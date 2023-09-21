@@ -1,13 +1,143 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+.new-login {
+  background-image: url(assets/restaurent.png);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 100%;
+  min-height: 100vh;
+  width: 100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body{
+  margin: 0px;
+}
+
+.restaurent-name{
+  font-size: 30px;
+  background: -webkit-linear-gradient(#fad426, #14742a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+form *{
+  font-family: "Poppins" sans-serif;
+  color: #ffffff;
+  letter-spacing: 0.6px;
+  outline: none;
+  border: none;
+}
+
+form{
+  background-color: rgba(255,255,255,0.13);
+  height: 500px;
+  width: 400px;
+  backdrop-filter: blur(10px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border: 2px solid rgba(255,255,255,0.1);
+  box-shadow: 0 0 35px rgba(8, 7, 16, 0.6);
+  padding: 50px 35px;
+  border-radius: 10px;
+}
+
+form h3{
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 42px;
+  text-align: center;
+}
+
+.textfield{
+  display: block;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 500;
+  color: hsl(138, 94%, 49%);
+}
+
+.forgot-link {
+  font-family: 'Ambit';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  text-decoration-line: underline;
+  color: #ffffff;
+  margin-top: 5px;
+  text-align: end;
+}
+
+.textfield{
+  display: block;
+  height: 50px;
+  width: 100%;
+  background-color: rgba(246, 247, 245, 0.07);
+  border-radius: 3px;
+  padding: 0 10px;
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 300;
+  -moz-text-decoration-color: #ffffff;
+}
+
+::placeholder{
+  color: rgb(216, 219, 221);
+}
+
+Button {
+  margin-top: 50px;
+  width: 100%;
+  color: #000000;
+  padding: 15px 0;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+
+}
+
+button:hover{
+  background: linear-gradient(to right , #2f649c , #c7911e);
+}
+
+.social{
+  margin-top: 30px;
+  display: flex;
+}
+
+.social div{
+  background: red;
+  width: 150px;
+  border-radius: 5px;
+  background-color: rgba(255,255,255, 0.27);
+  color: #ffffff;
+  text-align: center;
+  padding: 5px 10px 10px 5px;
+}
+
+.social div:hover{
+  background-color: rgba(255,255,255, 0.47);
+}
+
+.social .facebook{
+  margin-left: 25px;
+}
+
+
+.social i {
+  margin-right: 10px;
+}
+
+.social .google:hover{
+  background: linear-gradient(to left, #204bb8, #6f9fc0);
+  cursor: pointer;
+
+}
+
+.social .facebook:hover{
+  background: linear-gradient( to right, #c7911e, #c7541e);
+  cursor: pointer;
 }

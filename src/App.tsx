@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { Outlet, Navigate } from 'react-router-dom';
 
-function App() {
+
+const getLoginUrl = () => {
+  return `/login?from=${btoa(window.location.pathname + window.location.search)}`;
+}; 
+
+export default function App() {
+  const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem('token');
+  const [propsLoading, setPropsLoading] = useState(true); 
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+        <React.Fragment>
+            <Navigate to={getLoginUrl()} />
+        </React.Fragment>
+    </>
   );
 }
-
-export default App;
