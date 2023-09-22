@@ -1,9 +1,9 @@
 import axiosClient from "../common/axiosClients";
 
-export async function login() {
-    return axiosClient.post('/user');
-  }
+export async function login(req: any) {
+  return axiosClient.post("/security/login", req);
+}
 
-  export async function getUser() {
-    return axiosClient.get('/user');
-  }
+export async function getUser() {
+  return axiosClient.get("/user");
+}

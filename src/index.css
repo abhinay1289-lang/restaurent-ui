@@ -13,6 +13,13 @@ body{
   margin: 0px;
 }
 
+.err-msg {
+  margin-top: -15px;
+  color: #ff0000;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
 .restaurent-name{
   font-size: 30px;
   background: -webkit-linear-gradient(#fad426, #14742a);
@@ -51,14 +58,6 @@ form h3{
   text-align: center;
 }
 
-.textfield{
-  display: block;
-  margin-top: 20px;
-  font-size: 18px;
-  font-weight: 500;
-  color: hsl(138, 94%, 49%);
-}
-
 .forgot-link {
   font-family: 'Ambit';
   font-style: normal;
@@ -70,17 +69,30 @@ form h3{
   text-align: end;
 }
 
-.textfield{
-  display: block;
-  height: 50px;
-  width: 100%;
-  background-color: rgba(246, 247, 245, 0.07);
+.textfield {
+  background: rgba(241, 241, 241, 0.41);
+  border: none;
+  backdrop-filter: blur(5px);
   border-radius: 3px;
-  padding: 0 10px;
-  margin-top: 8px;
-  font-size: 15px;
-  font-weight: 300;
-  -moz-text-decoration-color: #ffffff;
+  font-family: 'Ambit';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  max-width: 100%;
+  line-height: 23px;
+  color: #ffffff;
+  width: 450px;
+  margin-bottom: 20px !important;
+}
+
+.textfield input {
+  padding: 12px 12px !important;
+  font-family: 'Ambit';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 23px;
+  color: #ffffff;
 }
 
 ::placeholder{
