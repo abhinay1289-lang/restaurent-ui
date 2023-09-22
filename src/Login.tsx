@@ -1,5 +1,5 @@
 import { Button, InputLabel, TextField } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import useNavigate from "./common/useNavigate";
 import { login as loginApi } from "./service/securityservice";
 import { useFormik } from "formik";
