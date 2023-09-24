@@ -8,7 +8,6 @@ import * as Yup from "yup";
 const Login = () => {
   const [worker, setWorker] = useState(false);
   const params = new URLSearchParams(window.location.search);
-  const target = params.get("from");
   const [navigate, redirect] = useNavigate();
 
   const validationSchema = Yup.object().shape({
@@ -20,29 +19,34 @@ const Login = () => {
 
   const login = (values: any) => {
     loginApi(values)
-      .then((resp) => {
-        localStorage.setItem("token", resp.data.token);
-        if (target) {
-          redirect(atob(target));
-        } else {
+      .then((_resp) => { 
           navigate(
             [
               {
-                label: "menucard",
+                label: "Menucard",
                 link: "/",
               },
             ],
             true
           );
-        }
       })
       .catch((_err) => {});
-  };
+    };
+  //   navigate(
+  //     [
+  //       {
+  //         label: 'Menucard',
+  //         link: '/',
+  //       },
+  //     ],
+  //     true
+  //   );
+  // };
 
   const formik = useFormik({
     initialValues: {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
     },
     onSubmit: (values) => {
       login(values);
