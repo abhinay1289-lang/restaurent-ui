@@ -1,23 +1,42 @@
 import "./menu.css";
 import { Paper } from "@mui/material";
 import MenuItemsDisplay from "./menuitemsdisplay";
+import Menusidebar from "./menusidebar";
 
 const menucard = () => {
   return (
     <div className="menu">
-        <div className='left-section'>
-            <>
-              <Paper sx={{ padding: [5, 2], marginBottom: '10px', backgroundColor:'transparent', minHeight:'100vh'}}>
-              </Paper>
-            </>
-        </div>
-        <div className='right-section'>
-            <>
-              <Paper sx={{ padding: [5, 2], marginBottom: '10px',backgroundColor:"transparent",minHeight:'100vh',minWidth:'160vh' }}>
-              <MenuItemsDisplay/>
-              </Paper>
-            </>
-        </div>
+      <div className="left-section">
+        <>
+          <Paper
+            elevation={0}
+            sx={{
+              padding: [5, 2],
+              marginBottom: "10px",
+              backgroundColor: "rgb(50,50,50,0.43)",
+              minHeight: "100vh",
+            }}
+          >
+            <Menusidebar />
+          </Paper>
+        </>
+      </div>
+      <div className="right-section">
+        <>
+          <Paper
+            elevation={1}
+            sx={{
+              padding: [5, 2],
+              marginBottom: "10px",
+              backgroundColor: "rgb(210,210,210,0.41)",
+              minHeight: "100vh",
+              minWidth: "160vh",
+            }}
+          >
+            <MenuItemsDisplay />
+          </Paper>
+        </>
+      </div>
     </div>
   );
 };

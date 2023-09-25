@@ -19,24 +19,24 @@ const Login = () => {
 
   const login = (values: any) => {
     loginApi(values)
-      .then((_resp) => { 
-          navigate(
-            [
-              {
-                label: "Menucard",
-                link: "/",
-              },
-            ],
-            true
-          );
+      .then((_resp) => {
+        navigate(
+          [
+            {
+              label: "Menucard",
+              link: "/",
+            },
+          ],
+          true
+        );
       })
       .catch((_err) => {});
-    };
+  };
   //   navigate(
   //     [
   //       {
-  //         label: 'Menucard',
-  //         link: '/',
+  //         label: "Menucard",
+  //         link: "/",
   //       },
   //     ],
   //     true
@@ -45,8 +45,8 @@ const Login = () => {
 
   const formik = useFormik({
     initialValues: {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
     },
     onSubmit: (values) => {
       login(values);
