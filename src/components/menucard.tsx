@@ -2,7 +2,7 @@ import "./menu.css";
 import { Paper } from "@mui/material";
 import MenuItemsDisplay from "./menuitemsdisplay";
 import Menusidebar from "./menusidebar";
-
+import ResponsiveAppBar from "./ResponsiveAppBar";
 const menucard = () => {
   return (
     <div className="menu">
@@ -17,7 +17,7 @@ const menucard = () => {
               minHeight: "100vh",
             }}
           >
-            <Menusidebar />
+            <ResponsiveAppBar />
           </Paper>
         </>
       </div>
