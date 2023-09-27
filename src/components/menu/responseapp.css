@@ -1,0 +1,30 @@
+.nav-menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-family: Ambit;
+    font-size: 15px;
+    font-weight: 400;
+    font-style: normal;
+    padding-left: 10px;
+    padding-right: 10px;
+    min-width: 100px;
+    cursor: pointer;
+    border-top: 5px solid #a72037;
+    border-bottom: 5px solid #a72037;
+    transition: border-bottom 0.5s;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    overflow: hidden;
+  }
+  
+  .nav-menu-item:hover {
+    background-color: #981d32;
+    border-color: #981d32;
+  }
+  
+  .nav-menu-item-selected {
+    border-bottom: 5px solid #ffffff !important;
+  }
+

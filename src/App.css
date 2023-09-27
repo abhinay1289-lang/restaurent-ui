@@ -1,33 +1,79 @@
-.App {
-  text-align: center;
+
+
+.top-navbar {
+  position: absolute;
+  height: 50px;
+  left: 0px;
+  top: 0px;
+
+  background: #a72037 !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.top-navbar .icon {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  left: 9.52px;
+  top: 9.52px;
+  background: #ffffff;
+  border-radius: 10%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.top-navbar .user-icon {
+  position: absolute;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  right: 25px;
+  top: 5px;
+}
+
+.top-navbar .user-name {
+  position: absolute;
+  width: fit-content;
+  right: 70px;
+  top: 10px;
+  font-family: 'Ambit';
+  font-style: normal;
+  font-size: 15px;
+  line-height: 1.3vw;
+  color: #ffffff;
+}
+
+.top-navbar .role {
+  position: absolute;
+  width: 63px;
+  height: 1vw;
+  right: 63px;
+  top: 30px;
+  font-family: 'Ambit';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1vw;
+  color: #ffffff;
+}
+.page-tabs {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background: #565353;
+  margin-top: 2px;
+  min-height: 30px;
 }
 
-.App-link {
-  color: #61dafb;
+.page-tabs button {
+  color: white !important;
+  min-height: 30px !important;
+  line-height: 0.40 !important;
+  padding: 10px 12px !important;
+  font-size: 13px;
+  
+}
+.page-tabs button.Mui-selected {
+  color: #a72037 !important ;
+  background: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.page-tabs div.MuiTabs-root {
+  min-height: 30px !important;
 }

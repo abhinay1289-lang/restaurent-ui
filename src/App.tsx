@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import "./App.css";
 import { Outlet, Navigate } from "react-router-dom";
-import Menucard from "./components/menucard";
-import "./components/menu.css";
+import Menucard from "./components/menu/menucard";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import ResponsiveAppBar from "./components/menu/ResponsiveAppBar";
+import { Backdrop, Box, CircularProgress } from "@mui/material";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const getLoginUrl = () => {
   return `/login?from=${btoa(
@@ -16,8 +19,24 @@ export default function App() {
   return (
     <>
       <React.Fragment>
+        <div id="detail">
+          <LocalizationProvider>
+            <>
+              <ResponsiveAppBar />
+              <div>
+                <Box sx={{ padding: [0, 1] }}>
+                  <Outlet />
+                </Box>
+              </div>
+            </>
+          </LocalizationProvider>
+        </div>
+
         {/* <Navigate to={getLoginUrl()} /> */}
-        <Menucard />
+        {/* <div>
+          <ResponsiveAppBar />
+          <Menucard />
+        </div> */}
       </React.Fragment>
     </>
   );

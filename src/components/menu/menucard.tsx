@@ -1,25 +1,20 @@
-import "./menu.css";
 import { Paper } from "@mui/material";
-import MenuItemsDisplay from "./menuitemsdisplay";
-import Menusidebar from "./menusidebar";
+import MenuItemsDisplay from "../menuitemsdisplay";
+// import Menusidebar from "./menusidebar";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 const menucard = () => {
   return (
     <div className="menu">
       <div className="left-section">
-        <>
-          <Paper
-            elevation={0}
-            sx={{
-              padding: [5, 2],
-              marginBottom: "10px",
-              backgroundColor: "rgb(50,50,50,0.43)",
-              minHeight: "100vh",
-            }}
-          >
-            <ResponsiveAppBar />
-          </Paper>
-        </>
+        <Paper
+          elevation={0}
+          sx={{
+            padding: [5, 2],
+            marginBottom: "10px",
+            backgroundColor: "rgb(50,50,50,0.43)",
+            minHeight: "100vh",
+          }}
+        ></Paper>
       </div>
       <div className="right-section">
         <>
