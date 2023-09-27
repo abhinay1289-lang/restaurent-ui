@@ -28,3 +28,21 @@
     border-bottom: 5px solid #ffffff !important;
   }
 
+  .user-icon {
+    background-color: #ffffff;
+    color: #a72037;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Ambit;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: normal;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+}

@@ -1,4 +1,13 @@
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: #f5f5f5;
+}
+
 .new-login {
   background-image: url(assets/restuarent.png.png);
   background-size: cover;
@@ -43,10 +52,7 @@
     }
 }
 
-body {
-  margin: 0;
-  background-color: #f5f5f5;
-}
+
 
 .err-msg {
   margin-top: -15px;
@@ -154,41 +160,3 @@ button:hover{
   background: linear-gradient(to right , #2f649c , #c7911e);
 }
 
-.social{
-  margin-top: 30px;
-  display: flex;
-}
-
-.social div{
-  background: red;
-  width: 150px;
-  border-radius: 5px;
-  background-color: rgba(255,255,255, 0.27);
-  color: #ffffff;
-  text-align: center;
-  padding: 5px 10px 10px 5px;
-}
-
-.social div:hover{
-  background-color: rgba(255,255,255, 0.47);
-}
-
-.social .facebook{
-  margin-left: 25px;
-}
-
-
-.social i {
-  margin-right: 10px;
-}
-
-.social .google:hover{
-  background: linear-gradient(to left, #204bb8, #6f9fc0);
-  cursor: pointer;
-
-}
-
-.social .facebook:hover{
-  background: linear-gradient( to right, #c7911e, #c7541e);
-  cursor: pointer;
-}
