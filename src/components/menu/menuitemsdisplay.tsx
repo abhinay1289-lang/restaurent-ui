@@ -18,10 +18,12 @@ const Menuitemsdisplay = () => {
   };
 
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex",
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    flexDirection: 'row' }}>
       <div
-        style={{ position: "absolute", marginTop: "590px", marginLeft: "58%" }}
-      >
+        >
         <h2
           style={{ fontFamily: "sans-serif", color: "red", fontSize: "20px" }}
         >
@@ -67,7 +69,7 @@ const Menuitemsdisplay = () => {
         </Menu>
       </div>
       <div
-        style={{ position: "absolute", marginTop: "35%", marginLeft: "90px" }}
+       style={{ width:"10%", height:'5vh'}}
       >
         <h2
           style={{ fontFamily: "sans-serif", color: "red", fontSize: "20px" }}
@@ -114,8 +116,7 @@ const Menuitemsdisplay = () => {
         </Menu>
       </div>
       <div
-        style={{ marginLeft: "350px", marginRight: "20px", marginTop: "23%" }}
-      >
+        >
         <h2
           style={{
             fontFamily: "sans-serif",
@@ -166,7 +167,6 @@ const Menuitemsdisplay = () => {
         </Menu>
       </div>
       <div
-        style={{ marginTop: "5.5%", position: "absolute", marginLeft: "950px" }}
       >
         <h2
           style={{
@@ -217,7 +217,7 @@ const Menuitemsdisplay = () => {
           </MenuItem>
         </Menu>
       </div>
-      <div style={{ marginTop: "23%", marginLeft: "100px" }}>
+      <div >
         <h2
           style={{
             fontFamily: "sans-serif",
@@ -268,12 +268,7 @@ const Menuitemsdisplay = () => {
         </Menu>
       </div>
       <div
-        style={{
-          position: "absolute",
-          marginRight: "20px",
-          marginLeft: "90px",
-          marginTop: "70px",
-        }}
+        
       >
         <h2
           style={{ fontFamily: "sans-serif", color: "red", fontSize: "20px" }}

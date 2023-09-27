@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import { Outlet, Navigate } from "react-router-dom";
-import Menucard from "./menu/menucard";
+import Menucard from "./menucard";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import ResponsiveAppBar from "./app-header/app-header";
 import { Backdrop, Box, CircularProgress } from "@mui/material";
@@ -24,7 +24,7 @@ export default function App() {
             <>
               <ResponsiveAppBar />
               <div>
-                <Box sx={{ padding: [0, 1] }}>
+                <Box >
                   <Outlet />
                 </Box>
               </div>

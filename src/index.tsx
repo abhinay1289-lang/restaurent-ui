@@ -5,7 +5,7 @@ import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/login/Login";
-import Menucard from "./components/menu/menucard";
+import Menucard from "./components/menucard";
 import Products from "./components/headers/products";
 
 const router = createBrowserRouter([

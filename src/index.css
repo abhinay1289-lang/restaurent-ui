@@ -1,4 +1,7 @@
 
+.MuiAutocomplete-root {
+  width: auto !important;
+}
 html {
   scroll-behavior: smooth;
 }
@@ -25,7 +28,6 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
   height: 100%;
-  min-height: 100vh;
   margin: 0px;
 }
 

@@ -94,9 +94,6 @@ const ResponsiveAppBar = () => {
   };
 
   const handleCloseUserMenu = (event: any) => {
-    if (event === 3) {
-      redirect("/login");
-    }
     setAnchorElUser(null);
   };
 
@@ -111,7 +108,7 @@ const ResponsiveAppBar = () => {
 
   return (
     <div>
-      <AppBar position="absolute">
+      <AppBar position="sticky">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
