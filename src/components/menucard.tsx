@@ -1,11 +1,36 @@
-import { Badge, Paper } from "@mui/material";
+import { Badge, Grid, ListItem, Paper } from "@mui/material";
 import MenuItemsDisplay from "./menu/menuitemsdisplay";
 // import Menusidebar from "./menusidebar";
 import ResponsiveAppBar from "./app-header/app-header";
+import { useState } from "react";
 const menucard = () => {
+
+  const SETTING_TABS = {
+    BIRYANI: 'Users',
+    STARTERS: 'Profile',
+    CURRIES: 'My Team',
+    FRIEDRICE_NOODLES : 'food',
+    GLOBAL_SETTING: 'Global Settings',
+  };
+
+  const [selectedtab, setSelectedTab] = useState('');
+
+  const handleClick = (tab: string) => {
+    setSelectedTab(tab);
+  };
+
   return (
     <div className="menu">
       {/* <nav> */}
+      {/* <Grid container spacing={2}>
+        <Grid item xs={2}>
+          <nav aria-label='user settings'></nav> */}
+          <ListItem
+            disablePadding
+            onClick={() => handleClick(SETTING_TABS.PROFILE)}
+            selected={seletedTab == SETTING_TABS.PROFILE}
+            sx={{ borderBottom: '1px dotted #888' }}
+          >
       <div className="left-section">
         <Paper
           sx={{
@@ -82,7 +107,16 @@ const menucard = () => {
           </div>
         </Paper>
       </div>
+      </ListItem>
+      {/* </Grid>
+      </Grid> */}
       {/* </nav> */}
+      <Grid item xs={10}>
+          {seletedTab == SETTING_TABS.USERS && <ManageUsers />}
+          {seletedTab == SETTING_TABS.MY_TEAM && <MyTeam />}
+          {seletedTab == SETTING_TABS.PROFILE && <Profile />}
+          {seletedTab == SETTING_TABS.GLOBAL_SETTING && <GlobalSettings />}
+        </Grid>
       <div className="right-section">
           <Paper
             sx={{
