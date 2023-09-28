@@ -141,12 +141,18 @@ const ResponsiveAppBar = () => {
             >
               LOGO
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "flex" } }}>
+            <Box 
+            sx={{ flexGrow: 1, display: { xs: "flex", md: "flex" } , borderBottom:'red' }}>
               {pages.map((page) => (
                 <Button
                   key={page.label}
                   onClick={() => handleMenuClick(page)}
                   sx={{ my: 2, color: "white", display: "block" }}
+                  className={
+                    parentPath == page.link
+                      ? 'nav-menu-item nav-menu-item-selected'
+                      : 'nav-menu-item'
+                  }
                 >
                   {page.label}
                 </Button>
@@ -159,7 +165,7 @@ const ResponsiveAppBar = () => {
               </div>
 
               <Menu
-                // sx={{ mt: "45px" }}
+                className="appbar"
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{

@@ -8,7 +8,8 @@ import {
   Paper,
 } from "@mui/material";
 import { useState } from "react";
-
+import GlobalSettings from "./globalsettings";
+import ChangePassword from "./ChangePassword";
 const Profile = () => {
   const USER_SETTING_TABS = {
     PROFILE: "Profile",
@@ -29,7 +30,7 @@ const Profile = () => {
           backgroundColor: "rgb(50,50,50,0.43)",
         }}
       >
-        <div className="left-section">
+        <div className="">
           <Grid sx={{ width: "20%" }}>
             <Grid>
               <nav aria-label="user settings">
@@ -81,6 +82,11 @@ const Profile = () => {
           </Grid>
         </div>
       </Paper>
+       <Grid item xs={10}>
+        {selectedTab == USER_SETTING_TABS.PROFILE && <Profile />}
+        {/* {selectedTab == USER_SETTING_TABS.GLOBAL_SETTING && < />} */}
+        {selectedTab == USER_SETTING_TABS.CHANGE_PASSWORD && <ChangePassword />}
+      </Grid>
     </div>
   );
 };

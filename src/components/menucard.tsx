@@ -35,7 +35,7 @@ const Menucard = () => {
     <div className="menu">
       <Paper
         sx={{
-          padding: "50px",
+          padding: "10px",
           backgroundColor: "rgb(50,50,50,0.43)",
         }}
       >

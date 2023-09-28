@@ -25,7 +25,7 @@
   }
   
   .nav-menu-item-selected {
-    border-bottom: 5px solid #ffffff !important;
+    border-bottom: 2px solid #f78605 !important;
   }
 
   .user-icon {
