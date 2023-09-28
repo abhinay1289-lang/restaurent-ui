@@ -7,6 +7,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/login/Login";
 import Menucard from "./components/menucard";
 import Products from "./components/headers/products";
+import Profile from "./components/user-settings/profile";
+import Dashboard from "./components/user-settings/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -26,24 +28,16 @@ const router = createBrowserRouter([
         element: <Products />,
       },
       {
-        element: "Pricing",
         path: "/Pricing",
+        element: "Pricing",
       },
       {
-        path: "Blog",
-        element: "/Blog",
+        path: "/Dashboard",
+        element: <Dashboard />,
       },
       {
-        path: "Profile",
-        element: "/Profile",
-      },
-      {
-        path: "Account",
-        element: "/Account",
-      },
-      {
-        path: "Dashboard",
-        element: "/Dashboard",
+        path: "/Profile",
+        element: <Profile />,
       },
     ],
   },

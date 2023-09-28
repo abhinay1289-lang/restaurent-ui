@@ -32,16 +32,6 @@ const Login = () => {
       })
       .catch((_err) => {});
   };
-  //   navigate(
-  //     [
-  //       {
-  //         label: "Menucard",
-  //         link: "/",
-  //       },
-  //     ],
-  //     true
-  //   );
-  // };
 
   const formik = useFormik({
     initialValues: {

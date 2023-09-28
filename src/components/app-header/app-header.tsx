@@ -28,8 +28,8 @@ const ResponsiveAppBar = () => {
       link: "/Pricing",
     },
     {
-      label: "Blog",
-      link: "/Blog",
+      label: "Dashboard",
+      link: "/Dashboard",
     },
   ];
 
@@ -37,14 +37,6 @@ const ResponsiveAppBar = () => {
     {
       label: "Profile",
       link: "/Profile",
-    },
-    {
-      label: "Account",
-      link: "/Account",
-    },
-    {
-      label: "Dashboard",
-      link: "/Dashboard",
     },
     {
       label: "Logout",
