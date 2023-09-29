@@ -1,0 +1,9 @@
+.changepassword {
+    width: fit-content;
+    padding : 20px
+}
+
+.password {
+    border-radius: 2%;
+    border: 10px;
+}

@@ -108,7 +108,6 @@ form h3{
 }
 
 .textfield {
-  background: rgba(241, 241, 241, 0.41);
   border: none;
   backdrop-filter: blur(5px);
   border-radius: 3px;

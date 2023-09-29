@@ -1,4 +1,4 @@
-import { Button, InputLabel, TextField } from "@mui/material";
+import { Button, Input, InputLabel, TextField } from "@mui/material";
 import React, { useState } from "react";
 import useNavigate from "../../common/useNavigate";
 import { login as loginApi } from "../../service/securityservice";
@@ -70,7 +70,8 @@ const Login = () => {
         <InputLabel className="Username" style={{ color: "cyan" }}>
           password
         </InputLabel>
-        <TextField
+        <Input
+          type="password"
           className="textfield"
           placeholder="Enter Your password"
           id="password"
