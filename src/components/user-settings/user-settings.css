@@ -3,7 +3,26 @@
     padding : 20px
 }
 
-.password {
-    border-radius: 2%;
-    border: 10px;
+.manage{
+    padding: 20px;
+    margin-left: 10px;
+    justify-content: center;
+}
+
+.user-form {
+    margin: 20px !important;
+    max-width: 150px;
+}
+
+.profile {
+    background-image: url(cooking.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100%;
+    margin: 0px;
+  }
+
+.btn{
+    text-decoration-color: white;
 }

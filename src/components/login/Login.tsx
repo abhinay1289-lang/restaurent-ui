@@ -4,6 +4,7 @@ import useNavigate from "../../common/useNavigate";
 import { login as loginApi } from "../../service/securityservice";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import './login.css'
 
 const Login = () => {
   const [worker, setWorker] = useState(false);
@@ -46,7 +47,7 @@ const Login = () => {
 
   return (
     <div className="new-login">
-      <form onSubmit={formik.handleSubmit}>
+      <form className="loginform" onSubmit={formik.handleSubmit}>
         <h1 className="restaurent-name">LAXMI SAI DHABA FAMILY RESTAURENT</h1>
         <h3>{worker === true ? "WORKER  " : "OWNER  "}LOGIN</h3>
 

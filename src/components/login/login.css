@@ -1,0 +1,119 @@
+
+  .responsive {
+    min-height: 25px;
+    top: 0;
+    left: 0;
+    background-color: #50b0f4;
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    z-index: 100;
+  }
+  
+  .menu{
+      display: flex;
+      width: 100%;
+      height: 100%;
+      .left-section {
+        /* width: 20%; */
+      }
+      .right-section {
+        width: 80%;
+      }
+  }
+  
+  .restaurent-name{
+    font-size: 30px;
+    background: -webkit-linear-gradient(#fad426, #14742a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+  }
+  
+  .loginform *{
+    font-family: "Poppins" sans-serif;
+    color: #ffffff;
+    letter-spacing: 0.6px;
+    outline: none;
+    border: none;
+  }
+  
+  .MuiAutocomplete-root {
+    width: auto !important;
+  }
+  
+  .loginform{
+    background-color: rgba(255,255,255,0.13);
+    height: 500px;
+    width: 400px;
+    backdrop-filter: blur(10px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 35px rgba(8, 7, 16, 0.6);
+    padding: 50px 35px;
+    border-radius: 10px;
+  }
+  
+  .loginform h3{
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 42px;
+    text-align: center;
+  }
+  
+  .forgot-link {
+    font-family: 'Ambit';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    text-decoration-line: underline;
+    color: #ffffff;
+    margin-top: 5px;
+    text-align: end;
+  }
+  
+  .textfield {
+    border: none;
+    backdrop-filter: blur(5px);
+    border-radius: 3px;
+    font-family: 'Ambit';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    max-width: 100%;
+    line-height: 23px;
+    color: #ffffff;
+    width: 450px;
+    margin-bottom: 20px !important;
+  }
+  
+  .textfield input {
+    padding: 12px 12px !important;
+    font-family: 'Ambit';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 23px;
+    color: #ffffff;
+  }
+  
+  ::placeholder{
+    color: rgb(216, 219, 221);
+  }
+  
+  Button {
+    margin-top: 50px;
+    width: 100%;
+    color: #000000;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+  
+  }
+  
+  
