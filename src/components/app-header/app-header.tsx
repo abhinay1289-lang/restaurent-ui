@@ -20,8 +20,8 @@ import { useEffect } from "react";
 const ResponsiveAppBar = () => {
   const pages = [
     {
-      label: "products",
-      link: "/Menucard",
+      label: "Products",
+      link: "/products",
     },
     {
       label: "Pricing",
@@ -57,8 +57,8 @@ const ResponsiveAppBar = () => {
       navigate(
         [
           {
-            label: "Menucard",
-            link: "/menucard",
+            label: "Products",
+            link: "/products",
           },
         ],
         true
@@ -141,8 +141,13 @@ const ResponsiveAppBar = () => {
             >
               LOGO
             </Typography>
-            <Box 
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "flex" } , borderBottom:'red' }}>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "flex", md: "flex" },
+                borderBottom: "red",
+              }}
+            >
               {pages.map((page) => (
                 <Button
                   key={page.label}
@@ -150,8 +155,8 @@ const ResponsiveAppBar = () => {
                   sx={{ my: 2, color: "white", display: "block" }}
                   className={
                     parentPath == page.link
-                      ? 'nav-menu-item nav-menu-item-selected'
-                      : 'nav-menu-item'
+                      ? "nav-menu-item nav-menu-item-selected"
+                      : "nav-menu-item"
                   }
                 >
                   {page.label}

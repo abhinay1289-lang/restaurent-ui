@@ -19,6 +19,7 @@
       }
       .right-section {
         width: 80%;
+        display: flex;
       }
   }
   

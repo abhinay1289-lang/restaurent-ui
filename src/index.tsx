@@ -5,11 +5,9 @@ import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./components/login/Login";
-import Menucard from "./components/menucard";
-import Products from "./components/headers/products";
 import Profile from "./components/user-settings/profile";
 import Dashboard from "./components/user-settings/Dashboard";
-
+import Products from "./components/products";
 const router = createBrowserRouter([
   {
     path: "/login",
@@ -19,10 +17,6 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      {
-        path: "/menucard",
-        element: <Menucard />,
-      },
       {
         path: "/products",
         element: <Products />,

@@ -1,4 +1,3 @@
-import Login from "./login/Login";
 import {
   Badge,
   Grid,
@@ -9,9 +8,6 @@ import {
   ListItemText,
   Paper,
 } from "@mui/material";
-// import MenuItemsDisplay from "./menu/menuitemsdisplay";
-// import Menusidebar from "./menusidebar";
-// import ResponsiveAppBar from "./app-header/app-header";
 import { useState } from "react";
 import Biryani from "./menu/Biryani";
 import Starters from "./menu/Starters";
@@ -20,7 +16,7 @@ import Curries from "./menu/Curries";
 import Rice from "./menu/Rice";
 import Rotis from "./menu/Rotis";
 
-const Menucard = () => {
+const Products = () => {
   const SETTING_TABS = {
     BIRYANI: "BIRYANI",
     STARTERS: "STARTERS",
@@ -207,28 +203,19 @@ const Menucard = () => {
           </Grid>
         </div>
       </Paper>
-      <Grid item xs={10}>
-        {selectedTab == SETTING_TABS.STARTERS && <Starters />}
-        {selectedTab == SETTING_TABS.BIRYANI && <Biryani />}
-        {selectedTab == SETTING_TABS.CURRIES && <Curries />}
-        {selectedTab == SETTING_TABS.FRIEDRICE_NOODLES && <FriedRice />}
-        {selectedTab == SETTING_TABS.RICE && <Rice />}
-        {selectedTab == SETTING_TABS.ROTIS && <Rotis />}
-      </Grid>
+
       <div className="right-section">
-        <Paper
-          sx={{
-            padding: [5, 2],
-            backgroundColor: "rgb(210,210,210,0.41)",
-            width: "100%",
-            display: "contents",
-          }}
-        >
-          {/* <MenuItemsDisplay /> */}
-        </Paper>
+        <Grid sx={{ width: "100%" }} item xs={10}>
+          {selectedTab === SETTING_TABS.STARTERS && <Starters />}
+          {selectedTab === SETTING_TABS.BIRYANI && <Biryani />}
+          {selectedTab === SETTING_TABS.CURRIES && <Curries />}
+          {selectedTab === SETTING_TABS.FRIEDRICE_NOODLES && <FriedRice />}
+          {selectedTab === SETTING_TABS.RICE && <Rice />}
+          {selectedTab === SETTING_TABS.ROTIS && <Rotis />}
+        </Grid>
       </div>
     </div>
   );
 };
 
-export default Menucard;
+export default Products;

@@ -31,4 +31,5 @@ body {
   background-repeat: no-repeat;
   height: 100%;
   margin: 0px;
+  justify-content: space-evenly;
 }

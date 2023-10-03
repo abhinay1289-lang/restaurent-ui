@@ -7,7 +7,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import GlobalSettings from "./globalsettings";
 import ChangePassword from "./ChangePassword";
 import Manageusers from "./manage-users";
@@ -81,12 +81,12 @@ const Profile = () => {
           </Grid>
 
           <Grid item xs={10}>
-            {selectedTab == USER_SETTING_TABS.PROFILE && <Profile />}
-            {selectedTab == USER_SETTING_TABS.GLOBAL_SETTING && (
+            {selectedTab === USER_SETTING_TABS.PROFILE && <Profile />}
+            {selectedTab === USER_SETTING_TABS.GLOBAL_SETTING && (
               <GlobalSettings />
             )}
-            {selectedTab == USER_SETTING_TABS.USERS && <Manageusers />}
-            {selectedTab == USER_SETTING_TABS.CHANGE_PASSWORD && (
+            {selectedTab === USER_SETTING_TABS.USERS && <Manageusers />}
+            {selectedTab === USER_SETTING_TABS.CHANGE_PASSWORD && (
               <ChangePassword />
             )}
           </Grid>
