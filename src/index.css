@@ -33,3 +33,20 @@ body {
   margin: 0px;
   justify-content: space-evenly;
 }
+
+::selection{
+	color: #fff;
+	background: #009d43;
+}
+::-moz-selection{
+	color: #fff;
+	background: #009d43;
+}
+::-webkit-selection{
+	color: #fff;
+	background: #009d43;
+}
+::-ms-selection{
+	color: #fff;
+	background: #009d43;
+}

@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   IconButton,
   List,
   ListItem,
@@ -10,8 +11,11 @@ import {
 } from "@mui/material";
 import "./menu.css";
 import Checkbox from "@mui/material/Checkbox";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import { useState } from "react";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { isDisabled } from "@testing-library/user-event/dist/utils";
+
 const Biryani = () => {
   let [count, setCount] = useState(0);
 
@@ -73,44 +77,34 @@ const Biryani = () => {
               </div>
             </Box>
           ))} */}
-          <List sx={{ width: "100%", maxWidth: 360, bgcolor: "lightgrey" }}>
-            {biryaniItems.map((value, i) => {
-              const labelId = `checkbox-list-label-${value}`;
+          <ul style={{ display: "flex" }}>
+            {biryaniItems.map((item, i) => (
+              <li key={i} style={{ display: "flex" }} className="list">
+                <div>
+                  <section className="section">
+                    <span className="mui-box">
+                      <Checkbox checked={count !== 0 ? true : false} />
+                    </span>
+                    <span>{item}</span>
+                    <span className="mui-buttons">
+                      <Button className="addicon">
+                        <span className="mui-label-2">
+                          <RemoveIcon />
+                        </span>
+                      </Button>
+                      <input type="text" className="mui-text" value={count} />
 
-              return (
-                <ListItem
-                  key={i}
-                  secondaryAction={
-                    <IconButton>
-                      {count === 0 ? (
-                        <AddCircleOutlineIcon onClick={increment} />
-                      ) : (
-                        count
-                      )}
-                    </IconButton>
-                  }
-                  disablePadding
-                >
-                  <ListItemButton
-                    role={undefined}
-                    // onClick={handleToggle(value)}
-                    dense
-                  >
-                    <ListItemIcon>
-                      <Checkbox
-                        edge="start"
-                        // checked={checked.indexOf(value) !== -1}
-                        tabIndex={-1}
-                        disableRipple
-                        inputProps={{ "aria-labelledby": labelId }}
-                      />
-                    </ListItemIcon>
-                    <ListItemText id={labelId} primary={value} />
-                  </ListItemButton>
-                </ListItem>
-              );
-            })}
-          </List>
+                      <Button className="addicon" onClick={increment}>
+                        <span className="mui-label-1">
+                          <AddIcon />
+                        </span>
+                      </Button>
+                    </span>
+                  </section>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
