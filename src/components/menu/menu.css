@@ -1,6 +1,8 @@
 .items{
     align-items: center;
     flex-direction: row;
+    border:double #ccc;
+    height : fit-content
 }
 
 .span{
