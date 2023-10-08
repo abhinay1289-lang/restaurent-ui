@@ -19,6 +19,7 @@ const Biryani = () => {
   let [count, setCount] = useState(0);
   const [disabled, setdisabled] = useState(false);
   const [selectedItem, setSelectedItem] = useState(0);
+
   const biryaniItems: String[] = [
     "djygfhdrtksrje",
     "kwhedwe",
@@ -26,9 +27,11 @@ const Biryani = () => {
     "jhaekgwd",
     "jhawguhe3",
   ];
+  const [counts, setCounts] = useState(new Array(biryaniItems.length).fill(0));
   const [checked, setChecked] = useState([0]);
 
   const handleToggle = (value: number) => () => {
+    console.log("value", value, "   count", count);
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -45,17 +48,27 @@ const Biryani = () => {
     console.log(value);
     setSelectedItem(value);
   };
-  const disabling = (value: any) => {
-    console.log("disabling : " + value);
-    decrement();
-    if (count <= 0) setdisabled(true);
+
+  // const increment = () => {
+  //   setCount(++count);
+  //   if (count > 0) setdisabled(false);
+  // };
+  // const decrement = () => {
+  //   setCount(--count);
+  // };
+
+  const increment = (index: any) => {
+    const newCounts = [...counts];
+    newCounts[index]++;
+    setCounts(newCounts);
+    setdisabled(false);
   };
-  const increment = () => {
-    setCount(++count);
-    if (count > 0) setdisabled(false);
-  };
-  const decrement = () => {
-    setCount(--count);
+
+  const decrement = (index: any) => {
+    const newCounts = [...counts];
+    newCounts[index]--;
+    setCounts(newCounts);
+    if (newCounts[index] <= 0) setdisabled(true);
   };
 
   return (
@@ -65,104 +78,134 @@ const Biryani = () => {
         display: "flex",
         width: "100%",
         height: "100%",
-        justifyContent: "space-evenly",
+        justifyContent: "space-around",
       }}
     >
       <div className="items">
         <h3 style={{ textAlign: "center", marginRight: "30px" }}>NON VEG</h3>
         <div>
-          {/* <ul style={{ display: "flex", flexDirection: "column" }}>
-            {biryaniItems.map((item, i) => (
-              <li
+          <List sx={{ width: "100%", maxWidth: 360, bgcolor: "transparent" }}>
+            {biryaniItems.map((value, i) => (
+              <ListItem
+                className="itemsbox"
                 key={i}
-                style={{ display: "flex" }}
-                onChange={() => display(i)}
-                className="list"
-              >
-                <div>
-                  <section className="section">
-                    <span className="mui-box">
-                      <Checkbox />
-                    </span>
-                    <span>{item}</span>
-                    <span className="mui-buttons">
-                      <Button
-                        key={i}
-                        className="addicon"
-                        disabled={disabled}
-                        onClick={() => disabling(selectedItem)}
-                      >
-                        <span className="mui-label-2">
-                          <RemoveIcon />
-                        </span>
-                      </Button>
-                      <input type="text" className="mui-text" value={count} />
+                secondaryAction={
+                  <div className="mui-buttons">
+                    <Button
+                      key={i}
+                      sx={{ padding: "0 0 0 0" }}
+                      disabled={disabled}
+                      onClick={() => decrement(i)}
+                    >
+                      <span className="mui-label-2">
+                        <RemoveIcon />
+                      </span>
+                    </Button>
 
-                      <Button key={i} className="addicon" onClick={increment}>
-                        <span className="mui-label-1">
-                          <AddIcon />
-                        </span>
-                      </Button>
-                    </span>
-                  </section>
-                </div>
-              </li>
+                    <input
+                      key={i}
+                      type="text"
+                      className="mui-text"
+                      value={count}
+                      readOnly
+                    />
+
+                    <Button
+                      sx={{ padding: "0 0 0 0" }}
+                      key={i}
+                      onClick={() => increment(i)}
+                    >
+                      <span className="mui-label-1">
+                        <AddIcon />
+                      </span>
+                    </Button>
+                  </div>
+                }
+                disablePadding
+              >
+                <ListItemButton
+                  className="itemsbutton"
+                  role={undefined}
+                  onClick={handleToggle(i)}
+                  dense
+                >
+                  <ListItemIcon>
+                    <Checkbox
+                      edge="start"
+                      checked={checked.indexOf(i) !== -1}
+                      tabIndex={-1}
+                      disableRipple
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary={value} />
+                </ListItemButton>
+              </ListItem>
             ))}
-          </ul> */}
-          {biryaniItems.map((value, i) => (
-            <ListItem
-              className="itemsbox"
-              key={i}
-              secondaryAction={
-                <div className="mui-buttons">
-                  <Button
-                    key={i}
-                    className="addicon"
-                    disabled={disabled}
-                    onClick={() => disabling(selectedItem)}
-                  >
-                    <span className="mui-label-2">
-                      <RemoveIcon />
-                    </span>
-                  </Button>
-                  <input type="text" className="mui-text" value={count} />
-
-                  <Button key={i} className="addicon" onClick={increment}>
-                    <span className="mui-label-1">
-                      <AddIcon />
-                    </span>
-                  </Button>
-                </div>
-              }
-              disablePadding
-            >
-              <ListItemButton
-                className="itemsbutton"
-                role={undefined}
-                onClick={handleToggle(i)}
-                dense
-              >
-                <ListItemIcon>
-                  <Checkbox
-                    edge="start"
-                    checked={checked.indexOf(i) !== -1}
-                    tabIndex={-1}
-                    disableRipple
-                  />
-                </ListItemIcon>
-                <ListItemText primary={value} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          </List>
         </div>
       </div>
 
       <div className="items">
-        <h3 style={{ textAlign: "center" }}>NON VEG</h3>
+        <h3 style={{ textAlign: "center", marginRight: "30px" }}>VEG</h3>
         <div>
-          {biryaniItems.map((item) => (
-            <h4>{item}</h4>
-          ))}
+          <List sx={{ width: "100%", maxWidth: 360, bgcolor: "transparent" }}>
+            {biryaniItems.map((value, i) => (
+              <ListItem
+                className="itemsbox"
+                key={i}
+                secondaryAction={
+                  <div className="mui-buttons">
+                    <Button
+                      key={i}
+                      sx={{ padding: "0 0 0 0" }}
+                      disabled={disabled}
+                      onClick={handleToggle(i)}
+                    >
+                      <span className="mui-label-2">
+                        <RemoveIcon />
+                      </span>
+                    </Button>
+
+                    <input
+                      key={i}
+                      type="text"
+                      className="mui-text"
+                      value={count}
+                      readOnly
+                    />
+
+                    <Button
+                      sx={{ padding: "0 0 0 0" }}
+                      key={i}
+                      onClick={increment}
+                    >
+                      <span className="mui-label-1">
+                        <AddIcon />
+                      </span>
+                    </Button>
+                  </div>
+                }
+                disablePadding
+              >
+                <ListItemButton
+                  className="itemsbutton"
+                  role={undefined}
+                  onClick={handleToggle(i)}
+                  dense
+                >
+                  <ListItemIcon>
+                    <Checkbox
+                      edge="start"
+                      checked={checked.indexOf(i) !== -1}
+                      tabIndex={-1}
+                      disableRipple
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary={value} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
         </div>
       </div>
     </div>

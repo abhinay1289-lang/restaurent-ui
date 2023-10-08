@@ -1,3 +1,17 @@
+.itemsbox{
+  display: flex;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    align-items: center;
+    position: relative;
+    text-decoration: none;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+
 .items{
     align-items: center;
     flex-direction: row;
@@ -17,6 +31,15 @@
     width: 70%;
     align-items: center;
 }
+.items .css-518kzi-MuiListItemSecondaryAction-root {
+  justify-content: flex-end;
+  display: flex;
+  top: 0%;
+  right: 0%;
+  transform: none;
+  position: inherit;
+}
+
 .mui-box{
     text-align: left;
     width: 30%;
@@ -41,23 +64,24 @@
     caret-color: transparent;
 }
 
-.mui-label-1{
+.mui-buttons {
+  .mui-label-1 {
     padding: 0px;
-    width: 100%;
     display: flex;
     align-items: inherit;
     justify-content: right;
 }
 .mui-label-2{
-    padding: 0px;
-    /* width: 100%; */
-    display: flex;
-    align-items: inherit;
-    justify-content: left;
+  padding: 0px;
+  display: flex;
+  align-items: inherit;
+  justify-content: left;
+}
 }
 
+
 .section .addicon{
-    min-width: 20px;
+    min-width: 10px;
     margin: 0px 10px;
     color: #555;
     padding: 0px;
