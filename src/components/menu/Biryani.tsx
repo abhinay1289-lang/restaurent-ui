@@ -14,6 +14,7 @@ import Checkbox from "@mui/material/Checkbox";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useState } from "react";
+import { SlowBuffer } from "buffer";
 
 const Biryani = () => {
   let [count, setCount] = useState(0);
@@ -49,18 +50,11 @@ const Biryani = () => {
     setSelectedItem(value);
   };
 
-  // const increment = () => {
-  //   setCount(++count);
-  //   if (count > 0) setdisabled(false);
-  // };
-  // const decrement = () => {
-  //   setCount(--count);
-  // };
-
   const increment = (index: any) => {
     const newCounts = [...counts];
     newCounts[index]++;
     setCounts(newCounts);
+    console.log(newCounts);
     setdisabled(false);
   };
 
@@ -68,6 +62,7 @@ const Biryani = () => {
     const newCounts = [...counts];
     newCounts[index]--;
     setCounts(newCounts);
+    console.log(newCounts);
     if (newCounts[index] <= 0) setdisabled(true);
   };
 
@@ -79,10 +74,19 @@ const Biryani = () => {
         width: "100%",
         height: "100%",
         justifyContent: "space-around",
+        marginTop: "10%",
       }}
     >
       <div className="items">
-        <h3 style={{ textAlign: "center", marginRight: "30px" }}>NON VEG</h3>
+        <h3
+          style={{
+            textAlign: "center",
+            backgroundColor: "#ff00005c",
+            margin: "0 0 0 0",
+          }}
+        >
+          NON VEG
+        </h3>
         <div>
           <List sx={{ width: "100%", maxWidth: 360, bgcolor: "transparent" }}>
             {biryaniItems.map((value, i) => (
@@ -106,7 +110,7 @@ const Biryani = () => {
                       key={i}
                       type="text"
                       className="mui-text"
-                      value={count}
+                      value={counts[i]}
                       readOnly
                     />
 
@@ -146,7 +150,15 @@ const Biryani = () => {
       </div>
 
       <div className="items">
-        <h3 style={{ textAlign: "center", marginRight: "30px" }}>VEG</h3>
+        <h3
+          style={{
+            textAlign: "center",
+            margin: "0 0 0 0",
+            backgroundColor: "#00800059",
+          }}
+        >
+          VEG
+        </h3>
         <div>
           <List sx={{ width: "100%", maxWidth: 360, bgcolor: "transparent" }}>
             {biryaniItems.map((value, i) => (
