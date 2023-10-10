@@ -16,7 +16,8 @@
     align-items: center;
     flex-direction: row;
     border:double #ccc;
-    height : fit-content
+    height : fit-content;
+    width: 70%;
 }
 
 .span{
