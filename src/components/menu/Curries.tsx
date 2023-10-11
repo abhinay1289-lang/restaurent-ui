@@ -16,7 +16,6 @@ const Curries = () => {
         backgroundColor: "transparent",
         display: "flex",
         width: "100%",
-        height: "100%",
         justifyContent: "space-around",
         marginTop: "10%",
       }}

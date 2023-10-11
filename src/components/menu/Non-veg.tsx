@@ -29,14 +29,12 @@ const Nonveg = (Props: any) => {
   };
 
   const increment = (index: any) => {
-    console.log(index);
     const newCounts = [...counts];
     newCounts[index]++;
     setCounts(newCounts);
   };
 
   const decrement = (index: any) => {
-    console.log(index);
     const newCounts = [...counts];
     newCounts[index]--;
     setCounts(newCounts);
@@ -53,7 +51,6 @@ const Nonveg = (Props: any) => {
         backgroundColor: "transparent",
         display: "flex",
         width: "100%",
-        height: "100%",
         justifyContent: "space-around",
         marginTop: "5%",
       }}

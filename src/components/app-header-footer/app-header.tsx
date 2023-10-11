@@ -12,7 +12,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import useNavigate from "../../common/useNavigate";
 import { useEffect } from "react";
 
-const ResponsiveAppBar = () => {
+const ResponsiveHeaderBar = () => {
   const pages = [
     {
       label: "Products",
@@ -194,4 +194,4 @@ const ResponsiveAppBar = () => {
     </div>
   );
 };
-export default ResponsiveAppBar;
+export default ResponsiveHeaderBar;

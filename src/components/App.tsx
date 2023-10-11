@@ -3,9 +3,10 @@ import "./App.css";
 import { Outlet, Navigate } from "react-router-dom";
 import Menucard from "./products";
 import { LocalizationProvider } from "@mui/x-date-pickers";
-import ResponsiveAppBar from "./app-header/app-header";
+import ResponsiveHeaderBar from "./app-header-footer/app-header";
 import { Backdrop, Box, CircularProgress } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import ResponseiveFooterBar from "./app-header-footer/app-footer";
 
 const getLoginUrl = () => {
   return `/login?from=${btoa(
@@ -22,7 +23,7 @@ export default function App() {
         <div id="detail">
           <LocalizationProvider>
             <>
-              <ResponsiveAppBar />
+              <ResponsiveHeaderBar />
               <div>
                 <Box>
                   <Outlet />

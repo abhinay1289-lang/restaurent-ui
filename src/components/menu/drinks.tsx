@@ -1,8 +1,14 @@
 import Nonveg from "./Non-veg";
 import Veg from "./Veg";
 
-const FriedRice = () => {
-  const biryaniItems: string[] = ["chicken", "kjbhi", "gfdtr", "egr", "jguhe3"];
+const Drinks = () => {
+  const biryaniItems: string[] = [
+    "djygfhdrtksrje",
+    "kwhedwe",
+    "kshhrdtreifwe",
+    "jhaekgwd",
+    "jhawguhe3",
+  ];
 
   return (
     <div
@@ -19,4 +25,4 @@ const FriedRice = () => {
     </div>
   );
 };
-export default FriedRice;
+export default Drinks;
