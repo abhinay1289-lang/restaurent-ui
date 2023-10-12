@@ -26,3 +26,11 @@
 .btn{
     text-decoration-color: white;
 }
+
+.mr10{
+    width: 20px;
+}
+.itemInput{
+    width: 150px;
+    height: 40px;
+}

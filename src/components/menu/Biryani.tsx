@@ -1,8 +1,10 @@
+import { useState } from "react";
 import "./menu.css";
 import Nonveg from "./Non-veg";
 import Veg from "./Veg";
 
 const Biryani = () => {
+  const [count, setCount] = useState(0);
   const biryaniItems: string[] = [
     "djygfhdrtksrje",
     "kwhedwe",
@@ -10,7 +12,9 @@ const Biryani = () => {
     "jhaekgwd",
     "jhawguhe3",
   ];
-
+  const updateCount = (data: any) => {
+    setCount(data);
+  };
   return (
     <div
       style={{
@@ -21,8 +25,9 @@ const Biryani = () => {
         marginTop: "10%",
       }}
     >
-      <Nonveg items={biryaniItems} />
-      <Veg items={biryaniItems} />
+      <span>{JSON.stringify(count)}</span>
+      <Nonveg items={biryaniItems} itemCount={updateCount} />
+      <Veg items={biryaniItems} itemCount={updateCount} />
     </div>
   );
 };

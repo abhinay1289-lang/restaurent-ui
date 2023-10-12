@@ -1,7 +1,15 @@
 import {
+  Alert,
   Box,
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   InputLabel,
+  Link,
+  Snackbar,
   Table,
   TableBody,
   TableCell,
@@ -17,6 +25,13 @@ import { useFormik } from "formik";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
+import ClearIcon from "@mui/icons-material/Clear";
+
+interface items {
+  item?: string;
+  price?: string;
+}
+
 const GlobalSettings = () => {
   const menuitems: string[] = [
     LookupTypes.BIRYANI,
@@ -26,16 +41,76 @@ const GlobalSettings = () => {
     LookupTypes.ROTIS,
     LookupTypes.STARTERS,
   ];
+
   const [lookupname, setLookupname] = useState("");
   const [editIndex, setEditIndex] = useState(1);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [items, setItems] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [disable, setDisable] = useState(true);
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const handleAdd = () => {
+    setRows([
+      ...rows,
+      {
+        id: rows.length + 1,
+        item: "",
+        price: "",
+      },
+    ]);
+  };
+
+  const handleSave = () => {
+    setRows(rows);
+    console.log("saved : ", rows);
+    setDisable(true);
+    setOpen(true);
+  };
+
+  const handleInputChange = (e: any, index: number) => {
+    setDisable(false);
+    const { name, value } = e.target;
+    const list = [...rows];
+    // list[index][name] = value;
+    setRows(list);
+  };
+  const handleConfirm = () => {
+    setShowConfirm(true);
+  };
+
+  const handleRemoveClick = (i: any) => {
+    const list = [...rows];
+    list.splice(i, 1);
+    setRows(list);
+    setShowConfirm(false);
+  };
+
+  const handleNo = () => {
+    setShowConfirm(false);
+  };
+
   const handleChange = (value: any) => {
     console.log(value);
     setLookupname(value);
   };
+  const handleClose = (event: any, reason: any) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setDialogOpen(false);
+    setOpen(false);
+  };
+  const handleAlertClose = () => {
+    setOpen(false);
+  };
+
+  const [rows, setRows] = useState([{ id: 1, item: "", price: "" }]);
 
   const formik = useFormik({
     initialValues: {
       name: "",
+      price: "",
     },
     onSubmit: (_value) => {},
   });
@@ -60,7 +135,8 @@ const GlobalSettings = () => {
         <Table className="global-setting" style={{ tableLayout: "fixed" }}>
           <TableHead>
             <TableRow>
-              <TableCell style={{ width: "40vw" }}>Value</TableCell>
+              <TableCell style={{ width: "30vw" }}>Item</TableCell>
+              <TableCell style={{ width: "5vw" }}>Price</TableCell>
               <TableCell style={{ width: "5vw" }}>Action</TableCell>
               <TableCell style={{ width: "10vw" }}>
                 <Button
@@ -70,10 +146,98 @@ const GlobalSettings = () => {
                     formik.resetForm();
                     // if (selectedSetting == "skills") setShowSkillsDialog(true);
                     // else setShowDialog(true);
+                    setDialogOpen(true);
                   }}
                 >
                   Add
                 </Button>
+                <Dialog open={dialogOpen} onClose={handleClose}>
+                  <DialogTitle>Add Item</DialogTitle>
+                  <TableBody>
+                    <Snackbar
+                      open={open}
+                      autoHideDuration={1000}
+                      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                      onClose={handleClose}
+                    >
+                      <Alert onClose={handleAlertClose} severity="success">
+                        Record saved successfully!
+                      </Alert>
+                    </Snackbar>
+                    <Box margin={1}>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <div>
+                          <div style={{ display: "flex" }}>
+                            <Button
+                              sx={{ minWidth: "200px" }}
+                              onClick={handleAdd}
+                            >
+                              ADD ANOTHER ITEM
+                            </Button>
+
+                            <Button onClick={handleSave}>SAVE</Button>
+                          </div>
+                        </div>
+                      </div>
+                      <Table
+                        // className={classes.table}
+                        size="small"
+                        aria-label="a dense table"
+                      >
+                        <TableHead>
+                          <TableRow sx={{ display: "flex" }}>
+                            <TableCell sx={{ marginRight: "100px" }}>
+                              ITEM NAME
+                            </TableCell>
+                            <TableCell>PRICE</TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {rows.map((row, i) => {
+                            return (
+                              <div>
+                                <TableRow>
+                                  <TableCell padding="none">
+                                    <input
+                                      className="itemInput"
+                                      // value={row.firstname}
+                                      name="firstname"
+                                      placeholder="enter item name"
+                                      onChange={(e) => handleInputChange(e, i)}
+                                    />
+                                  </TableCell>
+                                  <TableCell padding="none">
+                                    <input
+                                      type="number"
+                                      className="itemInput"
+                                      // value={row.lastname}
+                                      name="lastname"
+                                      placeholder="enter price"
+                                      onChange={(e) => handleInputChange(e, i)}
+                                    />
+                                  </TableCell>
+                                  <TableCell padding="none">
+                                    <Button
+                                      className="mr10"
+                                      onClick={() => handleRemoveClick(i)}
+                                    >
+                                      <ClearIcon />
+                                    </Button>
+                                  </TableCell>
+                                </TableRow>
+                              </div>
+                            );
+                          })}
+                        </TableBody>
+                      </Table>
+                    </Box>
+                  </TableBody>
+                </Dialog>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -96,6 +260,23 @@ const GlobalSettings = () => {
                     id="name"
                     size="small"
                     name="name"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                </form>
+                {/* )} */}
+              </TableCell>
+              <TableCell>
+                {/* {i != editIndex && data.name}
+                  {i == editIndex && ( */}
+                <form>
+                  <TextField
+                    type="number"
+                    value={formik.values.price}
+                    fullWidth
+                    id="price"
+                    size="small"
+                    name="price"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   />

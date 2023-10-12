@@ -8,7 +8,7 @@ import {
   ListItemText,
   Paper,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Biryani from "./menu/Biryani";
 import Starters from "./menu/Starters";
 import FriedRice from "./menu/FriedRice";
@@ -33,6 +33,10 @@ const Products = () => {
   const handleClick = (tab: string) => {
     setSelectedTab(tab);
   };
+
+  useEffect(() => {
+    selectedTab === SETTING_TABS.STARTERS && <Starters />;
+  });
 
   return (
     <div>

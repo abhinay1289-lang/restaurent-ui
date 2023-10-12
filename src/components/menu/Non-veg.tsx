@@ -16,6 +16,7 @@ const Nonveg = (Props: any) => {
   const items: string[] = Props.items;
   const [counts, setCounts] = useState(new Array(items.length).fill(0));
   const [checked, setChecked] = useState(new Array(items.length).fill(false));
+  const [itemCount, setItemCount] = useState(0);
 
   const handleToggle = (value: number) => () => {
     const newChecked = [...checked];
@@ -26,23 +27,43 @@ const Nonveg = (Props: any) => {
 
     setChecked(newChecked);
     setCounts(newCounts);
+    setItemCount(
+      newCounts.reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+        0
+      )
+    );
+  };
+
+  const sendDataToParent = () => {
+    Props.itemCount(itemCount);
   };
 
   const increment = (index: any) => {
     const newCounts = [...counts];
     newCounts[index]++;
     setCounts(newCounts);
+    setItemCount(
+      newCounts.reduce((prevvalue, currentValue) => prevvalue + currentValue, 0)
+    );
   };
 
   const decrement = (index: any) => {
     const newCounts = [...counts];
     newCounts[index]--;
     setCounts(newCounts);
+    setItemCount(
+      newCounts.reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+        0
+      )
+    );
   };
 
   useEffect(() => {
     const newChecked = counts.map((count) => count > 0);
     setChecked(newChecked);
+    sendDataToParent();
   }, [counts]);
 
   return (
@@ -55,6 +76,8 @@ const Nonveg = (Props: any) => {
         marginTop: "5%",
       }}
     >
+      <span>{JSON.stringify(counts)}</span>
+      <span>{JSON.stringify(itemCount)}</span>
       <div className="items">
         <h3
           style={{
