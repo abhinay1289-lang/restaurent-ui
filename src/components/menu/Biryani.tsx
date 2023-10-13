@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./menu.css";
 import Nonveg from "./Non-veg";
 import Veg from "./Veg";
 
-const Biryani = () => {
-  const [count, setCount] = useState(0);
+const Biryani = (Props: any) => {
+  const [nonVegCount, setNonVegCount] = useState(0);
+  const [vegCount, setVegCount] = useState(0);
+  let biryaniCount = nonVegCount + vegCount;
   const biryaniItems: string[] = [
     "djygfhdrtksrje",
     "kwhedwe",
@@ -12,9 +14,15 @@ const Biryani = () => {
     "jhaekgwd",
     "jhawguhe3",
   ];
-  const updateCount = (data: any) => {
-    setCount(data);
+  const updateNonVegCount = (data: any) => {
+    setNonVegCount(data);
   };
+  const updateVegCount = (data: any) => {
+    setVegCount(data);
+  };
+  useEffect(() => {
+    Props.biryaniCount(biryaniCount);
+  });
   return (
     <div
       style={{
@@ -25,9 +33,8 @@ const Biryani = () => {
         marginTop: "10%",
       }}
     >
-      <span>{JSON.stringify(count)}</span>
-      <Nonveg items={biryaniItems} itemCount={updateCount} />
-      <Veg items={biryaniItems} itemCount={updateCount} />
+      <Nonveg items={biryaniItems} itemCount={updateNonVegCount} />
+      <Veg items={biryaniItems} itemCount={updateVegCount} />
     </div>
   );
 };

@@ -73,8 +73,6 @@ const Veg = (Props: any) => {
         marginTop: "5%",
       }}
     >
-      <span>{JSON.stringify(counts)}</span>
-      <span>{JSON.stringify(itemCount)}</span>
       <div className="items">
         <h3
           style={{

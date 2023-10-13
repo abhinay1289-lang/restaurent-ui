@@ -1,7 +1,7 @@
 import { Button, Paper } from "@mui/material";
 import "./responseapp.css";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
-const ResponseiveFooterBar = () => {
+const ResponseiveFooterBar = (Props: any) => {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <Paper sx={{ backgroundColor: "#5de2e23d" }}>
@@ -9,7 +9,7 @@ const ResponseiveFooterBar = () => {
         <div style={{ display: "flex", justifyContent: "space-around" }}>
           <div>
             <span>No of Items :</span>
-            <span>10</span>
+            <span>{Props.totalcount}</span>
           </div>
           <div>
             <span>Total Price</span>

@@ -1,7 +1,11 @@
+import { useEffect, useState } from "react";
 import Nonveg from "./Non-veg";
 import Veg from "./Veg";
 
-const Drinks = () => {
+const Drinks = (Props: any) => {
+  const [nonVegCount, setNonVegCount] = useState(0);
+  const [vegCount, setVegCount] = useState(0);
+  let drinksCount = nonVegCount + vegCount;
   const biryaniItems: string[] = [
     "djygfhdrtksrje",
     "kwhedwe",
@@ -9,6 +13,16 @@ const Drinks = () => {
     "jhaekgwd",
     "jhawguhe3",
   ];
+
+  const updateNonVegCount = (data: any) => {
+    setNonVegCount(data);
+  };
+  const updateVegCount = (data: any) => {
+    setVegCount(data);
+  };
+  useEffect(() => {
+    Props.drinksCount(drinksCount);
+  });
 
   return (
     <div
@@ -20,8 +34,8 @@ const Drinks = () => {
         marginTop: "10%",
       }}
     >
-      <Nonveg items={biryaniItems} />
-      <Veg items={biryaniItems} />
+      <Nonveg items={biryaniItems} itemCount={updateNonVegCount} />
+      <Veg items={biryaniItems} itemCount={updateVegCount} />
     </div>
   );
 };

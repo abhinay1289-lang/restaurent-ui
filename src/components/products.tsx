@@ -30,8 +30,44 @@ const Products = () => {
   };
 
   const [selectedTab, setSelectedTab] = useState("");
+  const [briyaniCount, setBiryaniCount] = useState(0);
+  const [startersCount, setStartersCount] = useState(0);
+  const [curriesCount, setCurriesCount] = useState(0);
+  const [friedriceCount, setFriedriceCount] = useState(0);
+  const [riceCount, setRiceCount] = useState(0);
+  const [rotisCount, setRotisCount] = useState(0);
+  const [drinksCount, setDrinksCount] = useState(0);
+  let totalCount =
+    startersCount +
+    briyaniCount +
+    curriesCount +
+    friedriceCount +
+    riceCount +
+    rotisCount +
+    drinksCount;
   const handleClick = (tab: string) => {
     setSelectedTab(tab);
+  };
+  const updateBiryaniCount = (data: any) => {
+    setBiryaniCount(data);
+  };
+  const updateStartersCount = (data: any) => {
+    setStartersCount(data);
+  };
+  const updateCurriesCount = (data: any) => {
+    setCurriesCount(data);
+  };
+  const updateFriedriceCount = (data: any) => {
+    setFriedriceCount(data);
+  };
+  const updateRiceCount = (data: any) => {
+    setRiceCount(data);
+  };
+  const updateRotisCount = (data: any) => {
+    setRotisCount(data);
+  };
+  const updateDrinksCount = (data: any) => {
+    setDrinksCount(data);
   };
 
   useEffect(() => {
@@ -61,7 +97,7 @@ const Products = () => {
                       <ListItemButton>
                         <ListItemIcon>
                           <div>
-                            <Badge badgeContent={17} color="error">
+                            <Badge badgeContent={startersCount} color="error">
                               <img
                                 src={require("../assets/starters.png")}
                                 alt="Peopletech-Group"
@@ -82,7 +118,7 @@ const Products = () => {
                     >
                       <ListItemButton>
                         <ListItemIcon>
-                          <Badge badgeContent={17} color="error">
+                          <Badge badgeContent={briyaniCount} color="error">
                             <img
                               src={require("../assets/biryani.png")}
                               alt="Peopletech-Group"
@@ -103,7 +139,7 @@ const Products = () => {
                       <ListItemButton>
                         <ListItemIcon>
                           <div>
-                            <Badge badgeContent={17} color="error">
+                            <Badge badgeContent={curriesCount} color="error">
                               <img
                                 src={require("../assets/curries.png")}
                                 alt="Peopletech-Group"
@@ -127,7 +163,7 @@ const Products = () => {
                       <ListItemButton>
                         <ListItemIcon>
                           <div>
-                            <Badge badgeContent={17} color="error">
+                            <Badge badgeContent={friedriceCount} color="error">
                               <img
                                 src={require("../assets/friedrice.png")}
                                 alt="Peopletech-Group"
@@ -151,7 +187,7 @@ const Products = () => {
                       <ListItemButton>
                         <ListItemIcon>
                           <div>
-                            <Badge badgeContent={17} color="error">
+                            <Badge badgeContent={riceCount} color="error">
                               <img
                                 src={require("../assets/rice.png")}
                                 alt="Peopletech-Group"
@@ -173,7 +209,7 @@ const Products = () => {
                       <ListItemButton>
                         <ListItemIcon>
                           <div>
-                            <Badge badgeContent={17} color="error">
+                            <Badge badgeContent={rotisCount} color="error">
                               <img
                                 src={require("../assets/rotis.png")}
                                 alt="Peopletech-Group"
@@ -195,7 +231,7 @@ const Products = () => {
                       <ListItemButton>
                         <ListItemIcon>
                           <div>
-                            <Badge badgeContent={17} color="error">
+                            <Badge badgeContent={drinksCount} color="error">
                               <img
                                 src={require("../assets/rotis.png")}
                                 alt="Peopletech-Group"
@@ -216,18 +252,32 @@ const Products = () => {
         </Paper>
         <div className="right-section">
           <Grid sx={{ width: "100%" }} item xs={10}>
-            {selectedTab === SETTING_TABS.STARTERS && <Starters />}
-            {selectedTab === SETTING_TABS.BIRYANI && <Biryani />}
-            {selectedTab === SETTING_TABS.CURRIES && <Curries />}
-            {selectedTab === SETTING_TABS.FRIEDRICE_NOODLES && <FriedRice />}
-            {selectedTab === SETTING_TABS.RICE && <Rice />}
-            {selectedTab === SETTING_TABS.ROTIS && <Rotis />}
-            {selectedTab === SETTING_TABS.DRINKS && <Drinks />}
+            {selectedTab === SETTING_TABS.STARTERS && (
+              <Starters startersCount={updateStartersCount} />
+            )}
+            {selectedTab === SETTING_TABS.BIRYANI && (
+              <Biryani biryaniCount={updateBiryaniCount} />
+            )}
+            {selectedTab === SETTING_TABS.CURRIES && (
+              <Curries curryCount={updateCurriesCount} />
+            )}
+            {selectedTab === SETTING_TABS.FRIEDRICE_NOODLES && (
+              <FriedRice friedRiceCount={updateFriedriceCount} />
+            )}
+            {selectedTab === SETTING_TABS.RICE && (
+              <Rice riceCount={updateRiceCount} />
+            )}
+            {selectedTab === SETTING_TABS.ROTIS && (
+              <Rotis rotisCount={updateRotisCount} />
+            )}
+            {selectedTab === SETTING_TABS.DRINKS && (
+              <Drinks drinksCount={updateDrinksCount} />
+            )}
           </Grid>
         </div>
       </div>
       <div>
-        <ResponseiveFooterBar />
+        <ResponseiveFooterBar totalcount={totalCount} />
       </div>
     </div>
   );
