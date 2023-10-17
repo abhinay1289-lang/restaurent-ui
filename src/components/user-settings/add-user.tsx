@@ -39,6 +39,7 @@ const AddUser = ({ handleClose }: Props) => {
     firstName: Yup.string().required("first name is required"),
     lastName: Yup.string().required("last name is required"),
     email: Yup.string().required("email is required"),
+    password: Yup.string().required("password is required"),
   });
 
   const formik = useFormik({
@@ -46,6 +47,7 @@ const AddUser = ({ handleClose }: Props) => {
       firstName: "",
       lastName: "",
       email: "",
+      password: "",
       role: "",
     },
     onSubmit: (values) => {},
@@ -123,6 +125,26 @@ const AddUser = ({ handleClose }: Props) => {
                           </MenuItem>
                         ))}
                       </Select>
+                    </FormControl>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <FormControl variant="standard" className="user-form">
+                      <InputLabel>Password</InputLabel>
+                      <Input
+                        sx={{ width: "350px" }}
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="enter password"
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                      />
+                      {formik.touched.password && formik.errors.password ? (
+                        <div className="err-msg">{formik.errors.password}</div>
+                      ) : null}
                     </FormControl>
                   </td>
                 </tr>
