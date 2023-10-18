@@ -20,7 +20,7 @@ export default function App() {
   return (
     <>
       <React.Fragment>
-        <div id="detail">
+        {/* <div id="detail">
           <LocalizationProvider>
             <>
               <ResponsiveHeaderBar />
@@ -31,9 +31,9 @@ export default function App() {
               </div>
             </>
           </LocalizationProvider>
-        </div>
+        </div> */}
 
-        {/* <Navigate to={getLoginUrl()} /> */}
+        <Navigate to={getLoginUrl()} />
         {/* <div>
           <ResponsiveAppBar />
           <Menucard />

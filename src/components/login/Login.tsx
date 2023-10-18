@@ -4,7 +4,7 @@ import useNavigate from "../../common/useNavigate";
 import { login as loginApi } from "../../service/securityservice";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import './login.css'
+import "./login.css";
 
 const Login = () => {
   const [worker, setWorker] = useState(false);
@@ -20,7 +20,9 @@ const Login = () => {
 
   const login = (values: any) => {
     loginApi(values)
-      .then((_resp) => {
+      .then((resp) => {
+        console.log(resp);
+        // localStorage.setItem('token', resp.data.token);
         navigate(
           [
             {
