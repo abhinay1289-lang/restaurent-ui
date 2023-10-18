@@ -7,6 +7,7 @@ import ResponsiveHeaderBar from "./app-header-footer/app-header";
 import { Backdrop, Box, CircularProgress } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import ResponseiveFooterBar from "./app-header-footer/app-footer";
+import globalObject from "../common/global-variables";
 
 const getLoginUrl = () => {
   return `/login?from=${btoa(
@@ -17,27 +18,27 @@ const getLoginUrl = () => {
 export default function App() {
   const [loading, setLoading] = useState(true);
   const [propsLoading, setPropsLoading] = useState(true);
+  const token = globalObject.userObject;
   return (
     <>
       <React.Fragment>
-        {/* <div id="detail">
-          <LocalizationProvider>
-            <>
-              <ResponsiveHeaderBar />
-              <div>
-                <Box>
-                  <Outlet />
-                </Box>
-              </div>
-            </>
-          </LocalizationProvider>
-        </div> */}
-
-        <Navigate to={getLoginUrl()} />
-        {/* <div>
-          <ResponsiveAppBar />
-          <Menucard />
-        </div> */}
+        {token !== null ? (
+          <div id="detail">
+            <LocalizationProvider>
+              <>
+                {console.log(token)}
+                <ResponsiveHeaderBar />
+                <div>
+                  <Box>
+                    <Outlet />
+                  </Box>
+                </div>
+              </>
+            </LocalizationProvider>
+          </div>
+        ) : (
+          <Navigate to={getLoginUrl()} />
+        )}
       </React.Fragment>
     </>
   );
