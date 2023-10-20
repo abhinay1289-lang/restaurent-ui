@@ -23,7 +23,11 @@ const Login = () => {
   const login = (values: any) => {
     loginApi(values)
       .then((resp) => {
-        if (values.password === resp.data.password) {
+        console.log(values.username === resp.data.emailId);
+        if (
+          values.username === resp.data.emailId &&
+          values.password === resp.data.password
+        ) {
           setHide(true);
           globalObject.userObject = resp.data;
           navigate(
@@ -40,7 +44,9 @@ const Login = () => {
           globalObject.userObject = null;
         }
       })
-      .catch((_err) => {});
+      .catch((_err) => {
+        setHide(false);
+      });
   };
 
   const formik = useFormik({

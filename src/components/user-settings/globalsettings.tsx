@@ -7,6 +7,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  FormControl,
   InputLabel,
   Link,
   Snackbar,
@@ -27,9 +28,10 @@ import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import ClearIcon from "@mui/icons-material/Clear";
 
-interface items {
-  item?: string;
-  price?: string;
+interface Item {
+  type: string | undefined;
+  name: string;
+  price: string;
 }
 
 const GlobalSettings = () => {
@@ -45,10 +47,24 @@ const GlobalSettings = () => {
   const [lookupname, setLookupname] = useState("");
   const [editIndex, setEditIndex] = useState(1);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [items, setItems] = useState([]);
+  // const [items, setItems] = useState([]);
   const [open, setOpen] = useState(false);
   const [disable, setDisable] = useState(true);
   const [showConfirm, setShowConfirm] = useState(false);
+
+  const [items, setItems] = useState<Item[]>([
+    {
+      type: undefined,
+      name: "",
+      price: "",
+    },
+  ]);
+
+  const [newItem, setNewItem] = useState<Item>({
+    type: undefined,
+    name: "",
+    price: "",
+  });
 
   const handleAdd = () => {
     setRows([
@@ -62,38 +78,35 @@ const GlobalSettings = () => {
   };
 
   const handleSave = () => {
-    setRows(rows);
-    console.log("saved : ", rows);
-    setDisable(true);
-    setOpen(true);
+    if (newItem.type && newItem.name && newItem.price) {
+      setItems([...items, newItem]);
+    }
+    console.log("Saved Items: ", items);
   };
 
-  const handleInputChange = (e: any, index: number) => {
-    setDisable(false);
-    const { name, value } = e.target;
-    const list = [...rows];
-    // list[index][name] = value;
-    setRows(list);
-  };
-  const handleConfirm = () => {
-    setShowConfirm(true);
+  const handleAddAnotherItem = () => {
+    const newItem: Item = {
+      type: undefined,
+      name: "",
+      price: "",
+    };
+    setItems([...items, newItem]);
   };
 
-  const handleRemoveClick = (i: any) => {
-    const list = [...rows];
-    list.splice(i, 1);
-    setRows(list);
-    setShowConfirm(false);
+  const handleChange = (event: any, index: number) => {
+    const { name, value } = event.target;
+    const updatedItems: any = [...items];
+    updatedItems[index][name] = value;
+    setItems(updatedItems);
   };
 
-  const handleNo = () => {
-    setShowConfirm(false);
+  const handleTypeChange = (event: any, index: number) => {
+    const selectedValue = event.target.value as string | undefined;
+    const updatedItems = [...items];
+    updatedItems[index].type = selectedValue;
+    setItems(updatedItems);
   };
 
-  const handleChange = (value: any) => {
-    console.log(value);
-    setLookupname(value);
-  };
   const handleClose = (event: any, reason: any) => {
     if (reason === "clickaway") {
       return;
@@ -122,7 +135,7 @@ const GlobalSettings = () => {
         <Select
           fullWidth
           value={lookupname}
-          onChange={(e) => handleChange(e.target.value)}
+          // onChange={(e) => handleChange(e.target.value)}
         >
           {menuitems.map((item, i) => (
             <MenuItem value={item} key={i}>
@@ -165,25 +178,14 @@ const GlobalSettings = () => {
                       </Alert>
                     </Snackbar>
                     <Box margin={1}>
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        onClick={handleAddAnotherItem}
                       >
-                        <div>
-                          <div style={{ display: "flex" }}>
-                            <Button
-                              sx={{ minWidth: "200px" }}
-                              onClick={handleAdd}
-                            >
-                              ADD ANOTHER ITEM
-                            </Button>
-
-                            <Button onClick={handleSave}>SAVE</Button>
-                          </div>
-                        </div>
-                      </div>
+                        Add Another Item
+                      </Button>
                       <Table
                         // className={classes.table}
                         size="small"
@@ -191,48 +193,61 @@ const GlobalSettings = () => {
                       >
                         <TableHead>
                           <TableRow sx={{ display: "flex" }}>
-                            <TableCell sx={{ marginRight: "100px" }}>
+                            <TableCell sx={{ marginRight: "40px" }}>
+                              ITEM TYPE
+                            </TableCell>
+                            <TableCell sx={{ marginRight: "40px" }}>
                               ITEM NAME
                             </TableCell>
                             <TableCell>PRICE</TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
-                          {rows.map((row, i) => {
-                            return (
-                              <div>
-                                <TableRow>
-                                  <TableCell padding="none">
-                                    <input
-                                      className="itemInput"
-                                      // value={row.firstname}
-                                      name="firstname"
-                                      placeholder="enter item name"
-                                      onChange={(e) => handleInputChange(e, i)}
+                          <div>
+                            <TableRow>
+                              <Box sx={{ width: "100%" }}>
+                                {items.map((item, index) => (
+                                  <div key={index} style={{ display: "flex" }}>
+                                    <FormControl>
+                                      <Select
+                                        sx={{ width: "100px" }}
+                                        value={item.type}
+                                        onChange={(e) =>
+                                          handleTypeChange(e, index)
+                                        }
+                                        name="type"
+                                      >
+                                        <MenuItem value="non-veg">
+                                          Non-Veg
+                                        </MenuItem>
+                                        <MenuItem value="veg">Veg</MenuItem>
+                                      </Select>
+                                    </FormControl>
+                                    <TextField
+                                      sx={{ width: "150px" }}
+                                      name="name"
+                                      value={item.name}
+                                      onChange={(e) => handleChange(e, index)}
                                     />
-                                  </TableCell>
-                                  <TableCell padding="none">
-                                    <input
-                                      type="number"
-                                      className="itemInput"
-                                      // value={row.lastname}
-                                      name="lastname"
-                                      placeholder="enter price"
-                                      onChange={(e) => handleInputChange(e, i)}
+                                    <TextField
+                                      sx={{ width: "150px" }}
+                                      name="price"
+                                      value={item.price}
+                                      onChange={(e) => handleChange(e, index)}
                                     />
-                                  </TableCell>
-                                  <TableCell padding="none">
-                                    <Button
-                                      className="mr10"
-                                      onClick={() => handleRemoveClick(i)}
-                                    >
-                                      <ClearIcon />
-                                    </Button>
-                                  </TableCell>
-                                </TableRow>
-                              </div>
-                            );
-                          })}
+                                  </div>
+                                ))}
+                                <Button
+                                  fullWidth
+                                  variant="contained"
+                                  color="primary"
+                                  onClick={handleSave}
+                                >
+                                  Save
+                                </Button>
+                              </Box>
+                            </TableRow>
+                          </div>
                         </TableBody>
                       </Table>
                     </Box>
