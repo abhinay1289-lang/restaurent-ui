@@ -29,7 +29,7 @@ import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import ClearIcon from "@mui/icons-material/Clear";
 
 interface Item {
-  type: string | undefined;
+  type: number | undefined;
   name: string;
   price: string;
 }
@@ -44,37 +44,33 @@ const GlobalSettings = () => {
     LookupTypes.STARTERS,
   ];
 
-  const [lookupname, setLookupname] = useState("");
+  const [lookupname, setLookupname] = useState("BIRYANI");
   const [editIndex, setEditIndex] = useState(1);
   const [dialogOpen, setDialogOpen] = useState(false);
-  // const [items, setItems] = useState([]);
   const [open, setOpen] = useState(false);
-  const [disable, setDisable] = useState(true);
-  const [showConfirm, setShowConfirm] = useState(false);
 
   const [items, setItems] = useState<Item[]>([
     {
-      type: undefined,
+      type: 1,
       name: "",
       price: "",
     },
   ]);
 
   const [newItem, setNewItem] = useState<Item>({
-    type: undefined,
+    type: 1,
     name: "",
     price: "",
   });
 
-  const handleAdd = () => {
-    setRows([
-      ...rows,
-      {
-        id: rows.length + 1,
-        item: "",
-        price: "",
-      },
-    ]);
+  const handleMenuChange = (value: any) => {
+    setLookupname(value);
+  };
+
+  const handleRemoveItem = (index: number) => {
+    const updatedItems = [...items];
+    updatedItems.splice(index, 1);
+    setItems(updatedItems);
   };
 
   const handleSave = () => {
@@ -86,7 +82,7 @@ const GlobalSettings = () => {
 
   const handleAddAnotherItem = () => {
     const newItem: Item = {
-      type: undefined,
+      type: 1,
       name: "",
       price: "",
     };
@@ -101,7 +97,7 @@ const GlobalSettings = () => {
   };
 
   const handleTypeChange = (event: any, index: number) => {
-    const selectedValue = event.target.value as string | undefined;
+    const selectedValue = event.target.value as number | undefined;
     const updatedItems = [...items];
     updatedItems[index].type = selectedValue;
     setItems(updatedItems);
@@ -118,8 +114,6 @@ const GlobalSettings = () => {
     setOpen(false);
   };
 
-  const [rows, setRows] = useState([{ id: 1, item: "", price: "" }]);
-
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -135,7 +129,7 @@ const GlobalSettings = () => {
         <Select
           fullWidth
           value={lookupname}
-          // onChange={(e) => handleChange(e.target.value)}
+          onChange={(e) => handleMenuChange(e.target.value)}
         >
           {menuitems.map((item, i) => (
             <MenuItem value={item} key={i}>
@@ -186,14 +180,10 @@ const GlobalSettings = () => {
                       >
                         Add Another Item
                       </Button>
-                      <Table
-                        // className={classes.table}
-                        size="small"
-                        aria-label="a dense table"
-                      >
+                      <Table size="small" aria-label="a dense table">
                         <TableHead>
                           <TableRow sx={{ display: "flex" }}>
-                            <TableCell sx={{ marginRight: "40px" }}>
+                            <TableCell sx={{ marginRight: "20px" }}>
                               ITEM TYPE
                             </TableCell>
                             <TableCell sx={{ marginRight: "40px" }}>
@@ -207,39 +197,54 @@ const GlobalSettings = () => {
                             <TableRow>
                               <Box sx={{ width: "100%" }}>
                                 {items.map((item, index) => (
-                                  <div key={index} style={{ display: "flex" }}>
+                                  <div
+                                    key={index}
+                                    style={{
+                                      display: "flex",
+                                      paddingTop: "10px",
+                                      paddingBottom: "10px",
+                                    }}
+                                  >
                                     <FormControl>
                                       <Select
-                                        sx={{ width: "100px" }}
+                                        sx={{ width: "120px" }}
                                         value={item.type}
                                         onChange={(e) =>
                                           handleTypeChange(e, index)
                                         }
                                         name="type"
                                       >
-                                        <MenuItem value="non-veg">
-                                          Non-Veg
+                                        <MenuItem value="" disabled>
+                                          Select item type
                                         </MenuItem>
-                                        <MenuItem value="veg">Veg</MenuItem>
+                                        <MenuItem value={1}>Non-Veg</MenuItem>
+                                        <MenuItem value={2}>Veg</MenuItem>
                                       </Select>
                                     </FormControl>
                                     <TextField
+                                      placeholder="enter item name"
                                       sx={{ width: "150px" }}
                                       name="name"
                                       value={item.name}
                                       onChange={(e) => handleChange(e, index)}
                                     />
                                     <TextField
+                                      placeholder="enter price"
                                       sx={{ width: "150px" }}
                                       name="price"
                                       value={item.price}
                                       onChange={(e) => handleChange(e, index)}
                                     />
+                                    <Button
+                                      className="mr10"
+                                      onClick={() => handleRemoveItem(index)}
+                                    >
+                                      <ClearIcon />
+                                    </Button>
                                   </div>
                                 ))}
                                 <Button
-                                  fullWidth
-                                  variant="contained"
+                                  // variant="contained"
                                   color="primary"
                                   onClick={handleSave}
                                 >
