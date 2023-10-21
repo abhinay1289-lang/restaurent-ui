@@ -77,6 +77,7 @@ const GlobalSettings = () => {
     if (newItem.type && newItem.name && newItem.price) {
       setItems([...items, newItem]);
     }
+    setOpen(true);
     console.log("Saved Items: ", items);
   };
 
@@ -103,7 +104,7 @@ const GlobalSettings = () => {
     setItems(updatedItems);
   };
 
-  const handleClose = (event: any, reason: any) => {
+  const handleClose = (reason: any) => {
     if (reason === "clickaway") {
       return;
     }
@@ -112,6 +113,14 @@ const GlobalSettings = () => {
   };
   const handleAlertClose = () => {
     setOpen(false);
+    setDialogOpen(false);
+    setItems([
+      {
+        type: 1,
+        name: "",
+        price: "",
+      },
+    ]);
   };
 
   const formik = useFormik({
@@ -154,6 +163,7 @@ const GlobalSettings = () => {
                     // if (selectedSetting == "skills") setShowSkillsDialog(true);
                     // else setShowDialog(true);
                     setDialogOpen(true);
+                    // setOpen(false);
                   }}
                 >
                   Add
@@ -163,9 +173,9 @@ const GlobalSettings = () => {
                   <TableBody>
                     <Snackbar
                       open={open}
-                      autoHideDuration={1000}
+                      autoHideDuration={500}
                       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                      onClose={handleClose}
+                      onClose={handleAlertClose}
                     >
                       <Alert onClose={handleAlertClose} severity="success">
                         Record saved successfully!
