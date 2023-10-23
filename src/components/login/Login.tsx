@@ -67,7 +67,7 @@ const Login = () => {
         onSubmit={formik.handleSubmit}
         onChange={() => setHide(true)}
       >
-        <h1 className="restaurent-name">LAXMI SAI DHABA FAMILY RESTAURENT</h1>
+        <h1 className="restaurent-name">ANUSHA FAMILY RESTAURENT</h1>
         <h3>{worker === true ? "WORKER  " : "OWNER  "}LOGIN</h3>
 
         <InputLabel className="Username" style={{ color: "cyan" }}>

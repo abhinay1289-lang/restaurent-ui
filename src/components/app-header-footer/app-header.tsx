@@ -11,6 +11,8 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import useNavigate from "../../common/useNavigate";
 import { useEffect } from "react";
+import globalObject from "../../common/global-variables";
+import { getInitials } from "../../common/commonutill";
 
 const ResponsiveHeaderBar = () => {
   const pages = [
@@ -42,6 +44,7 @@ const ResponsiveHeaderBar = () => {
     null
   );
   const [parentPath, setParentPath] = React.useState("");
+  const user = globalObject.userObject;
   const [navigate, redirect] = useNavigate();
 
   useEffect(() => {
@@ -158,7 +161,7 @@ const ResponsiveHeaderBar = () => {
 
             <Box sx={{ flexGrow: 0 }}>
               <div className="user-icon" onClick={handleOpenUserMenu}>
-                SA
+                {getInitials(user)}
               </div>
 
               <Menu

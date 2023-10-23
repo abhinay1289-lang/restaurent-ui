@@ -27,6 +27,7 @@ import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutli
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import ClearIcon from "@mui/icons-material/Clear";
+import { saveLookupInfo } from "../../service/lookupservice";
 
 interface Item {
   type: number | undefined;
@@ -78,7 +79,8 @@ const GlobalSettings = () => {
       setItems([...items, newItem]);
     }
     setOpen(true);
-    console.log("Saved Items: ", items);
+    console.log("Saved Items: ", lookupname, items);
+    saveLookupInfo(items, lookupname).then((resp) => console.log(resp));
   };
 
   const handleAddAnotherItem = () => {
@@ -260,6 +262,9 @@ const GlobalSettings = () => {
                                 >
                                   Save
                                 </Button>
+                                <span>
+                                  {JSON.stringify(lookupname + items)}
+                                </span>
                               </Box>
                             </TableRow>
                           </div>
