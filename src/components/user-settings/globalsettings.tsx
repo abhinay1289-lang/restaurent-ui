@@ -262,9 +262,6 @@ const GlobalSettings = () => {
                                 >
                                   Save
                                 </Button>
-                                <span>
-                                  {JSON.stringify(lookupname + items)}
-                                </span>
                               </Box>
                             </TableRow>
                           </div>
