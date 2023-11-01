@@ -8,6 +8,8 @@ import "./login.css";
 import globalObject from "../../common/global-variables";
 
 const Login = () => {
+  localStorage.removeItem("userObject");
+  localStorage.removeItem("token");
   const [worker, setWorker] = useState(false);
   const params = new URLSearchParams(window.location.search);
   const [navigate, redirect] = useNavigate();
@@ -20,32 +22,25 @@ const Login = () => {
     password: Yup.string().required("Password is required"),
   });
 
-  const login = (values: any) => {
+  const login = async (values: any) => {
     loginApi(values)
       .then((resp) => {
-        console.log(values.username === resp.data.emailId);
-        if (
-          values.username === resp.data.emailId &&
-          values.password === resp.data.password
-        ) {
-          setHide(true);
-          globalObject.userObject = resp.data;
-          navigate(
-            [
-              {
-                label: "Menucard",
-                link: "/",
-              },
-            ],
-            true
-          );
-        } else {
-          setHide(false);
-          globalObject.userObject = null;
-        }
+        setHide(true);
+        localStorage.setItem("userObject", JSON.stringify(resp.data));
+        navigate(
+          [
+            {
+              label: "products",
+              link: "/",
+            },
+          ],
+          true
+        );
+        setHide(false);
       })
       .catch((_err) => {
         setHide(false);
+        localStorage.setItem("userObject", "");
       });
   };
 

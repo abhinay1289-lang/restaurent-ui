@@ -11,7 +11,6 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import useNavigate from "../../common/useNavigate";
 import { useEffect } from "react";
-import globalObject from "../../common/global-variables";
 import { getInitials } from "../../common/commonutill";
 
 const ResponsiveHeaderBar = () => {
@@ -44,7 +43,8 @@ const ResponsiveHeaderBar = () => {
     null
   );
   const [parentPath, setParentPath] = React.useState("");
-  const user = globalObject.userObject;
+  const user = JSON.parse(localStorage.getItem("userObject") || "{}");
+
   const [navigate, redirect] = useNavigate();
 
   useEffect(() => {
@@ -67,6 +67,7 @@ const ResponsiveHeaderBar = () => {
 
   const handleMenuClick = (setting: any) => {
     if (setting.label === "Logout") {
+      localStorage.removeItem("userObject");
       redirect(setting.link);
     } else {
       navigate(

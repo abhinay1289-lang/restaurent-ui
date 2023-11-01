@@ -3,13 +3,9 @@ import {
   Box,
   Button,
   Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
   DialogTitle,
   FormControl,
   InputLabel,
-  Link,
   Snackbar,
   Table,
   TableBody,
@@ -21,13 +17,14 @@ import {
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { LookupTypes } from "../../common/lookuptypes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import ClearIcon from "@mui/icons-material/Clear";
-import { saveLookupInfo } from "../../service/lookupservice";
+import { getLookupData, saveLookupInfo } from "../../service/lookupservice";
+import globalObject from "../../common/global-variables";
 
 interface Item {
   type: number | undefined;
@@ -45,10 +42,11 @@ const GlobalSettings = () => {
     LookupTypes.STARTERS,
   ];
 
-  const [lookupname, setLookupname] = useState("BIRYANI");
-  const [editIndex, setEditIndex] = useState(1);
+  const [lookupname, setLookupname] = useState("biryani");
+  const [editIndex, setEditIndex] = useState(-1);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [open, setOpen] = useState(false);
+  const [lookupData, setLookupData] = useState([] as any[]);
 
   const [items, setItems] = useState<Item[]>([
     {
@@ -74,13 +72,29 @@ const GlobalSettings = () => {
     setItems(updatedItems);
   };
 
+  const refreshLookupdata = () => {
+    getLookupData(lookupname)
+      .then((resp) => {
+        globalObject.lookupvalues[lookupname] = resp.data;
+        setLookupData(resp.data);
+      })
+      .catch();
+  };
+
   const handleSave = () => {
     if (newItem.type && newItem.name && newItem.price) {
       setItems([...items, newItem]);
     }
-    setOpen(true);
+
     console.log("Saved Items: ", lookupname, items);
-    saveLookupInfo(items, lookupname).then((resp) => console.log(resp));
+
+    saveLookupInfo(items, lookupname)
+      .then((resp) => {
+        setOpen(true);
+        refreshLookupdata();
+        console.log("response => ", resp.data);
+      })
+      .catch((err) => console.log("error", err));
   };
 
   const handleAddAnotherItem = () => {
@@ -132,6 +146,11 @@ const GlobalSettings = () => {
     },
     onSubmit: (_value) => {},
   });
+
+  useEffect(() => {
+    setLookupname(lookupname);
+    setLookupData(globalObject.lookupvalues[LookupTypes.BIRYANI]);
+  }, []);
 
   return (
     <Box sx={{ width: "20%", padding: "20px" }}>
@@ -274,94 +293,91 @@ const GlobalSettings = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* {(rowsPerPage > 0
-              ? tableData.slice(
-                  page * rowsPerPage,
-                  page * rowsPerPage + rowsPerPage
-                )
-              : tableData
-            ).map((data, i) => ( */}
-            <TableRow key={1}>
-              <TableCell>
-                {/* {i != editIndex && data.name}
-                  {i == editIndex && ( */}
-                <form>
-                  <TextField
-                    value={formik.values.name}
-                    fullWidth
-                    id="name"
-                    size="small"
-                    name="name"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                  />
-                </form>
-                {/* )} */}
-              </TableCell>
-              <TableCell>
-                {/* {i != editIndex && data.name}
-                  {i == editIndex && ( */}
-                <form>
-                  <TextField
-                    type="number"
-                    value={formik.values.price}
-                    fullWidth
-                    id="price"
-                    size="small"
-                    name="price"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                  />
-                </form>
-                {/* )} */}
-              </TableCell>
-              <TableCell>
-                {editIndex !== 0 && (
-                  <DriveFileRenameOutlineIcon
+            {lookupData.map((data, i) => (
+              <TableRow key={i}>
+                <TableCell>
+                  {i !== editIndex && data.name}
+                  {i === editIndex && (
+                    <form>
+                      <TextField
+                        value={formik.values.name}
+                        fullWidth
+                        id="name"
+                        size="small"
+                        name="name"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                      />
+                    </form>
+                  )}
+                </TableCell>
+                <TableCell>
+                  {i !== editIndex && data.price}
+                  {i === editIndex && (
+                    <form>
+                      <TextField
+                        type="number"
+                        value={formik.values.price}
+                        fullWidth
+                        id="price"
+                        size="small"
+                        name="price"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                      />
+                    </form>
+                  )}
+                </TableCell>
+                <TableCell>
+                  {editIndex !== 0 && (
+                    <DriveFileRenameOutlineIcon
+                      fontSize="small"
+                      style={{ cursor: "pointer", color: "#a72037" }}
+                      // onClick={() => {
+                      //   setEditIndex(i);
+                      //   formik.setFieldValue("name", data.name);
+                      //   setTextValue(data.name);
+                      // }}
+                    />
+                  )}
+                  {editIndex === 0 && (
+                    <CheckCircleRoundedIcon
+                      style={{
+                        cursor:
+                          !formik.values.name ||
+                          formik.values.name.trim() === ""
+                            ? "default"
+                            : "pointer",
+                        color: "#a72037",
+                        opacity:
+                          !formik.values.name ||
+                          formik.values.name.trim() === ""
+                            ? "50%"
+                            : "100%",
+                      }}
+                      // onClick={() => {
+                      //   if (
+                      //     formik.values.name &&
+                      //     formik.values.name.trim() != ""
+                      //   )
+                      //     handleSave(data.id);
+                      // }}
+                    />
+                  )}
+                  <DeleteRoundedIcon
                     fontSize="small"
-                    style={{ cursor: "pointer", color: "#a72037" }}
-                    // onClick={() => {
-                    //   setEditIndex(i);
-                    //   formik.setFieldValue("name", data.name);
-                    //   setTextValue(data.name);
-                    // }}
-                  />
-                )}
-                {editIndex === 0 && (
-                  <CheckCircleRoundedIcon
                     style={{
-                      cursor:
-                        !formik.values.name || formik.values.name.trim() === ""
-                          ? "default"
-                          : "pointer",
+                      marginLeft: "15px",
+                      cursor: "pointer",
                       color: "#a72037",
-                      opacity:
-                        !formik.values.name || formik.values.name.trim() === ""
-                          ? "50%"
-                          : "100%",
                     }}
-                    // onClick={() => {
-                    //   if (
-                    //     formik.values.name &&
-                    //     formik.values.name.trim() != ""
-                    //   )
-                    //     handleSave(data.id);
-                    // }}
+                    // onClick={() => deleteData(data.id)}
                   />
-                )}
-                <DeleteRoundedIcon
-                  fontSize="small"
-                  style={{
-                    marginLeft: "15px",
-                    cursor: "pointer",
-                    color: "#a72037",
-                  }}
-                  // onClick={() => deleteData(data.id)}
-                />
-              </TableCell>
-              <TableCell></TableCell>
-            </TableRow>
-            {/* // ))} */}
+                </TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            ))}
+
             <TableRow>
               {/* <TablePagination
                 colSpan={2}

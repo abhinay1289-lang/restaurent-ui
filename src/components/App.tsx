@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { Outlet, Navigate } from "react-router-dom";
-import Menucard from "./products";
 import { LocalizationProvider } from "@mui/x-date-pickers";
-import ResponsiveHeaderBar from "./app-header-footer/app-header";
-import { Backdrop, Box, CircularProgress } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import ResponseiveFooterBar from "./app-header-footer/app-footer";
+import ResponsiveHeaderBar from "./app-header-footer/app-header";
+import { Box } from "@mui/material";
+import { getLookupData } from "../service/lookupservice";
 import globalObject from "../common/global-variables";
+import { LookupTypes } from "../common/lookuptypes";
 
 const getLoginUrl = () => {
   return `/login?from=${btoa(
@@ -16,17 +16,28 @@ const getLoginUrl = () => {
 };
 
 export default function App() {
-  const [loading, setLoading] = useState(true);
-  const [propsLoading, setPropsLoading] = useState(true);
-  const token = globalObject.userObject;
+  const user = JSON.parse(localStorage.getItem("userObject") || "{}");
+
+  useEffect(() => {
+    if (Object.keys(user).length !== 0)
+      getLookupData("all")
+        .then((resp) => {
+          globalObject.lookupvalues = resp.data;
+          console.log(globalObject.lookupvalues);
+
+          console.log(globalObject.lookupvalues[LookupTypes.BIRYANI]);
+        })
+        .catch();
+  });
+
   return (
     <>
+      {console.log(user)}
       <React.Fragment>
-        {token !== null ? (
+        {Object.keys(user).length !== 0 ? (
           <div id="detail">
-            <LocalizationProvider>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
               <>
-                {console.log(token)}
                 <ResponsiveHeaderBar />
                 <div>
                   <Box>

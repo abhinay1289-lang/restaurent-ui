@@ -1,6 +1,6 @@
 import axiosClient from "../common/axiosClients";
 
-export async function getLookupValues(lookupName: string) {
+export async function getLookupData(lookupName: string) {
   return axiosClient.get(`/lookup/${lookupName}`);
 }
 

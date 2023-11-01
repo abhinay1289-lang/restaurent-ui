@@ -34,7 +34,7 @@ const Curries = (Props: any) => {
         marginTop: "10%",
       }}
     >
-      <Nonveg items={biryaniItems} itemCount={updateNonVegCount} />
+      {/* <Nonveg items={biryaniItems} itemCount={updateNonVegCount} /> */}
       <Veg items={biryaniItems} itemCount={updateVegCount} />
     </div>
   );
