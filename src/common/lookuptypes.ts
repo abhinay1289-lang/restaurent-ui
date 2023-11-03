@@ -1,7 +1,7 @@
 export enum LookupTypes {
     BIRYANI = 'biryani',
     STARTERS = "starters",
-    CURRIES = "curries ",
+    CURRIES = "curries",
     FRIEDRICE_NOODLES = "friedRiceAndNoodles",
     RICE = "rice",
     ROTIS = "rotis",

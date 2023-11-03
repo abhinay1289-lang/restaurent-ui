@@ -86,12 +86,13 @@ const Nonveg = (Props: any) => {
         >
           NON VEG
         </h3>
+
         <div>
           <List sx={{ width: "100%", bgcolor: "transparent" }}>
             {items.map((value, i) => (
               <ListItem
                 className="itemsbox"
-                key={i}
+                key={value}
                 secondaryAction={
                   <div className="mui-buttons">
                     <Button
@@ -140,7 +141,7 @@ const Nonveg = (Props: any) => {
                       disableRipple
                     />
                   </ListItemIcon>
-                  <ListItemText primary={value} />
+                  <ListItemText primary={value.name} />
                 </ListItemButton>
               </ListItem>
             ))}

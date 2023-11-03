@@ -50,3 +50,12 @@ body {
 	color: #fff;
 	background: #009d43;
 }
+
+.pagination p {
+  color: #000000 !important;
+  font-family: 'Ambit' !important;
+  font-style: normal;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  display: flex;
+}

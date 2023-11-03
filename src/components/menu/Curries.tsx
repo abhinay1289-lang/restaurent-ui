@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
 import Nonveg from "./Non-veg";
 import Veg from "./Veg";
+import globalObject from "../../common/global-variables";
+import { LookupTypes } from "../../common/lookuptypes";
 
 const Curries = (Props: any) => {
   const [nonVegCount, setNonVegCount] = useState(0);
   const [vegCount, setVegCount] = useState(0);
   let curriesCount = nonVegCount + vegCount;
-  const biryaniItems: string[] = [
-    "djygfhdrtksrje",
-    "kwhedwe",
-    "kshhrdtreifwe",
-    "jhaekgwd",
-    "jhawguhe3",
-  ];
+
+  const curryItems: any[] = globalObject.lookupvalues[LookupTypes.CURRIES];
 
   const updateNonVegCount = (data: any) => {
     setNonVegCount(data);
@@ -34,8 +31,8 @@ const Curries = (Props: any) => {
         marginTop: "10%",
       }}
     >
-      {/* <Nonveg items={biryaniItems} itemCount={updateNonVegCount} /> */}
-      <Veg items={biryaniItems} itemCount={updateVegCount} />
+      <Nonveg items={curryItems} itemCount={updateNonVegCount} />
+      <Veg items={curryItems} itemCount={updateVegCount} />
     </div>
   );
 };

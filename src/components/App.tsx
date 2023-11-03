@@ -7,7 +7,6 @@ import ResponsiveHeaderBar from "./app-header-footer/app-header";
 import { Box } from "@mui/material";
 import { getLookupData } from "../service/lookupservice";
 import globalObject from "../common/global-variables";
-import { LookupTypes } from "../common/lookuptypes";
 
 const getLoginUrl = () => {
   return `/login?from=${btoa(
@@ -23,16 +22,12 @@ export default function App() {
       getLookupData("all")
         .then((resp) => {
           globalObject.lookupvalues = resp.data;
-          console.log(globalObject.lookupvalues);
-
-          console.log(globalObject.lookupvalues[LookupTypes.BIRYANI]);
         })
         .catch();
   });
 
   return (
     <>
-      {console.log(user)}
       <React.Fragment>
         {Object.keys(user).length !== 0 ? (
           <div id="detail">

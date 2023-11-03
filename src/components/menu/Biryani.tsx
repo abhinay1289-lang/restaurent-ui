@@ -9,16 +9,6 @@ const Biryani = (Props: any) => {
   const [nonVegCount, setNonVegCount] = useState(0);
   const [vegCount, setVegCount] = useState(0);
   let biryaniCount = nonVegCount + vegCount;
-  // const [biryaniItems, setBiryaniItems] = useState(
-  //   globalObject.lookupvalues[LookupTypes.BIRYANI]
-  // );
-  // const biryaniItems: string[] = [
-  //   "djygfhdrtksrje",
-  //   "kwhedwe",
-  //   "kshhrdtreifwe",
-  //   "jhaekgwd",
-  //   "jhawguhe3",
-  // ];
 
   const biryaniItems: any[] = globalObject.lookupvalues[LookupTypes.BIRYANI];
 
@@ -29,10 +19,6 @@ const Biryani = (Props: any) => {
     setVegCount(data);
   };
   useEffect(() => {
-    console.log(
-      "biryani items",
-      globalObject.lookupvalues[LookupTypes.BIRYANI]
-    );
     Props.biryaniCount(biryaniCount);
   });
   return (

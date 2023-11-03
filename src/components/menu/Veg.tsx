@@ -13,7 +13,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { useEffect, useState } from "react";
 
 const Veg = (Props: any) => {
-  const items: string[] = Props.items;
+  const items: any[] = Props.items;
   const [counts, setCounts] = useState(new Array(items.length).fill(0));
   const [checked, setChecked] = useState(new Array(items.length).fill(false));
   const [itemCount, setItemCount] = useState(0);
@@ -137,7 +137,7 @@ const Veg = (Props: any) => {
                       disableRipple
                     />
                   </ListItemIcon>
-                  <ListItemText primary={value} />
+                  <ListItemText primary={value.name} />
                 </ListItemButton>
               </ListItem>
             ))}
