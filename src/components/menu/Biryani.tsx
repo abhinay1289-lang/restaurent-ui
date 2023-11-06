@@ -10,7 +10,13 @@ const Biryani = (Props: any) => {
   const [vegCount, setVegCount] = useState(0);
   let biryaniCount = nonVegCount + vegCount;
 
-  const biryaniItems: any[] = globalObject.lookupvalues[LookupTypes.BIRYANI];
+  const biryaniNonvegItems: any[] = globalObject.lookupvalues[
+    LookupTypes.BIRYANI
+  ].filter((item: any) => item.type === 1);
+
+  const biryaniVegItems: any[] = globalObject.lookupvalues[
+    LookupTypes.BIRYANI
+  ].filter((item: any) => item.type === 2);
 
   const updateNonVegCount = (data: any) => {
     setNonVegCount(data);
@@ -31,8 +37,8 @@ const Biryani = (Props: any) => {
         marginTop: "10%",
       }}
     >
-      <Nonveg items={biryaniItems} itemCount={updateNonVegCount} />
-      <Veg items={biryaniItems} itemCount={updateVegCount} />
+      <Nonveg items={biryaniNonvegItems} itemCount={updateNonVegCount} />
+      <Veg items={biryaniVegItems} itemCount={updateVegCount} />
     </div>
   );
 };

@@ -9,7 +9,13 @@ const Drinks = (Props: any) => {
   const [vegCount, setVegCount] = useState(0);
   let drinksCount = nonVegCount + vegCount;
 
-  const drinkItems: any[] = globalObject.lookupvalues[LookupTypes.DRINKS];
+  const drinksNonvegItems: any[] = globalObject.lookupvalues[
+    LookupTypes.DRINKS
+  ].filter((item: any) => item.type === 1);
+
+  const drinksVegItems: any[] = globalObject.lookupvalues[
+    LookupTypes.DRINKS
+  ].filter((item: any) => item.type === 2);
 
   const updateNonVegCount = (data: any) => {
     setNonVegCount(data);
@@ -31,8 +37,8 @@ const Drinks = (Props: any) => {
         marginTop: "10%",
       }}
     >
-      <Nonveg items={drinkItems} itemCount={updateNonVegCount} />
-      <Veg items={drinkItems} itemCount={updateVegCount} />
+      <Nonveg items={drinksNonvegItems} itemCount={updateNonVegCount} />
+      <Veg items={drinksVegItems} itemCount={updateVegCount} />
     </div>
   );
 };

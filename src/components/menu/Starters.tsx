@@ -9,7 +9,13 @@ const Starters = (Props: any) => {
   const [vegCount, setVegCount] = useState(0);
   let rotisCount = nonVegCount + vegCount;
 
-  const starterItems: any[] = globalObject.lookupvalues[LookupTypes.STARTERS];
+  const startersNonvegItems: any[] = globalObject.lookupvalues[
+    LookupTypes.STARTERS
+  ].filter((item: any) => item.type === 1);
+
+  const startersVegItems: any[] = globalObject.lookupvalues[
+    LookupTypes.STARTERS
+  ].filter((item: any) => item.type === 2);
 
   const updateNonVegCount = (data: any) => {
     setNonVegCount(data);
@@ -31,8 +37,8 @@ const Starters = (Props: any) => {
         marginTop: "10%",
       }}
     >
-      <Nonveg items={starterItems} itemCount={updateNonVegCount} />
-      <Veg items={starterItems} itemCount={updateVegCount} />
+      <Nonveg items={startersNonvegItems} itemCount={updateNonVegCount} />
+      <Veg items={startersVegItems} itemCount={updateVegCount} />
     </div>
   );
 };

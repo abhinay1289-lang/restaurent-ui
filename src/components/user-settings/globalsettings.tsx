@@ -31,7 +31,6 @@ import {
   saveLookupInfo,
 } from "../../service/lookupservice";
 import globalObject from "../../common/global-variables";
-import { text } from "node:stream/consumers";
 import Notify from "../../common/notify";
 
 interface Item {
@@ -105,7 +104,14 @@ const GlobalSettings = () => {
         (e: any) => e == formik.values.name.toLocaleLowerCase()
       ).length > 0;
     if (data.id === undefined) {
-      !isExisting ? save() : setError(`${data.name} is existed`);
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      !isExisting
+        ? save()
+        : (setToastMsg({
+            severity: "error",
+            msg: `${data.name} already exist`,
+          }),
+          setShowToast(true));
     } else {
       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       textValue.toLowerCase() === formik.values.name.toLowerCase() ||

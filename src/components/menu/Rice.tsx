@@ -9,7 +9,13 @@ const Rice = (Props: any) => {
   const [vegCount, setVegCount] = useState(0);
   let riceCount = nonVegCount + vegCount;
 
-  const riceItems: any[] = globalObject.lookupvalues[LookupTypes.RICE];
+  const riceNonvegItems: any[] = globalObject.lookupvalues[
+    LookupTypes.RICE
+  ].filter((item: any) => item.type === 1);
+
+  const riceVegItems: any[] = globalObject.lookupvalues[
+    LookupTypes.RICE
+  ].filter((item: any) => item.type === 2);
 
   const updateNonVegCount = (data: any) => {
     setNonVegCount(data);
@@ -31,8 +37,8 @@ const Rice = (Props: any) => {
         marginTop: "10%",
       }}
     >
-      <Nonveg items={riceItems} itemCount={updateNonVegCount} />
-      <Veg items={riceItems} itemCount={updateVegCount} />
+      <Nonveg items={riceNonvegItems} itemCount={updateNonVegCount} />
+      <Veg items={riceVegItems} itemCount={updateVegCount} />
     </div>
   );
 };

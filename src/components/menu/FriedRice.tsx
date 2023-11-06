@@ -9,8 +9,13 @@ const FriedRice = (Props: any) => {
   const [vegCount, setVegCount] = useState(0);
   let friedRiceCount = nonVegCount + vegCount;
 
-  const chineseItems: any[] =
-    globalObject.lookupvalues[LookupTypes.FRIEDRICE_NOODLES];
+  const friedNonvegItems: any[] = globalObject.lookupvalues[
+    LookupTypes.FRIEDRICE_NOODLES
+  ].filter((item: any) => item.type === 1);
+
+  const friedVegItems: any[] = globalObject.lookupvalues[
+    LookupTypes.FRIEDRICE_NOODLES
+  ].filter((item: any) => item.type === 2);
 
   const updateNonVegCount = (data: any) => {
     setNonVegCount(data);
@@ -32,8 +37,8 @@ const FriedRice = (Props: any) => {
         marginTop: "10%",
       }}
     >
-      <Nonveg items={chineseItems} itemCount={updateNonVegCount} />
-      <Veg items={chineseItems} itemCount={updateVegCount} />
+      <Nonveg items={friedNonvegItems} itemCount={updateNonVegCount} />
+      <Veg items={friedVegItems} itemCount={updateVegCount} />
     </div>
   );
 };

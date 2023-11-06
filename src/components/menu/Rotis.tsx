@@ -9,7 +9,13 @@ const Rotis = (Props: any) => {
   const [vegCount, setVegCount] = useState(0);
   let rotisCount = nonVegCount + vegCount;
 
-  const rotisItems: any[] = globalObject.lookupvalues[LookupTypes.ROTIS];
+  const rotisNonvegItems: any[] = globalObject.lookupvalues[
+    LookupTypes.ROTIS
+  ].filter((item: any) => item.type === 1);
+
+  const rotisVegItems: any[] = globalObject.lookupvalues[
+    LookupTypes.ROTIS
+  ].filter((item: any) => item.type === 2);
 
   const updateNonVegCount = (data: any) => {
     setNonVegCount(data);
@@ -31,8 +37,8 @@ const Rotis = (Props: any) => {
         marginTop: "10%",
       }}
     >
-      <Nonveg items={rotisItems} itemCount={updateNonVegCount} />
-      <Veg items={rotisItems} itemCount={updateVegCount} />
+      <Nonveg items={rotisNonvegItems} itemCount={updateNonVegCount} />
+      <Veg items={rotisVegItems} itemCount={updateVegCount} />
     </div>
   );
 };

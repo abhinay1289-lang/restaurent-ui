@@ -9,7 +9,13 @@ const Curries = (Props: any) => {
   const [vegCount, setVegCount] = useState(0);
   let curriesCount = nonVegCount + vegCount;
 
-  const curryItems: any[] = globalObject.lookupvalues[LookupTypes.CURRIES];
+  const curriesNonvegItems: any[] = globalObject.lookupvalues[
+    LookupTypes.CURRIES
+  ].filter((item: any) => item.type === 1);
+
+  const curriesVegItems: any[] = globalObject.lookupvalues[
+    LookupTypes.CURRIES
+  ].filter((item: any) => item.type === 2);
 
   const updateNonVegCount = (data: any) => {
     setNonVegCount(data);
@@ -31,8 +37,8 @@ const Curries = (Props: any) => {
         marginTop: "10%",
       }}
     >
-      <Nonveg items={curryItems} itemCount={updateNonVegCount} />
-      <Veg items={curryItems} itemCount={updateVegCount} />
+      <Nonveg items={curriesNonvegItems} itemCount={updateNonVegCount} />
+      <Veg items={curriesVegItems} itemCount={updateVegCount} />
     </div>
   );
 };

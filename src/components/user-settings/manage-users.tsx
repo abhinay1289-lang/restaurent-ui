@@ -13,9 +13,13 @@ import {
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 import { useState } from "react";
 import AddUser from "./add-user";
+import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutline";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import { getRole } from "../../common/commonutill";
 const Manageusers = () => {
   const [open, setOpen] = useState(false);
   const userheaders = ["Name", "Email", "Role", "Action"];
+  const user = JSON.parse(localStorage.getItem("userObject") || "{}");
   const handleadduser = () => {
     setOpen(true);
   };
@@ -57,6 +61,26 @@ const Manageusers = () => {
                 ))}
               </TableRow>
             </TableHead>
+            <TableRow>
+              <TableCell>{user.firstName}</TableCell>
+              <TableCell>{user.emailId}</TableCell>
+
+              <TableCell>{getRole(user)}</TableCell>
+              <TableCell>
+                <DriveFileRenameOutlineIcon
+                  fontSize="small"
+                  style={{ cursor: "pointer", color: "#a72037" }}
+                />
+                <DeleteRoundedIcon
+                  fontSize="small"
+                  style={{
+                    marginLeft: "15px",
+                    cursor: "pointer",
+                    color: "#a72037",
+                  }}
+                />
+              </TableCell>
+            </TableRow>
           </Table>
         </TableContainer>
       </div>
