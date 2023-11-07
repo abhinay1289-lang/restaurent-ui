@@ -17,6 +17,7 @@ const Veg = (Props: any) => {
   const [counts, setCounts] = useState(new Array(items.length).fill(0));
   const [checked, setChecked] = useState(new Array(items.length).fill(false));
   const [itemCount, setItemCount] = useState(0);
+  const [list, setList] = useState([] as any[]);
 
   const handleToggle = (value: number) => () => {
     const newChecked = [...checked];
@@ -33,6 +34,10 @@ const Veg = (Props: any) => {
         0
       )
     );
+  };
+
+  const listOfSelectedItems = (value: any) => {
+    setList((prevList) => [...prevList, value]);
   };
 
   const increment = (index: any) => {
@@ -73,6 +78,7 @@ const Veg = (Props: any) => {
         marginTop: "5%",
       }}
     >
+      <span>{JSON.stringify(list)}</span>
       <div className="items">
         <h3
           style={{
@@ -126,7 +132,10 @@ const Veg = (Props: any) => {
                 <ListItemButton
                   className="itemsbutton"
                   role={undefined}
-                  onClick={handleToggle(i)}
+                  onClick={() => {
+                    handleToggle(i);
+                    listOfSelectedItems(value);
+                  }}
                   dense
                 >
                   <ListItemIcon>
