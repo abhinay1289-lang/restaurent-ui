@@ -17,16 +17,13 @@ const Nonveg = (Props: any) => {
   const [counts, setCounts] = useState(new Array(items.length).fill(0));
   const [checked, setChecked] = useState(new Array(items.length).fill(false));
   const [list, setList] = useState([] as any[]);
-  const [filteredItems, setFilteredItems] = useState([] as any[]);
   const [itemCount, setItemCount] = useState(0);
 
   const handleToggle = (value: number) => {
     const newChecked = [...checked];
     newChecked[value] = !newChecked[value];
-
     const newCounts = [...counts];
     newCounts[value] = newChecked[value] ? 1 : 0;
-
     setChecked(newChecked);
     setCounts(newCounts);
     setItemCount(
@@ -35,12 +32,13 @@ const Nonveg = (Props: any) => {
         0
       )
     );
-    const filtered = list.filter(
-      (value, index, self) => self.indexOf(value) === index
-    );
-    setFilteredItems(filtered);
-    console.log("final", filteredItems);
+    // selectedItems();
   };
+
+  // const selectedItems = () => {
+  //   console.log(list);
+  //   console.log(counts);
+  // };
 
   const listOfSelectedItems = (value: any) => {
     const prevList = [...list];
@@ -59,6 +57,7 @@ const Nonveg = (Props: any) => {
     setItemCount(
       newCounts.reduce((prevvalue, currentValue) => prevvalue + currentValue, 0)
     );
+    // selectedItems();
   };
 
   const decrement = (index: any) => {
@@ -71,6 +70,7 @@ const Nonveg = (Props: any) => {
         0
       )
     );
+    // selectedItems();
   };
 
   useEffect(() => {
@@ -81,6 +81,8 @@ const Nonveg = (Props: any) => {
 
   return (
     <>
+      {console.log(list)}
+      {console.log(counts)}
       <div
         style={{
           backgroundColor: "transparent",
@@ -119,7 +121,10 @@ const Nonveg = (Props: any) => {
                         key={i}
                         sx={{ padding: "0 0 0 0" }}
                         disabled={counts[i] === 0}
-                        onClick={() => decrement(i)}
+                        onClick={() => {
+                          decrement(i);
+                          listOfSelectedItems(value);
+                        }}
                       >
                         <span className="mui-label-2">
                           <RemoveIcon />
@@ -139,6 +144,7 @@ const Nonveg = (Props: any) => {
                         key={i}
                         onClick={() => {
                           increment(i);
+                          listOfSelectedItems(value);
                         }}
                       >
                         <span className="mui-label-1">
@@ -153,7 +159,6 @@ const Nonveg = (Props: any) => {
                     className="itemsbutton"
                     role={undefined}
                     onClick={() => {
-                      // setList((prevList) => [...prevList, value]);
                       listOfSelectedItems(value);
                       handleToggle(i);
                     }}
