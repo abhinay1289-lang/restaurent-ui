@@ -78,7 +78,7 @@ const Veg = (Props: any) => {
         marginTop: "5%",
       }}
     >
-      <span>{JSON.stringify(list)}</span>
+      {/* <span>{JSON.stringify(list)}</span> */}
       <div className="items">
         <h3
           style={{
