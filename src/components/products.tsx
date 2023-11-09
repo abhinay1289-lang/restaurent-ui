@@ -37,6 +37,7 @@ const Products = () => {
   const [riceCount, setRiceCount] = useState(0);
   const [rotisCount, setRotisCount] = useState(0);
   const [drinksCount, setDrinksCount] = useState(0);
+  const [listOfSelectedItems, setListOfSelectedItems] = useState([] as any[]);
   let totalCount =
     startersCount +
     briyaniCount +
@@ -45,6 +46,10 @@ const Products = () => {
     riceCount +
     rotisCount +
     drinksCount;
+
+  const handleListOfItems = (data: any) => {
+    setListOfSelectedItems(data);
+  };
   const handleClick = (tab: string) => {
     setSelectedTab(tab);
   };
@@ -72,7 +77,7 @@ const Products = () => {
 
   useEffect(() => {
     selectedTab === SETTING_TABS.STARTERS && <Starters />;
-  });
+  }, [SETTING_TABS.STARTERS, selectedTab]);
 
   return (
     <div>
@@ -256,7 +261,10 @@ const Products = () => {
               <Starters startersCount={updateStartersCount} />
             )}
             {selectedTab === SETTING_TABS.BIRYANI && (
-              <Biryani biryaniCount={updateBiryaniCount} />
+              <Biryani
+                biryaniCount={updateBiryaniCount}
+                biryaniItems={handleListOfItems}
+              />
             )}
             {selectedTab === SETTING_TABS.CURRIES && (
               <Curries curryCount={updateCurriesCount} />
@@ -277,7 +285,10 @@ const Products = () => {
         </div>
       </div>
       <div>
-        <ResponseiveFooterBar totalcount={totalCount} />
+        <ResponseiveFooterBar
+          totalcount={totalCount}
+          totalItems={listOfSelectedItems}
+        />
       </div>
     </div>
   );

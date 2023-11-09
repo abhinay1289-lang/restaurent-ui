@@ -19,12 +19,12 @@ const Veg = (Props: any) => {
   const [itemCount, setItemCount] = useState(0);
   const [list, setList] = useState([] as any[]);
 
-  const handleToggle = (value: number) => () => {
+  const handleToggle = (index: number, value: any) => {
     const newChecked = [...checked];
-    newChecked[value] = !newChecked[value];
+    newChecked[index] = !newChecked[index];
 
     const newCounts = [...counts];
-    newCounts[value] = newChecked[value] ? 1 : 0;
+    newCounts[index] = newChecked[index] ? 1 : 0;
 
     setChecked(newChecked);
     setCounts(newCounts);
@@ -34,23 +34,43 @@ const Veg = (Props: any) => {
         0
       )
     );
+    listOfSelectedItems(index, value);
   };
 
-  const listOfSelectedItems = (value: any) => {
-    setList((prevList) => [...prevList, value]);
+  const listOfSelectedItems = (index: number, value: any) => {
+    const prevList = [...list];
+    if (checked[index] === false) {
+      prevList.push(value);
+      setList(prevList);
+    } else {
+      list.map((listvalue, listindex) => {
+        if (items[index].id === listvalue.id) prevList.splice(listindex, 1);
+        setList(prevList);
+      });
+    }
   };
 
-  const increment = (index: any) => {
+  const increment = (index: any, value: any) => {
     const newCounts = [...counts];
     newCounts[index]++;
     setCounts(newCounts);
     setItemCount(
       newCounts.reduce((prevvalue, currentValue) => prevvalue + currentValue, 0)
     );
+
+    const listofselected = [...list];
+    if (++counts[index] === 1) {
+      listofselected.push(value);
+      setList(listofselected);
+    } else {
+      setList(listofselected);
+    }
   };
 
   const sendDataToParent = () => {
     Props.itemCount(itemCount);
+    Props.itemList(list);
+    Props.counts(counts.filter((count) => count > 0));
   };
 
   const decrement = (index: any) => {
@@ -58,8 +78,21 @@ const Veg = (Props: any) => {
     newCounts[index]--;
     setCounts(newCounts);
     setItemCount(
-      newCounts.reduce((prevvalue, currentValue) => prevvalue + currentValue, 0)
+      newCounts.reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+        0
+      )
     );
+    const listofselected = [...list];
+    if (--counts[index] === 0) {
+      list.map((listvalue, listindex) => {
+        if (items[index].id === listvalue.id)
+          listofselected.splice(listindex, 1);
+        setList(listofselected);
+      });
+    } else {
+      setList(listofselected);
+    }
   };
 
   useEffect(() => {
@@ -78,7 +111,6 @@ const Veg = (Props: any) => {
         marginTop: "5%",
       }}
     >
-      {/* <span>{JSON.stringify(list)}</span> */}
       <div className="items">
         <h3
           style={{
@@ -101,7 +133,9 @@ const Veg = (Props: any) => {
                       key={i}
                       sx={{ padding: "0 0 0 0" }}
                       disabled={counts[i] === 0}
-                      onClick={() => decrement(i)}
+                      onClick={() => {
+                        decrement(i);
+                      }}
                     >
                       <span className="mui-label-2">
                         <RemoveIcon />
@@ -119,7 +153,7 @@ const Veg = (Props: any) => {
                     <Button
                       sx={{ padding: "0 0 0 0" }}
                       key={i}
-                      onClick={() => increment(i)}
+                      onClick={() => increment(i, value)}
                     >
                       <span className="mui-label-1">
                         <AddIcon />
@@ -133,8 +167,7 @@ const Veg = (Props: any) => {
                   className="itemsbutton"
                   role={undefined}
                   onClick={() => {
-                    handleToggle(i);
-                    listOfSelectedItems(value);
+                    handleToggle(i, value);
                   }}
                   dense
                 >

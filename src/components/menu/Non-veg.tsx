@@ -19,11 +19,11 @@ const Nonveg = (Props: any) => {
   const [list, setList] = useState([] as any[]);
   const [itemCount, setItemCount] = useState(0);
 
-  const handleToggle = (value: number) => {
+  const handleToggle = (index: number, value: any) => {
     const newChecked = [...checked];
-    newChecked[value] = !newChecked[value];
+    newChecked[index] = !newChecked[index];
     const newCounts = [...counts];
-    newCounts[value] = newChecked[value] ? 1 : 0;
+    newCounts[index] = newChecked[index] ? 1 : 0;
     setChecked(newChecked);
     setCounts(newCounts);
     setItemCount(
@@ -32,51 +32,49 @@ const Nonveg = (Props: any) => {
         0
       )
     );
+    listOfSelectedItems(index, value);
   };
 
-  const listOfSelectedItems = (value: any, index: any) => {
-    console.log(value, index);
-    // if (counts[index] === 0) {
-    //   const prevList = [...list];
-    //   prevList.push(value);
-
-    //   const listofprices = [];
-    //   listofprices.push({
-    //     price: value.price,
-    //     quantity: counts[index],
-    //   });
-    //   console.log([...listofprices,]);
-    //   setList(prevList);
-    // } else {
-    //   const prevList = [...list];
-    //   prevList.splice(index, 1);
-    //   setList(prevList);
-    // }
-    // console.log(checked);
+  const listOfSelectedItems = (index: number, value: any) => {
     const prevList = [...list];
-    prevList.push(value);
-    const selectedItems = [];
-
-    setList(prevList);
+    if (checked[index] === false) {
+      prevList.push(value);
+      setList(prevList);
+    } else {
+      list.map((listvalue, listindex) => {
+        if (items[index].id === listvalue.id) prevList.splice(listindex, 1);
+        setList(prevList);
+      });
+    }
   };
 
   const sendDataToParent = () => {
     Props.itemCount(itemCount);
+    Props.itemList(list);
+    Props.counts(counts.filter((count) => count > 0));
   };
 
-  const increment = (index: any) => {
+  const increment = (index: any, value: any) => {
+    const listofselected = [...list];
     const newCounts = [...counts];
-    newCounts[index]++;
+    const countList = [...counts];
 
+    if (++counts[index] === 1) {
+      listofselected.push(value);
+      setList(listofselected);
+    } else {
+      newCounts[index]++;
+      countList.push(newCounts[index]++);
+      setList(listofselected);
+      console.log("countList", countList);
+    }
     setCounts(newCounts);
     setItemCount(
       newCounts.reduce((prevvalue, currentValue) => prevvalue + currentValue, 0)
     );
-    console.log(counts[index]);
   };
 
   const decrement = (index: any) => {
-    console.log(index);
     const newCounts = [...counts];
     newCounts[index]--;
     setCounts(newCounts);
@@ -86,6 +84,16 @@ const Nonveg = (Props: any) => {
         0
       )
     );
+    const listofselected = [...list];
+    if (--counts[index] === 0) {
+      list.map((listvalue, listindex) => {
+        if (items[index].id === listvalue.id)
+          listofselected.splice(listindex, 1);
+        setList(listofselected);
+      });
+    } else {
+      setList(listofselected);
+    }
   };
 
   useEffect(() => {
@@ -96,6 +104,8 @@ const Nonveg = (Props: any) => {
 
   return (
     <>
+      {/* <span>{JSON.stringify(list)}</span> */}
+      {/* <span>{JSON.stringify(counts)}</span> */}
       <div
         style={{
           backgroundColor: "transparent",
@@ -105,13 +115,6 @@ const Nonveg = (Props: any) => {
           marginTop: "5%",
         }}
       >
-        {/* <span>
-          {JSON.stringify(
-            list.filter((value, index, self) => self.indexOf(value) === index)
-          )}
-        </span>
-        <span>{JSON.stringify(counts)}</span>
-        <span>{JSON.stringify(checked)}</span> */}
         <div className="items">
           <h3
             style={{
@@ -137,7 +140,6 @@ const Nonveg = (Props: any) => {
                         disabled={counts[i] === 0}
                         onClick={() => {
                           decrement(i);
-                          listOfSelectedItems(value, i);
                         }}
                       >
                         <span className="mui-label-2">
@@ -156,10 +158,7 @@ const Nonveg = (Props: any) => {
                       <Button
                         sx={{ padding: "0 0 0 0" }}
                         key={i}
-                        onClick={() => {
-                          increment(i);
-                          listOfSelectedItems(value, i);
-                        }}
+                        onClick={() => increment(i, value)}
                       >
                         <span className="mui-label-1">
                           <AddIcon />
@@ -173,8 +172,7 @@ const Nonveg = (Props: any) => {
                     className="itemsbutton"
                     role={undefined}
                     onClick={() => {
-                      listOfSelectedItems(value, i);
-                      handleToggle(i);
+                      handleToggle(i, value);
                     }}
                     dense
                   >

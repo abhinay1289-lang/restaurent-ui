@@ -8,8 +8,27 @@ import { LookupTypes } from "../../common/lookuptypes";
 const Biryani = (Props: any) => {
   const [nonVegCount, setNonVegCount] = useState(0);
   const [vegCount, setVegCount] = useState(0);
+  const [nonVegItems, setNonvegItems] = useState([] as any[]);
+  const [vegItems, setVegItems] = useState([] as any[]);
+  const [nonVegTotalCount, setNonvegTotalCount] = useState([] as any[]);
+  const [vegTotalCount, setVegTotalCount] = useState([] as any[]);
   let biryaniCount = nonVegCount + vegCount;
+  let biryaniItems = [...nonVegItems, ...vegItems];
+  let biryaniItemCounts = [...nonVegTotalCount, ...vegTotalCount];
 
+  const handleNonVegCounts = (data: any[]) => {
+    setNonvegTotalCount(data);
+  };
+  const handleVegCounts = (data: any[]) => {
+    setVegTotalCount(data);
+  };
+
+  const handleNonvegBiryaniItems = (data: any[]) => {
+    setNonvegItems(data);
+  };
+  const handleVegBiryaniItems = (data: any) => {
+    setVegItems(data);
+  };
   const biryaniNonvegItems: any[] = globalObject.lookupvalues[
     LookupTypes.BIRYANI
   ].filter((item: any) => item.type === 1);
@@ -26,7 +45,8 @@ const Biryani = (Props: any) => {
   };
   useEffect(() => {
     Props.biryaniCount(biryaniCount);
-  });
+    Props.biryaniItems(biryaniItems);
+  }, [biryaniCount]);
   return (
     <div
       style={{
@@ -37,8 +57,20 @@ const Biryani = (Props: any) => {
         marginTop: "10%",
       }}
     >
-      <Nonveg items={biryaniNonvegItems} itemCount={updateNonVegCount} />
-      <Veg items={biryaniVegItems} itemCount={updateVegCount} />
+      <span>{JSON.stringify(biryaniItems)}</span>
+      <span>{JSON.stringify(biryaniItemCounts)}</span>
+      <Nonveg
+        items={biryaniNonvegItems}
+        itemCount={updateNonVegCount}
+        itemList={handleNonvegBiryaniItems}
+        counts={handleNonVegCounts}
+      />
+      <Veg
+        items={biryaniVegItems}
+        itemCount={updateVegCount}
+        itemList={handleVegBiryaniItems}
+        counts={handleVegCounts}
+      />
     </div>
   );
 };
