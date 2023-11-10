@@ -18,6 +18,7 @@ const Nonveg = (Props: any) => {
   const [checked, setChecked] = useState(new Array(items.length).fill(false));
   const [list, setList] = useState([] as any[]);
   const [itemCount, setItemCount] = useState(0);
+  const [totalCount, setTotalCount] = useState([] as any[]);
 
   const handleToggle = (index: number, value: any) => {
     const newChecked = [...checked];
@@ -57,21 +58,44 @@ const Nonveg = (Props: any) => {
   const increment = (index: any, value: any) => {
     const listofselected = [...list];
     const newCounts = [...counts];
-    const countList = [...counts];
+    const itemsCounts = [...totalCount];
 
     if (++counts[index] === 1) {
       listofselected.push(value);
       setList(listofselected);
+      itemsCounts.push({
+        itemId: value.id,
+        count: counts[index],
+      });
+      console.log("items", items[index]);
+      console.log(index);
+      console.log("total count", itemsCounts);
+      totalCount.map((itemcount, itemindex) => {
+        if (items[index].id === itemsCounts[itemindex].itemId) {
+          console.log("if loop", items[index], itemsCounts[itemindex]);
+          itemsCounts[index].count++;
+        }
+      });
+
+      console.log(totalCount);
+      setTotalCount(itemsCounts);
     } else {
       newCounts[index]++;
-      countList.push(newCounts[index]++);
+      setCounts(newCounts);
+      setItemCount(
+        newCounts.reduce(
+          (prevvalue, currentValue) => prevvalue + currentValue,
+          0
+        )
+      );
+      newCounts.map((counts) => {
+        if (items[index].id === counts[index]) {
+          totalCount.splice(index, 1);
+        }
+      });
+      // setTotalCount(newCounts);
       setList(listofselected);
-      console.log("countList", countList);
     }
-    setCounts(newCounts);
-    setItemCount(
-      newCounts.reduce((prevvalue, currentValue) => prevvalue + currentValue, 0)
-    );
   };
 
   const decrement = (index: any) => {
@@ -104,8 +128,8 @@ const Nonveg = (Props: any) => {
 
   return (
     <>
-      {/* <span>{JSON.stringify(list)}</span> */}
-      {/* <span>{JSON.stringify(counts)}</span> */}
+      <span>{JSON.stringify(itemCount)}</span>
+      <span>{JSON.stringify(list)}</span>
       <div
         style={{
           backgroundColor: "transparent",

@@ -57,8 +57,8 @@ const Biryani = (Props: any) => {
         marginTop: "10%",
       }}
     >
-      <span>{JSON.stringify(biryaniItems)}</span>
-      <span>{JSON.stringify(biryaniItemCounts)}</span>
+      {/* <span>{JSON.stringify(biryaniItems)}</span>
+      <span>{JSON.stringify(biryaniItemCounts)}</span> */}
       <Nonveg
         items={biryaniNonvegItems}
         itemCount={updateNonVegCount}
