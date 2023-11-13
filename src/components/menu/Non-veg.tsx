@@ -33,26 +33,53 @@ const Nonveg = (Props: any) => {
         0
       )
     );
+
     listOfSelectedItems(index, value);
   };
 
   const listOfSelectedItems = (index: number, value: any) => {
+    console.log(checked, value, totalCount, list);
     const prevList = [...list];
+    const itemsCounts = [...totalCount];
+
     if (checked[index] === false) {
+      totalCount.map((itemvalue) => {
+        if (itemvalue.id === value.id) {
+          itemsCounts.push({
+            itemId: value.id,
+            count: counts[index],
+          });
+          setTotalCount(
+            itemsCounts.filter(
+              (value, index, selfarray) => selfarray.indexOf(value) === index
+            )
+          );
+        } else {
+          totalCount.map((itemvalue, itemindex) => {
+            if (items[index].id === itemvalue.itemId) {
+              totalCount.splice(itemindex, 1);
+            }
+          });
+        }
+      });
+
       prevList.push(value);
-      setList(prevList);
+      setList(
+        prevList.filter(
+          (value, index, selfarray) => selfarray.indexOf(value) === index
+        )
+      );
     } else {
       list.map((listvalue, listindex) => {
         if (items[index].id === listvalue.id) prevList.splice(listindex, 1);
         setList(prevList);
       });
+      totalCount.map((itemvalue, itemindex) => {
+        if (items[index].id === itemvalue.itemId) {
+          totalCount.splice(itemindex, 1);
+        }
+      });
     }
-  };
-
-  const sendDataToParent = () => {
-    Props.itemCount(itemCount);
-    Props.itemList(list);
-    Props.counts(counts.filter((count) => count > 0));
   };
 
   const increment = (index: any, value: any) => {
@@ -67,17 +94,6 @@ const Nonveg = (Props: any) => {
         itemId: value.id,
         count: counts[index],
       });
-      console.log("items", items[index]);
-      console.log(index);
-      console.log("total count", itemsCounts);
-      totalCount.map((itemcount, itemindex) => {
-        if (items[index].id === itemsCounts[itemindex].itemId) {
-          console.log("if loop", items[index], itemsCounts[itemindex]);
-          itemsCounts[index].count++;
-        }
-      });
-
-      console.log(totalCount);
       setTotalCount(itemsCounts);
     } else {
       newCounts[index]++;
@@ -96,6 +112,15 @@ const Nonveg = (Props: any) => {
       // setTotalCount(newCounts);
       setList(listofselected);
     }
+    // if (counts[index] > 1) {
+    //   totalCount.map((itemcount, itemindex) => {
+    //     console.log(items[index].id, itemsCounts[itemindex].itemId);
+    //     if (items[index].id === itemsCounts[itemindex].itemId) {
+    //       console.log("if loop", items[index], itemsCounts[itemindex]);
+    //       itemsCounts[index].count++;
+    //     }
+    //   });
+    // }
   };
 
   const decrement = (index: any) => {
@@ -115,9 +140,20 @@ const Nonveg = (Props: any) => {
           listofselected.splice(listindex, 1);
         setList(listofselected);
       });
+      totalCount.map((item, itemindex) => {
+        if (items[index].id === totalCount[itemindex].itemId) {
+          totalCount.splice(itemindex, 1);
+        }
+      });
     } else {
       setList(listofselected);
     }
+  };
+
+  const sendDataToParent = () => {
+    Props.itemCount(itemCount);
+    Props.itemList(list);
+    Props.counts(counts.filter((count) => count > 0));
   };
 
   useEffect(() => {
@@ -128,7 +164,7 @@ const Nonveg = (Props: any) => {
 
   return (
     <>
-      <span>{JSON.stringify(itemCount)}</span>
+      <span>{JSON.stringify(totalCount)}</span>
       <span>{JSON.stringify(list)}</span>
       <div
         style={{
