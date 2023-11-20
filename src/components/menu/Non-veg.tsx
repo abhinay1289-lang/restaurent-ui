@@ -17,8 +17,8 @@ const Nonveg = (Props: any) => {
   const [counts, setCounts] = useState(new Array(items.length).fill(0));
   const [checked, setChecked] = useState(new Array(items.length).fill(false));
   const [list, setList] = useState([] as any[]);
+  const [totalItemCount, setTotalItemCount] = useState([] as any[]);
   const [itemCount, setItemCount] = useState(0);
-  const [totalCount, setTotalCount] = useState([] as any[]);
 
   const handleToggle = (index: number, value: any) => {
     const newChecked = [...checked];
@@ -33,39 +33,26 @@ const Nonveg = (Props: any) => {
         0
       )
     );
-
     listOfSelectedItems(index, value);
   };
 
   const listOfSelectedItems = (index: number, value: any) => {
-    console.log(checked, value, totalCount, list);
+    console.log(totalItemCount, checked, counts, checked[index]);
     const prevList = [...list];
-    const itemsCounts = [...totalCount];
-
+    const prevItemsCounts = [...totalItemCount];
     if (checked[index] === false) {
-      totalCount.map((itemvalue) => {
-        if (itemvalue.id === value.id) {
-          itemsCounts.push({
-            itemId: value.id,
-            count: counts[index],
-          });
-          setTotalCount(
-            itemsCounts.filter(
-              (value, index, selfarray) => selfarray.indexOf(value) === index
-            )
-          );
-        } else {
-          totalCount.map((itemvalue, itemindex) => {
-            if (items[index].id === itemvalue.itemId) {
-              totalCount.splice(itemindex, 1);
-            }
-          });
-        }
-      });
-
       prevList.push(value);
+      prevItemsCounts.push({
+        value: value.id,
+        count: ++counts[index],
+      });
       setList(
         prevList.filter(
+          (value, index, selfarray) => selfarray.indexOf(value) === index
+        )
+      );
+      setTotalItemCount(
+        prevItemsCounts.filter(
           (value, index, selfarray) => selfarray.indexOf(value) === index
         )
       );
@@ -74,28 +61,36 @@ const Nonveg = (Props: any) => {
         if (items[index].id === listvalue.id) prevList.splice(listindex, 1);
         setList(prevList);
       });
-      totalCount.map((itemvalue, itemindex) => {
-        if (items[index].id === itemvalue.itemId) {
-          totalCount.splice(itemindex, 1);
+
+      totalItemCount.map((item, itemindex) => {
+        if (items[index].id === item.value) {
+          totalItemCount.splice(itemindex, 1);
         }
       });
     }
   };
 
   const increment = (index: any, value: any) => {
+    const newChecked = [...checked];
+    newChecked[index] = !newChecked[index];
+    setChecked(newChecked);
+
     const listofselected = [...list];
     const newCounts = [...counts];
-    const itemsCounts = [...totalCount];
 
+    const itemsCounts = [...totalItemCount];
+    console.log(counts);
     if (++counts[index] === 1) {
+      console.log(counts);
       listofselected.push(value);
       setList(listofselected);
       itemsCounts.push({
-        itemId: value.id,
+        value: value.id,
         count: counts[index],
       });
-      setTotalCount(itemsCounts);
+      setTotalItemCount(itemsCounts);
     } else {
+      console.log("counting numbers");
       newCounts[index]++;
       setCounts(newCounts);
       setItemCount(
@@ -104,26 +99,16 @@ const Nonveg = (Props: any) => {
           0
         )
       );
-      newCounts.map((counts) => {
-        if (items[index].id === counts[index]) {
-          totalCount.splice(index, 1);
+      totalItemCount.map((item, itemindex) => {
+        if (value.id === item.value) {
+          totalItemCount[itemindex].count++;
         }
       });
-      // setTotalCount(newCounts);
       setList(listofselected);
     }
-    // if (counts[index] > 1) {
-    //   totalCount.map((itemcount, itemindex) => {
-    //     console.log(items[index].id, itemsCounts[itemindex].itemId);
-    //     if (items[index].id === itemsCounts[itemindex].itemId) {
-    //       console.log("if loop", items[index], itemsCounts[itemindex]);
-    //       itemsCounts[index].count++;
-    //     }
-    //   });
-    // }
   };
 
-  const decrement = (index: any) => {
+  const decrement = (index: any, value: any) => {
     const newCounts = [...counts];
     newCounts[index]--;
     setCounts(newCounts);
@@ -140,20 +125,25 @@ const Nonveg = (Props: any) => {
           listofselected.splice(listindex, 1);
         setList(listofselected);
       });
-      totalCount.map((item, itemindex) => {
-        if (items[index].id === totalCount[itemindex].itemId) {
-          totalCount.splice(itemindex, 1);
+      totalItemCount.map((item, itemindex) => {
+        if (items[index].id === item.value) {
+          totalItemCount.splice(itemindex, 1);
         }
       });
     } else {
       setList(listofselected);
+      totalItemCount.map((item, itemindex) => {
+        if (value.id === item.value) {
+          totalItemCount[itemindex].count--;
+        }
+      });
     }
   };
 
   const sendDataToParent = () => {
     Props.itemCount(itemCount);
     Props.itemList(list);
-    Props.counts(counts.filter((count) => count > 0));
+    Props.counts(totalItemCount);
   };
 
   useEffect(() => {
@@ -164,8 +154,9 @@ const Nonveg = (Props: any) => {
 
   return (
     <>
-      <span>{JSON.stringify(totalCount)}</span>
+      <span>{JSON.stringify(totalItemCount)}</span>
       <span>{JSON.stringify(list)}</span>
+      <span>{JSON.stringify(counts)}</span>
       <div
         style={{
           backgroundColor: "transparent",
@@ -199,7 +190,7 @@ const Nonveg = (Props: any) => {
                         sx={{ padding: "0 0 0 0" }}
                         disabled={counts[i] === 0}
                         onClick={() => {
-                          decrement(i);
+                          decrement(i, value);
                         }}
                       >
                         <span className="mui-label-2">
