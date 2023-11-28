@@ -7,7 +7,14 @@ import { LookupTypes } from "../../common/lookuptypes";
 const Curries = (Props: any) => {
   const [nonVegCount, setNonVegCount] = useState(0);
   const [vegCount, setVegCount] = useState(0);
+  const [nonVegItems, setNonvegItems] = useState([] as any[]);
+  const [vegItems, setVegItems] = useState([] as any[]);
+  const [nonVegTotalCount, setNonvegTotalCount] = useState([] as any[]);
+  const [vegTotalCount, setVegTotalCount] = useState([] as any[]);
+
   let curriesCount = nonVegCount + vegCount;
+  let curryItems = [...nonVegItems, ...vegItems];
+  let curryItemCounts = [...nonVegTotalCount, ...vegTotalCount];
 
   const curriesNonvegItems: any[] = globalObject.lookupvalues[
     LookupTypes.CURRIES
@@ -17,15 +24,11 @@ const Curries = (Props: any) => {
     LookupTypes.CURRIES
   ].filter((item: any) => item.type === 2);
 
-  const updateNonVegCount = (data: any) => {
-    setNonVegCount(data);
-  };
-  const updateVegCount = (data: any) => {
-    setVegCount(data);
-  };
   useEffect(() => {
     Props.curryCount(curriesCount);
-  });
+    Props.curryItems(curryItems);
+    Props.curryCountList(curryItemCounts);
+  }, [curriesCount]);
 
   return (
     <div
@@ -37,8 +40,18 @@ const Curries = (Props: any) => {
         marginTop: "10%",
       }}
     >
-      <Nonveg items={curriesNonvegItems} itemCount={updateNonVegCount} />
-      <Veg items={curriesVegItems} itemCount={updateVegCount} />
+      <Nonveg
+        items={curriesNonvegItems}
+        itemCount={(data: any) => setNonVegCount(data)}
+        itemList={(data: any) => setNonvegItems(data)}
+        counts={(data: any) => setNonvegTotalCount(data)}
+      />
+      <Veg
+        items={curriesVegItems}
+        itemCount={(data: any) => setVegCount(data)}
+        itemList={(data: any) => setVegItems(data)}
+        counts={(data: any) => setVegTotalCount(data)}
+      />
     </div>
   );
 };

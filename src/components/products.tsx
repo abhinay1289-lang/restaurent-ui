@@ -38,6 +38,12 @@ const Products = () => {
   const [rotisCount, setRotisCount] = useState(0);
   const [drinksCount, setDrinksCount] = useState(0);
   const [listOfSelectedItems, setListOfSelectedItems] = useState([] as any[]);
+  const [listOfBiryaniCount, setListOfBiryaniCount] = useState([] as any[]);
+  const [listOfStartersCount, setListOfStartersCount] = useState([] as any[]);
+  const [listOfCurriesCount, setListOfCurriesCount] = useState([] as any[]);
+  const [listOfRiceCount, setListOfRiceCount] = useState([] as any[]);
+  const [listOfRotisCount, setListOfRotisCount] = useState([] as any[]);
+  const [listOfDrinksCount, setListOfDrinksCount] = useState([] as any[]);
   let totalCount =
     startersCount +
     briyaniCount +
@@ -47,32 +53,8 @@ const Products = () => {
     rotisCount +
     drinksCount;
 
-  const handleListOfItems = (data: any) => {
-    setListOfSelectedItems(data);
-  };
   const handleClick = (tab: string) => {
     setSelectedTab(tab);
-  };
-  const updateBiryaniCount = (data: any) => {
-    setBiryaniCount(data);
-  };
-  const updateStartersCount = (data: any) => {
-    setStartersCount(data);
-  };
-  const updateCurriesCount = (data: any) => {
-    setCurriesCount(data);
-  };
-  const updateFriedriceCount = (data: any) => {
-    setFriedriceCount(data);
-  };
-  const updateRiceCount = (data: any) => {
-    setRiceCount(data);
-  };
-  const updateRotisCount = (data: any) => {
-    setRotisCount(data);
-  };
-  const updateDrinksCount = (data: any) => {
-    setDrinksCount(data);
   };
 
   useEffect(() => {
@@ -258,28 +240,53 @@ const Products = () => {
         <div className="right-section">
           <Grid sx={{ width: "100%" }} item xs={10}>
             {selectedTab === SETTING_TABS.STARTERS && (
-              <Starters startersCount={updateStartersCount} />
+              <Starters
+                startersCount={(data: any) => setStartersCount(data)}
+                startersItems={(data: any) => setListOfSelectedItems(data)}
+                startersCountList={(data: any) => setListOfBiryaniCount(data)}
+              />
             )}
             {selectedTab === SETTING_TABS.BIRYANI && (
               <Biryani
-                biryaniCount={updateBiryaniCount}
-                biryaniItems={handleListOfItems}
+                biryaniCount={(data: any) => setBiryaniCount(data)}
+                biryaniItems={(data: any) => setListOfSelectedItems(data)}
+                biryaniCountList={(data: any) => setListOfBiryaniCount(data)}
               />
             )}
             {selectedTab === SETTING_TABS.CURRIES && (
-              <Curries curryCount={updateCurriesCount} />
+              <Curries
+                curryCount={(data: any) => setCurriesCount(data)}
+                curryItems={(data: any) => setListOfSelectedItems(data)}
+                curryCountList={(data: any) => setListOfBiryaniCount(data)}
+              />
             )}
             {selectedTab === SETTING_TABS.FRIEDRICE_NOODLES && (
-              <FriedRice friedRiceCount={updateFriedriceCount} />
+              <FriedRice
+                friedRiceCount={(data: any) => setFriedriceCount(data)}
+                friedRiceItems={(data: any) => setListOfSelectedItems(data)}
+                friedRiceCountList={(data: any) => setListOfBiryaniCount(data)}
+              />
             )}
             {selectedTab === SETTING_TABS.RICE && (
-              <Rice riceCount={updateRiceCount} />
+              <Rice
+                riceCount={(data: any) => setRiceCount(data)}
+                riceItems={(data: any) => setListOfSelectedItems(data)}
+                riceCountList={(data: any) => setListOfBiryaniCount(data)}
+              />
             )}
             {selectedTab === SETTING_TABS.ROTIS && (
-              <Rotis rotisCount={updateRotisCount} />
+              <Rotis
+                rotisCount={(data: any) => setRotisCount(data)}
+                rotisItems={(data: any) => setListOfSelectedItems(data)}
+                rotisCountList={(data: any) => setListOfBiryaniCount(data)}
+              />
             )}
             {selectedTab === SETTING_TABS.DRINKS && (
-              <Drinks drinksCount={updateDrinksCount} />
+              <Drinks
+                drinksCount={(data: any) => setDrinksCount(data)}
+                drinksItems={(data: any) => setListOfSelectedItems(data)}
+                drinksCountList={(data: any) => setListOfBiryaniCount(data)}
+              />
             )}
           </Grid>
         </div>
@@ -288,6 +295,7 @@ const Products = () => {
         <ResponseiveFooterBar
           totalcount={totalCount}
           totalItems={listOfSelectedItems}
+          totalItemCount={listOfBiryaniCount}
         />
       </div>
     </div>

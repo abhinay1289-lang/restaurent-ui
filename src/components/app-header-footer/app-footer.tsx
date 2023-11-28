@@ -6,6 +6,7 @@ const ResponseiveFooterBar = (Props: any) => {
     <>
       <span>{JSON.stringify(Props.totalItems)}</span>
       <span>{JSON.stringify(Props.totalcount)}</span>
+      <span>{JSON.stringify(Props.totalItemCount)}</span>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <Paper sx={{ backgroundColor: "#5de2e23d" }}>
           <h3 style={{ textAlign: "center" }}>PRICE DETAILS</h3>

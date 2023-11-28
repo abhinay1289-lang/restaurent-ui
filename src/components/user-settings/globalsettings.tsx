@@ -95,6 +95,7 @@ const GlobalSettings = () => {
   };
 
   const handleSave = (data?: any, id?: any) => {
+    console.log(data);
     const existingData: any[] = globalObject.lookupvalues[lookupname].map(
       (e: any) => e.name.toLowerCase()
     );
@@ -150,7 +151,10 @@ const GlobalSettings = () => {
         setDialogOpen(false);
         refreshLookupdata();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log("kjsbhkdcnfekfjmc");
+        console.log(err);
+      });
   };
 
   const handleAddAnotherItem = () => {

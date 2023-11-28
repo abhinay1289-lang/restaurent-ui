@@ -18,14 +18,13 @@ const Veg = (Props: any) => {
   const [checked, setChecked] = useState(new Array(items.length).fill(false));
   const [itemCount, setItemCount] = useState(0);
   const [list, setList] = useState([] as any[]);
+  const [totalItemCount, setTotalItemCount] = useState([] as any[]);
 
   const handleToggle = (index: number, value: any) => {
     const newChecked = [...checked];
     newChecked[index] = !newChecked[index];
-
     const newCounts = [...counts];
     newCounts[index] = newChecked[index] ? 1 : 0;
-
     setChecked(newChecked);
     setCounts(newCounts);
     setItemCount(
@@ -39,30 +38,74 @@ const Veg = (Props: any) => {
 
   const listOfSelectedItems = (index: number, value: any) => {
     const prevList = [...list];
+    const prevItemsCounts = [...totalItemCount];
     if (checked[index] === false) {
       prevList.push(value);
-      setList(prevList);
+      prevItemsCounts.push({
+        value: value.id,
+        count: ++counts[index],
+      });
+      setList(
+        prevList.filter(
+          (value, index, selfarray) => selfarray.indexOf(value) === index
+        )
+      );
+      setTotalItemCount(
+        prevItemsCounts.filter(
+          (value, index, selfarray) => selfarray.indexOf(value) === index
+        )
+      );
     } else {
       list.map((listvalue, listindex) => {
         if (items[index].id === listvalue.id) prevList.splice(listindex, 1);
         setList(prevList);
       });
+
+      totalItemCount.map((item, itemindex) => {
+        if (items[index].id === item.value) {
+          totalItemCount.splice(itemindex, 1);
+        }
+      });
     }
   };
 
   const increment = (index: any, value: any) => {
-    const newCounts = [...counts];
-    newCounts[index]++;
-    setCounts(newCounts);
-    setItemCount(
-      newCounts.reduce((prevvalue, currentValue) => prevvalue + currentValue, 0)
-    );
-
+    const newChecked = [...checked];
     const listofselected = [...list];
+    const newCounts = [...counts];
+    const itemsCounts = [...totalItemCount];
     if (++counts[index] === 1) {
+      newChecked[index] = true;
+      setChecked(newChecked);
       listofselected.push(value);
       setList(listofselected);
+      itemsCounts.push({
+        value: value.id,
+        count: counts[index],
+      });
+      newCounts[index]++;
+      setCounts(newCounts);
+      setItemCount(
+        newCounts.reduce(
+          (prevvalue, currentValue) => prevvalue + currentValue,
+          0
+        )
+      );
+      setTotalItemCount(itemsCounts);
     } else {
+      newCounts[index]++;
+      setCounts(newCounts);
+      setItemCount(
+        newCounts.reduce(
+          (prevvalue, currentValue) => prevvalue + currentValue,
+          0
+        )
+      );
+      totalItemCount.map((item, itemindex) => {
+        if (value.id === item.value) {
+          totalItemCount[itemindex].count++;
+        }
+      });
       setList(listofselected);
     }
   };
@@ -70,10 +113,10 @@ const Veg = (Props: any) => {
   const sendDataToParent = () => {
     Props.itemCount(itemCount);
     Props.itemList(list);
-    Props.counts(counts.filter((count) => count > 0));
+    Props.counts(totalItemCount);
   };
 
-  const decrement = (index: any) => {
+  const decrement = (index: any, value: any) => {
     const newCounts = [...counts];
     newCounts[index]--;
     setCounts(newCounts);
@@ -90,8 +133,18 @@ const Veg = (Props: any) => {
           listofselected.splice(listindex, 1);
         setList(listofselected);
       });
+      totalItemCount.map((item, itemindex) => {
+        if (items[index].id === item.value) {
+          totalItemCount.splice(itemindex, 1);
+        }
+      });
     } else {
       setList(listofselected);
+      totalItemCount.map((item, itemindex) => {
+        if (value.id === item.value) {
+          totalItemCount[itemindex].count--;
+        }
+      });
     }
   };
 
@@ -100,93 +153,95 @@ const Veg = (Props: any) => {
     setChecked(newChecked);
     sendDataToParent();
   }, [counts]);
-
   return (
-    <div
-      style={{
-        backgroundColor: "transparent",
-        display: "flex",
-        width: "100%",
-        justifyContent: "space-around",
-        marginTop: "5%",
-      }}
-    >
-      <div className="items">
-        <h3
-          style={{
-            textAlign: "center",
-            backgroundColor: "rgb(26 219 21 / 49%)",
-            margin: "0 0 0 0",
-          }}
-        >
-          VEG
-        </h3>
-        <div>
-          <List sx={{ width: "100%", bgcolor: "transparent" }}>
-            {items.map((value, i) => (
-              <ListItem
-                className="itemsbox"
-                key={i}
-                secondaryAction={
-                  <div className="mui-buttons">
-                    <Button
-                      key={i}
-                      sx={{ padding: "0 0 0 0" }}
-                      disabled={counts[i] === 0}
-                      onClick={() => {
-                        decrement(i);
-                      }}
-                    >
-                      <span className="mui-label-2">
-                        <RemoveIcon />
-                      </span>
-                    </Button>
+    <>
+      <span>{JSON.stringify(totalItemCount)}</span>
+      <div
+        style={{
+          backgroundColor: "transparent",
+          display: "flex",
+          width: "100%",
+          justifyContent: "space-around",
+          marginTop: "5%",
+        }}
+      >
+        <div className="items">
+          <h3
+            style={{
+              textAlign: "center",
+              backgroundColor: "rgb(26 219 21 / 49%)",
+              margin: "0 0 0 0",
+            }}
+          >
+            VEG
+          </h3>
+          <div>
+            <List sx={{ width: "100%", bgcolor: "transparent" }}>
+              {items.map((value, i) => (
+                <ListItem
+                  className="itemsbox"
+                  key={i}
+                  secondaryAction={
+                    <div className="mui-buttons">
+                      <Button
+                        key={i}
+                        sx={{ padding: "0 0 0 0" }}
+                        disabled={counts[i] === 0}
+                        onClick={() => {
+                          decrement(i, value);
+                        }}
+                      >
+                        <span className="mui-label-2">
+                          <RemoveIcon />
+                        </span>
+                      </Button>
 
-                    <input
-                      key={i}
-                      type="text"
-                      className="mui-text"
-                      value={counts[i]}
-                      readOnly
-                    />
+                      <input
+                        key={i}
+                        type="text"
+                        className="mui-text"
+                        value={counts[i]}
+                        readOnly
+                      />
 
-                    <Button
-                      sx={{ padding: "0 0 0 0" }}
-                      key={i}
-                      onClick={() => increment(i, value)}
-                    >
-                      <span className="mui-label-1">
-                        <AddIcon />
-                      </span>
-                    </Button>
-                  </div>
-                }
-                disablePadding
-              >
-                <ListItemButton
-                  className="itemsbutton"
-                  role={undefined}
-                  onClick={() => {
-                    handleToggle(i, value);
-                  }}
-                  dense
+                      <Button
+                        sx={{ padding: "0 0 0 0" }}
+                        key={i}
+                        onClick={() => increment(i, value)}
+                      >
+                        <span className="mui-label-1">
+                          <AddIcon />
+                        </span>
+                      </Button>
+                    </div>
+                  }
+                  disablePadding
                 >
-                  <ListItemIcon>
-                    <Checkbox
-                      edge="start"
-                      checked={counts[i] > 0}
-                      tabIndex={-1}
-                      disableRipple
-                    />
-                  </ListItemIcon>
-                  <ListItemText primary={value.name} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
+                  <ListItemButton
+                    className="itemsbutton"
+                    role={undefined}
+                    onClick={() => {
+                      handleToggle(i, value);
+                    }}
+                    dense
+                  >
+                    <ListItemIcon>
+                      <Checkbox
+                        edge="start"
+                        checked={counts[i] > 0}
+                        tabIndex={-1}
+                        disableRipple
+                      />
+                    </ListItemIcon>
+                    <ListItemText primary={value.name} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default Veg;

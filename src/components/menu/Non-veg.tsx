@@ -37,7 +37,6 @@ const Nonveg = (Props: any) => {
   };
 
   const listOfSelectedItems = (index: number, value: any) => {
-    console.log(totalItemCount, checked, counts, checked[index]);
     const prevList = [...list];
     const prevItemsCounts = [...totalItemCount];
     if (checked[index] === false) {
@@ -72,25 +71,28 @@ const Nonveg = (Props: any) => {
 
   const increment = (index: any, value: any) => {
     const newChecked = [...checked];
-    newChecked[index] = !newChecked[index];
-    setChecked(newChecked);
-
     const listofselected = [...list];
     const newCounts = [...counts];
-
     const itemsCounts = [...totalItemCount];
-    console.log(counts);
     if (++counts[index] === 1) {
-      console.log(counts);
+      newChecked[index] = true;
+      setChecked(newChecked);
       listofselected.push(value);
       setList(listofselected);
       itemsCounts.push({
         value: value.id,
         count: counts[index],
       });
+      newCounts[index]++;
+      setCounts(newCounts);
+      setItemCount(
+        newCounts.reduce(
+          (prevvalue, currentValue) => prevvalue + currentValue,
+          0
+        )
+      );
       setTotalItemCount(itemsCounts);
     } else {
-      console.log("counting numbers");
       newCounts[index]++;
       setCounts(newCounts);
       setItemCount(
@@ -154,9 +156,6 @@ const Nonveg = (Props: any) => {
 
   return (
     <>
-      <span>{JSON.stringify(totalItemCount)}</span>
-      <span>{JSON.stringify(list)}</span>
-      <span>{JSON.stringify(counts)}</span>
       <div
         style={{
           backgroundColor: "transparent",
