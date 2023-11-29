@@ -22,7 +22,7 @@ const Products = () => {
   const SETTING_TABS = {
     BIRYANI: "BIRYANI",
     STARTERS: "STARTERS",
-    CURRIES: "CURRIES ",
+    CURRIES: "CURRIES",
     FRIEDRICE_NOODLES: "FRIED RICE & NOODLES",
     RICE: "RICE",
     ROTIS: "ROTIS",
@@ -37,9 +37,16 @@ const Products = () => {
   const [riceCount, setRiceCount] = useState(0);
   const [rotisCount, setRotisCount] = useState(0);
   const [drinksCount, setDrinksCount] = useState(0);
-  const [listOfSelectedItems, setListOfSelectedItems] = useState([] as any[]);
+  const [listOfBiryaniItems, setListOfBiryaniItems] = useState([] as any[]);
+  const [listOfStartersItems, setListOfStartersItems] = useState([] as any[]);
+  const [listOfCurriesItems, setListOfCurriesItems] = useState([] as any[]);
+  const [listOfFriedItems, setListOfFriedItems] = useState([] as any[]);
+  const [listOfRiceItems, setListOfRiceItems] = useState([] as any[]);
+  const [listOfRotisItems, setListOfRotisItems] = useState([] as any[]);
+  const [listOfDrinksItems, setListOfDrinksItems] = useState([] as any[]);
   const [listOfBiryaniCount, setListOfBiryaniCount] = useState([] as any[]);
   const [listOfStartersCount, setListOfStartersCount] = useState([] as any[]);
+  const [listOfFriedCount, setListOfFriedCount] = useState([] as any[]);
   const [listOfCurriesCount, setListOfCurriesCount] = useState([] as any[]);
   const [listOfRiceCount, setListOfRiceCount] = useState([] as any[]);
   const [listOfRotisCount, setListOfRotisCount] = useState([] as any[]);
@@ -52,6 +59,25 @@ const Products = () => {
     riceCount +
     rotisCount +
     drinksCount;
+
+  let totalItems = [
+    ...listOfBiryaniItems,
+    ...listOfCurriesItems,
+    // ...listOfStartersItems,
+    // ...listOfFriedItems,
+    // ...listOfRiceItems,
+    // ...listOfRotisItems,
+    // ...listOfDrinksItems,
+  ];
+  let totalItemsCount = [
+    ...listOfBiryaniCount,
+    ...listOfCurriesCount,
+    // ...listOfStartersCount,
+    // ...listOfFriedCount,
+    // ...listOfRiceCount,
+    // ...listOfRotisCount,
+    // ...listOfDrinksCount,
+  ];
 
   const handleClick = (tab: string) => {
     setSelectedTab(tab);
@@ -242,50 +268,50 @@ const Products = () => {
             {selectedTab === SETTING_TABS.STARTERS && (
               <Starters
                 startersCount={(data: any) => setStartersCount(data)}
-                startersItems={(data: any) => setListOfSelectedItems(data)}
-                startersCountList={(data: any) => setListOfBiryaniCount(data)}
+                startersItems={(data: any) => setListOfStartersItems(data)}
+                startersCountList={(data: any) => setListOfStartersCount(data)}
               />
             )}
             {selectedTab === SETTING_TABS.BIRYANI && (
               <Biryani
                 biryaniCount={(data: any) => setBiryaniCount(data)}
-                biryaniItems={(data: any) => setListOfSelectedItems(data)}
+                biryaniItems={(data: any) => setListOfBiryaniItems(data)}
                 biryaniCountList={(data: any) => setListOfBiryaniCount(data)}
               />
             )}
             {selectedTab === SETTING_TABS.CURRIES && (
               <Curries
                 curryCount={(data: any) => setCurriesCount(data)}
-                curryItems={(data: any) => setListOfSelectedItems(data)}
-                curryCountList={(data: any) => setListOfBiryaniCount(data)}
+                curryItems={(data: any) => setListOfCurriesItems(data)}
+                curryCountList={(data: any) => setListOfCurriesCount(data)}
               />
             )}
             {selectedTab === SETTING_TABS.FRIEDRICE_NOODLES && (
               <FriedRice
                 friedRiceCount={(data: any) => setFriedriceCount(data)}
-                friedRiceItems={(data: any) => setListOfSelectedItems(data)}
-                friedRiceCountList={(data: any) => setListOfBiryaniCount(data)}
+                friedRiceItems={(data: any) => setListOfFriedItems(data)}
+                friedRiceCountList={(data: any) => setListOfFriedCount(data)}
               />
             )}
             {selectedTab === SETTING_TABS.RICE && (
               <Rice
                 riceCount={(data: any) => setRiceCount(data)}
-                riceItems={(data: any) => setListOfSelectedItems(data)}
-                riceCountList={(data: any) => setListOfBiryaniCount(data)}
+                riceItems={(data: any) => setListOfRiceItems(data)}
+                riceCountList={(data: any) => setListOfRiceCount(data)}
               />
             )}
             {selectedTab === SETTING_TABS.ROTIS && (
               <Rotis
                 rotisCount={(data: any) => setRotisCount(data)}
-                rotisItems={(data: any) => setListOfSelectedItems(data)}
-                rotisCountList={(data: any) => setListOfBiryaniCount(data)}
+                rotisItems={(data: any) => setListOfRotisItems(data)}
+                rotisCountList={(data: any) => setListOfRotisCount(data)}
               />
             )}
             {selectedTab === SETTING_TABS.DRINKS && (
               <Drinks
                 drinksCount={(data: any) => setDrinksCount(data)}
-                drinksItems={(data: any) => setListOfSelectedItems(data)}
-                drinksCountList={(data: any) => setListOfBiryaniCount(data)}
+                drinksItems={(data: any) => setListOfDrinksItems(data)}
+                drinksCountList={(data: any) => setListOfDrinksCount(data)}
               />
             )}
           </Grid>
@@ -294,8 +320,8 @@ const Products = () => {
       <div>
         <ResponseiveFooterBar
           totalcount={totalCount}
-          totalItems={listOfSelectedItems}
-          totalItemCount={listOfBiryaniCount}
+          totalItems={totalItems}
+          totalItemCount={totalItemsCount}
         />
       </div>
     </div>
