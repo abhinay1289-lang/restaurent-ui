@@ -7,7 +7,13 @@ import globalObject from "../../common/global-variables";
 const Starters = (Props: any) => {
   const [nonVegCount, setNonVegCount] = useState(0);
   const [vegCount, setVegCount] = useState(0);
-  let rotisCount = nonVegCount + vegCount;
+  const [nonVegItems, setNonvegItems] = useState([] as any[]);
+  const [vegItems, setVegItems] = useState([] as any[]);
+  const [nonVegTotalCount, setNonvegTotalCount] = useState([] as any[]);
+  const [vegTotalCount, setVegTotalCount] = useState([] as any[]);
+  let startersCount = nonVegCount + vegCount;
+  let startersItems = [...nonVegItems, ...vegItems];
+  let startersItemCounts = [...nonVegTotalCount, ...vegTotalCount];
 
   const startersNonvegItems: any[] = globalObject.lookupvalues[
     LookupTypes.STARTERS
@@ -17,15 +23,11 @@ const Starters = (Props: any) => {
     LookupTypes.STARTERS
   ].filter((item: any) => item.type === 2);
 
-  const updateNonVegCount = (data: any) => {
-    setNonVegCount(data);
-  };
-  const updateVegCount = (data: any) => {
-    setVegCount(data);
-  };
   useEffect(() => {
-    Props.startersCount(rotisCount);
-  });
+    Props.startersCount(startersCount);
+    Props.startersItems(startersItems);
+    Props.startersCountList(startersItemCounts);
+  }, [startersCount]);
 
   return (
     <div
@@ -37,8 +39,18 @@ const Starters = (Props: any) => {
         marginTop: "10%",
       }}
     >
-      <Nonveg items={startersNonvegItems} itemCount={updateNonVegCount} />
-      <Veg items={startersVegItems} itemCount={updateVegCount} />
+      <Nonveg
+        items={startersNonvegItems}
+        itemCount={(data: any) => setNonVegCount(data)}
+        itemList={(data: any) => setNonvegItems(data)}
+        counts={(data: any) => setNonvegTotalCount(data)}
+      />
+      <Veg
+        items={startersVegItems}
+        itemCount={(data: any) => setVegCount(data)}
+        itemList={(data: any) => setVegItems(data)}
+        counts={(data: any) => setVegTotalCount(data)}
+      />
     </div>
   );
 };

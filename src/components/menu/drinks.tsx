@@ -1,30 +1,25 @@
 import { useEffect, useState } from "react";
-import Nonveg from "./Non-veg";
 import Veg from "./Veg";
 import globalObject from "../../common/global-variables";
 import { LookupTypes } from "../../common/lookuptypes";
 
 const Drinks = (Props: any) => {
-  const [nonVegCount, setNonVegCount] = useState(0);
   const [vegCount, setVegCount] = useState(0);
-  let drinksCount = nonVegCount + vegCount;
+  const [vegItems, setVegItems] = useState([] as any[]);
+  const [vegTotalCount, setVegTotalCount] = useState([] as any[]);
 
-  const drinksNonvegItems: any[] = globalObject.lookupvalues[
-    LookupTypes.DRINKS
-  ].filter((item: any) => item.type === 1);
+  let drinksCount = vegCount;
+  let drinkItems = [...vegItems];
+  let drinkItemCounts = [...vegTotalCount];
 
   const drinksVegItems: any[] = globalObject.lookupvalues[
     LookupTypes.DRINKS
   ].filter((item: any) => item.type === 2);
 
-  const updateNonVegCount = (data: any) => {
-    setNonVegCount(data);
-  };
-  const updateVegCount = (data: any) => {
-    setVegCount(data);
-  };
   useEffect(() => {
     Props.drinksCount(drinksCount);
+    Props.drinksItems(drinkItems);
+    Props.drinksCountList(drinkItemCounts);
   });
 
   return (
@@ -37,8 +32,12 @@ const Drinks = (Props: any) => {
         marginTop: "10%",
       }}
     >
-      <Nonveg items={drinksNonvegItems} itemCount={updateNonVegCount} />
-      <Veg items={drinksVegItems} itemCount={updateVegCount} />
+      <Veg
+        items={drinksVegItems}
+        itemCount={(data: any) => setVegCount(data)}
+        itemList={(data: any) => setVegItems(data)}
+        counts={(data: any) => setVegTotalCount(data)}
+      />
     </div>
   );
 };

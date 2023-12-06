@@ -13,7 +13,6 @@ import Biryani from "./menu/Biryani";
 import Starters from "./menu/Starters";
 import FriedRice from "./menu/FriedRice";
 import Curries from "./menu/Curries";
-import Rice from "./menu/Rice";
 import Rotis from "./menu/Rotis";
 import Drinks from "./menu/drinks";
 import ResponseiveFooterBar from "./app-header-footer/app-footer";
@@ -23,7 +22,6 @@ const Products = () => {
     BIRYANI: "BIRYANI",
     STARTERS: "STARTERS",
     CURRIES: "CURRIES",
-    FRIEDRICE_NOODLES: "FRIED RICE & NOODLES",
     RICE: "RICE",
     ROTIS: "ROTIS",
     DRINKS: "DRINKS(BEVARAGES)",
@@ -63,20 +61,20 @@ const Products = () => {
   let totalItems = [
     ...listOfBiryaniItems,
     ...listOfCurriesItems,
-    // ...listOfStartersItems,
-    // ...listOfFriedItems,
-    // ...listOfRiceItems,
-    // ...listOfRotisItems,
-    // ...listOfDrinksItems,
+    ...listOfStartersItems,
+    ...listOfFriedItems,
+    ...listOfRiceItems,
+    ...listOfRotisItems,
+    ...listOfDrinksItems,
   ];
   let totalItemsCount = [
     ...listOfBiryaniCount,
     ...listOfCurriesCount,
-    // ...listOfStartersCount,
-    // ...listOfFriedCount,
-    // ...listOfRiceCount,
-    // ...listOfRotisCount,
-    // ...listOfDrinksCount,
+    ...listOfStartersCount,
+    ...listOfFriedCount,
+    ...listOfRiceCount,
+    ...listOfRotisCount,
+    ...listOfDrinksCount,
   ];
 
   const handleClick = (tab: string) => {
@@ -167,32 +165,6 @@ const Products = () => {
                     </ListItem>
                     <ListItem
                       // disablePadding
-                      onClick={() =>
-                        handleClick(SETTING_TABS.FRIEDRICE_NOODLES)
-                      }
-                      selected={selectedTab === SETTING_TABS.FRIEDRICE_NOODLES}
-                      sx={{ borderBottom: "1px dotted #888" }}
-                    >
-                      <ListItemButton>
-                        <ListItemIcon>
-                          <div>
-                            <Badge badgeContent={friedriceCount} color="error">
-                              <img
-                                src={require("../assets/friedrice.png")}
-                                alt="Peopletech-Group"
-                                height={70}
-                                style={{ marginRight: "10px" }}
-                              />
-                            </Badge>
-                          </div>
-                        </ListItemIcon>
-                        <ListItemText
-                          primary={SETTING_TABS.FRIEDRICE_NOODLES}
-                        />
-                      </ListItemButton>
-                    </ListItem>
-                    <ListItem
-                      // disablePadding
                       onClick={() => handleClick(SETTING_TABS.RICE)}
                       selected={selectedTab === SETTING_TABS.RICE}
                       sx={{ borderBottom: "1px dotted #888" }}
@@ -200,7 +172,7 @@ const Products = () => {
                       <ListItemButton>
                         <ListItemIcon>
                           <div>
-                            <Badge badgeContent={riceCount} color="error">
+                            <Badge badgeContent={friedriceCount} color="error">
                               <img
                                 src={require("../assets/rice.png")}
                                 alt="Peopletech-Group"
@@ -246,7 +218,7 @@ const Products = () => {
                           <div>
                             <Badge badgeContent={drinksCount} color="error">
                               <img
-                                src={require("../assets/rotis.png")}
+                                src={require("../assets/drinks.png")}
                                 alt="Peopletech-Group"
                                 height={70}
                                 style={{ marginRight: "10px" }}
@@ -286,18 +258,11 @@ const Products = () => {
                 curryCountList={(data: any) => setListOfCurriesCount(data)}
               />
             )}
-            {selectedTab === SETTING_TABS.FRIEDRICE_NOODLES && (
-              <FriedRice
-                friedRiceCount={(data: any) => setFriedriceCount(data)}
-                friedRiceItems={(data: any) => setListOfFriedItems(data)}
-                friedRiceCountList={(data: any) => setListOfFriedCount(data)}
-              />
-            )}
             {selectedTab === SETTING_TABS.RICE && (
-              <Rice
-                riceCount={(data: any) => setRiceCount(data)}
-                riceItems={(data: any) => setListOfRiceItems(data)}
-                riceCountList={(data: any) => setListOfRiceCount(data)}
+              <FriedRice
+                riceCount={(data: any) => setFriedriceCount(data)}
+                riceItems={(data: any) => setListOfFriedItems(data)}
+                riceCountList={(data: any) => setListOfFriedCount(data)}
               />
             )}
             {selectedTab === SETTING_TABS.ROTIS && (

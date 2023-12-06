@@ -17,7 +17,6 @@ import Biryani from "./menu/Biryani";
 import Starters from "./menu/Starters";
 import FriedRice from "./menu/FriedRice";
 import Curries from "./menu/Curries";
-import Rice from "./menu/Rice";
 import Rotis from "./menu/Rotis";
 import React from "react";
 
@@ -125,7 +124,7 @@ const Menucard = () => {
                         <div>
                           <Badge badgeContent={17} color="error">
                             <img
-                              src={require("../assets/friedrice.png")}
+                              src={require("../assets/rice.png")}
                               alt="Peopletech-Group"
                               height={70}
                               style={{ marginRight: "10px" }}
@@ -136,7 +135,7 @@ const Menucard = () => {
                       <ListItemText primary={SETTING_TABS.FRIEDRICE_NOODLES} />
                     </ListItemButton>
                   </ListItem>
-                  <ListItem
+                  {/* <ListItem
                     // disablePadding
                     onClick={() => handleClick(SETTING_TABS.RICE)}
                     selected={selectedTab === SETTING_TABS.RICE}
@@ -157,7 +156,7 @@ const Menucard = () => {
                       </ListItemIcon>
                       <ListItemText primary={SETTING_TABS.RICE} />
                     </ListItemButton>
-                  </ListItem>
+                  </ListItem> */}
                   <ListItem
                     // disablePadding
                     onClick={() => handleClick(SETTING_TABS.ROTIS)}
@@ -213,7 +212,6 @@ const Menucard = () => {
         {selectedTab == SETTING_TABS.BIRYANI && <Biryani />}
         {selectedTab == SETTING_TABS.CURRIES && <Curries />}
         {selectedTab == SETTING_TABS.FRIEDRICE_NOODLES && <FriedRice />}
-        {selectedTab == SETTING_TABS.RICE && <Rice />}
         {selectedTab == SETTING_TABS.ROTIS && <Rotis />}
       </Grid>
       <div className="right-section">

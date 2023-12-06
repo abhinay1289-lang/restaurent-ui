@@ -155,7 +155,6 @@ const Veg = (Props: any) => {
   }, [counts]);
   return (
     <>
-      <span>{JSON.stringify(totalItemCount)}</span>
       <div
         style={{
           backgroundColor: "transparent",

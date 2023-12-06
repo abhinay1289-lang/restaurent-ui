@@ -43,10 +43,10 @@ const GlobalSettings = () => {
   const menuitems: string[] = [
     LookupTypes.BIRYANI,
     LookupTypes.CURRIES,
-    LookupTypes.FRIEDRICE_NOODLES,
     LookupTypes.RICE,
     LookupTypes.ROTIS,
     LookupTypes.STARTERS,
+    LookupTypes.DRINKS,
   ];
 
   const [lookupname, setLookupname] = useState("biryani");

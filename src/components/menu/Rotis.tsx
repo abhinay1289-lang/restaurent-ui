@@ -1,31 +1,25 @@
 import { useEffect, useState } from "react";
-import Nonveg from "./Non-veg";
 import Veg from "./Veg";
 import { LookupTypes } from "../../common/lookuptypes";
 import globalObject from "../../common/global-variables";
 
 const Rotis = (Props: any) => {
-  const [nonVegCount, setNonVegCount] = useState(0);
   const [vegCount, setVegCount] = useState(0);
-  let rotisCount = nonVegCount + vegCount;
+  const [vegItems, setVegItems] = useState([] as any[]);
+  const [vegTotalCount, setVegTotalCount] = useState([] as any[]);
 
-  const rotisNonvegItems: any[] = globalObject.lookupvalues[
-    LookupTypes.ROTIS
-  ].filter((item: any) => item.type === 1);
+  let curryItems = [...vegItems];
+  let curryItemCounts = [...vegTotalCount];
 
   const rotisVegItems: any[] = globalObject.lookupvalues[
     LookupTypes.ROTIS
   ].filter((item: any) => item.type === 2);
 
-  const updateNonVegCount = (data: any) => {
-    setNonVegCount(data);
-  };
-  const updateVegCount = (data: any) => {
-    setVegCount(data);
-  };
   useEffect(() => {
-    Props.rotisCount(rotisCount);
-  });
+    Props.rotisCount(vegCount);
+    Props.rotisItems(curryItems);
+    Props.rotisCountList(curryItemCounts);
+  }, [vegCount]);
 
   return (
     <div
@@ -37,8 +31,12 @@ const Rotis = (Props: any) => {
         marginTop: "10%",
       }}
     >
-      <Nonveg items={rotisNonvegItems} itemCount={updateNonVegCount} />
-      <Veg items={rotisVegItems} itemCount={updateVegCount} />
+      <Veg
+        items={rotisVegItems}
+        itemCount={(data: any) => setVegCount(data)}
+        itemList={(data: any) => setVegItems(data)}
+        counts={(data: any) => setVegTotalCount(data)}
+      />
     </div>
   );
 };

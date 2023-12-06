@@ -7,25 +7,28 @@ import globalObject from "../../common/global-variables";
 const FriedRice = (Props: any) => {
   const [nonVegCount, setNonVegCount] = useState(0);
   const [vegCount, setVegCount] = useState(0);
-  let friedRiceCount = nonVegCount + vegCount;
+  const [nonVegItems, setNonvegItems] = useState([] as any[]);
+  const [vegItems, setVegItems] = useState([] as any[]);
+  const [nonVegTotalCount, setNonvegTotalCount] = useState([] as any[]);
+  const [vegTotalCount, setVegTotalCount] = useState([] as any[]);
+
+  let riceCount = nonVegCount + vegCount;
+  let riceItems = [...nonVegItems, ...vegItems];
+  let riceItemCounts = [...nonVegTotalCount, ...vegTotalCount];
 
   const friedNonvegItems: any[] = globalObject.lookupvalues[
-    LookupTypes.FRIEDRICE_NOODLES
+    LookupTypes.RICE
   ].filter((item: any) => item.type === 1);
 
   const friedVegItems: any[] = globalObject.lookupvalues[
-    LookupTypes.FRIEDRICE_NOODLES
+    LookupTypes.RICE
   ].filter((item: any) => item.type === 2);
 
-  const updateNonVegCount = (data: any) => {
-    setNonVegCount(data);
-  };
-  const updateVegCount = (data: any) => {
-    setVegCount(data);
-  };
   useEffect(() => {
-    Props.friedRiceCount(friedRiceCount);
-  });
+    Props.riceCount(riceCount);
+    Props.riceItems(riceItems);
+    Props.riceCountList(riceItemCounts);
+  }, [riceCount]);
 
   return (
     <div
@@ -37,8 +40,18 @@ const FriedRice = (Props: any) => {
         marginTop: "10%",
       }}
     >
-      <Nonveg items={friedNonvegItems} itemCount={updateNonVegCount} />
-      <Veg items={friedVegItems} itemCount={updateVegCount} />
+      <Nonveg
+        items={friedNonvegItems}
+        itemCount={(data: any) => setNonVegCount(data)}
+        itemList={(data: any) => setNonvegItems(data)}
+        counts={(data: any) => setNonvegTotalCount(data)}
+      />
+      <Veg
+        items={friedVegItems}
+        itemCount={(data: any) => setVegCount(data)}
+        itemList={(data: any) => setVegItems(data)}
+        counts={(data: any) => setVegTotalCount(data)}
+      />
     </div>
   );
 };
