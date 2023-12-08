@@ -8,6 +8,7 @@ import Login from "./components/login/Login";
 import Profile from "./components/user-settings/profile";
 import Dashboard from "./components/user-settings/Dashboard";
 import Products from "./components/products";
+import Pricing from "./components/pricing/pricing";
 const router = createBrowserRouter([
   {
     path: "/login",
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/Pricing",
-        element: "Pricing",
+        element: <Pricing />,
       },
       {
         path: "/Dashboard",
