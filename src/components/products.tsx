@@ -88,6 +88,9 @@ const Products = () => {
   return (
     <div>
       <div className="menu">
+        {/* <video autoPlay loop muted id="background-video" width="100%">
+          <source src={require("../assets/")} type="video/mp4" />
+        </video> */}
         <Paper
           sx={{
             padding: "10px",
@@ -152,7 +155,7 @@ const Products = () => {
                           <div>
                             <Badge badgeContent={curriesCount} color="error">
                               <img
-                                src={require("../assets/curries.png")}
+                                src={require("../assets/curry.gif")}
                                 alt="Peopletech-Group"
                                 height={70}
                                 style={{ marginRight: "10px" }}
@@ -174,7 +177,7 @@ const Products = () => {
                           <div>
                             <Badge badgeContent={friedriceCount} color="error">
                               <img
-                                src={require("../assets/rice.png")}
+                                src={require("../assets/rice.gif")}
                                 alt="Peopletech-Group"
                                 height={70}
                                 style={{ marginRight: "10px" }}
@@ -218,7 +221,7 @@ const Products = () => {
                           <div>
                             <Badge badgeContent={drinksCount} color="error">
                               <img
-                                src={require("../assets/drinks.png")}
+                                src={require("../assets/drinks.gif")}
                                 alt="Peopletech-Group"
                                 height={70}
                                 style={{ marginRight: "10px" }}

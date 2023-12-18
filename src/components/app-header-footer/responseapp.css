@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff;
+    color: darkslategray;
     font-family: Ambit;
     font-size: 15px;
     font-weight: 400;
@@ -18,6 +18,10 @@
     transition-duration: 0.4s;
     overflow: hidden;
   }
+
+  header.css-7e0s21-MuiPaper-root-MuiAppBar-root{
+    background-color: darkslategray;
+  }
   
   .nav-menu-item:hover {
     background-color: #981d32;
@@ -25,7 +29,7 @@
   }
   
   .nav-menu-item-selected {
-    border-bottom: 2px solid #f78605 !important;
+    border-bottom: 2px solid #f7055e !important;
   }
   
   .user-icon {
