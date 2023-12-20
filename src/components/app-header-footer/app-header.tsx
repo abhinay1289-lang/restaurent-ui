@@ -99,8 +99,7 @@ const ResponsiveHeaderBar = () => {
       <AppBar position="sticky" className="header">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
-            {/* <Typography
+            <Typography
               variant="h6"
               noWrap
               component="a"
@@ -114,33 +113,13 @@ const ResponsiveHeaderBar = () => {
                 color: "inherit",
                 textDecoration: "none",
               }}
-            > */}
-            <img
-              src={require("./title.gif")}
-              alt="Peopletech-Group"
-              height={70}
-              style={{ marginRight: "10px" }}
-            />
-            {/* LOGO */}
-            {/* </Typography> */}
-            <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
             >
-              LOGO
+              <img
+                src={require("./title.gif")}
+                alt="Peopletech-Group"
+                height={70}
+                style={{ marginRight: "10px" }}
+              />
             </Typography>
             <Box
               sx={{
