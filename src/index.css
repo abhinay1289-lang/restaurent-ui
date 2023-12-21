@@ -34,6 +34,16 @@ body {
   justify-content: space-evenly;
 }
 
+.pricing{
+  background-image: url(assets/wood\ table.webp);
+  background-size:cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 100%;
+  margin: 0px;
+  justify-content: space-evenly;
+}
+
 ::selection{
 	color: #fff;
 	background: #009d43;

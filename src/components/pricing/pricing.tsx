@@ -27,9 +27,9 @@ const Pricing = () => {
 
   return (
     <>
-      <div style={{ width: "100%", display: "flex" }}>
-        <div className="pricing">
-          <h3 style={{ textAlign: "center" }}>BIRYANI</h3>
+      <div style={{ width: "100%", display: "flex" }} className="pricing">
+        <div>
+          <h3 style={{ textAlign: "center", color: "" }}>BIRYANI</h3>
           <TableContainer component={Paper}>
             <Table aria-label="simple table" sx={{ width: "90%" }}>
               <TableHead>
@@ -47,8 +47,9 @@ const Pricing = () => {
             </Table>
           </TableContainer>
         </div>
-        <div className="pricing">
+        <div>
           <h3 style={{ textAlign: "center" }}>CURRIES</h3>
+          {/* <span>{JSON.stringify(curries)}</span> */}
           <TableContainer component={Paper}>
             <Table aria-label="simple table" sx={{ width: "90%" }}>
               <TableHead>
@@ -66,7 +67,7 @@ const Pricing = () => {
             </Table>
           </TableContainer>
         </div>
-        <div className="pricing">
+        <div>
           <h3 style={{ textAlign: "center" }}>STARTERS</h3>
           <TableContainer component={Paper}>
             <Table aria-label="simple table" sx={{ width: "90%" }}>
@@ -85,7 +86,7 @@ const Pricing = () => {
             </Table>
           </TableContainer>
         </div>
-        <div className="pricing">
+        <div>
           <h3 style={{ textAlign: "center" }}>RICE</h3>
           <TableContainer component={Paper}>
             <Table aria-label="simple table" sx={{ width: "90%" }}>
@@ -104,7 +105,7 @@ const Pricing = () => {
             </Table>
           </TableContainer>
         </div>
-        <div className="pricing">
+        <div>
           <h3 style={{ textAlign: "center" }}>ROTIS</h3>
           <TableContainer component={Paper}>
             <Table aria-label="simple table" sx={{ width: "90%" }}>
@@ -123,7 +124,7 @@ const Pricing = () => {
             </Table>
           </TableContainer>
         </div>
-        <div className="pricing">
+        <div>
           <h3 style={{ textAlign: "center" }}>DRINKS</h3>
           <TableContainer component={Paper}>
             <Table aria-label="simple table" sx={{ width: "90%" }}>

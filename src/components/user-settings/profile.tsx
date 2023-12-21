@@ -12,6 +12,7 @@ import GlobalSettings from "./globalsettings";
 import ChangePassword from "./ChangePassword";
 import Manageusers from "./manage-users";
 import "./user-settings.css";
+import UserProfile from "./UserProfile";
 const Profile = () => {
   const USER_SETTING_TABS = {
     PROFILE: "Profile",
@@ -81,7 +82,7 @@ const Profile = () => {
           </Grid>
 
           <Grid item xs={10}>
-            {selectedTab === USER_SETTING_TABS.PROFILE && <Profile />}
+            {selectedTab === USER_SETTING_TABS.PROFILE && <UserProfile />}
             {selectedTab === USER_SETTING_TABS.GLOBAL_SETTING && (
               <GlobalSettings />
             )}
