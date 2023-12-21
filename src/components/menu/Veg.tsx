@@ -56,11 +56,13 @@ const Veg = (Props: any) => {
         )
       );
     } else {
+      // eslint-disable-next-line array-callback-return
       list.map((listvalue, listindex) => {
         if (items[index].id === listvalue.id) prevList.splice(listindex, 1);
         setList(prevList);
       });
 
+      // eslint-disable-next-line array-callback-return
       totalItemCount.map((item, itemindex) => {
         if (items[index].id === item.value) {
           totalItemCount.splice(itemindex, 1);
@@ -101,6 +103,7 @@ const Veg = (Props: any) => {
           0
         )
       );
+      // eslint-disable-next-line array-callback-return
       totalItemCount.map((item, itemindex) => {
         if (value.id === item.value) {
           totalItemCount[itemindex].count++;
@@ -128,11 +131,13 @@ const Veg = (Props: any) => {
     );
     const listofselected = [...list];
     if (--counts[index] === 0) {
+      // eslint-disable-next-line array-callback-return
       list.map((listvalue, listindex) => {
         if (items[index].id === listvalue.id)
           listofselected.splice(listindex, 1);
         setList(listofselected);
       });
+      // eslint-disable-next-line array-callback-return
       totalItemCount.map((item, itemindex) => {
         if (items[index].id === item.value) {
           totalItemCount.splice(itemindex, 1);
@@ -140,6 +145,7 @@ const Veg = (Props: any) => {
       });
     } else {
       setList(listofselected);
+      // eslint-disable-next-line array-callback-return
       totalItemCount.map((item, itemindex) => {
         if (value.id === item.value) {
           totalItemCount[itemindex].count--;

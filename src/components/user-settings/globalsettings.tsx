@@ -55,7 +55,6 @@ const GlobalSettings = () => {
   const [open, setOpen] = useState(false);
   const [lookupData, setLookupData] = useState([] as any[]);
   const [textValue, setTextValue] = useState("");
-  const [error, setError] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [page, setPage] = useState(0);
   const [showToast, setShowToast] = useState(false);
@@ -95,14 +94,13 @@ const GlobalSettings = () => {
   };
 
   const handleSave = (data?: any, id?: any) => {
-    console.log(data);
     const existingData: any[] = globalObject.lookupvalues[lookupname].map(
       (e: any) => e.name.toLowerCase()
     );
 
     const isExisting: Boolean =
       existingData.filter(
-        (e: any) => e == formik.values.name.toLocaleLowerCase()
+        (e: any) => e === formik.values.name.toLocaleLowerCase()
       ).length > 0;
     if (data.id === undefined) {
       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
@@ -152,7 +150,6 @@ const GlobalSettings = () => {
         refreshLookupdata();
       })
       .catch((err) => {
-        console.log("kjsbhkdcnfekfjmc");
         console.log(err);
       });
   };
@@ -453,7 +450,7 @@ const GlobalSettings = () => {
                         onClick={() => {
                           if (
                             formik.values.name &&
-                            formik.values.name.trim() != ""
+                            formik.values.name.trim() !== ""
                           )
                             handleSave(data, i);
                         }}

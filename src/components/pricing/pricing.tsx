@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import globalObject from "../../common/global-variables";
 import {
   Paper,
@@ -18,8 +18,10 @@ const Pricing = () => {
   const rotis: any[] = globalObject.lookupvalues["rotis"];
   const drinks: any[] = globalObject.lookupvalues["drinks"];
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let lookupvalues;
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     lookupvalues = globalObject.lookupvalues;
   });
 

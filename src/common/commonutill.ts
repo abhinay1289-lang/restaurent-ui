@@ -12,7 +12,6 @@ export function redirectToLogin() {
   }
 
   export function getInitials(userObj: any) {
-    console.log('user',userObj)
     let initials = '';
     if (userObj.firstName) {
       initials += userObj.firstName[0].toUpperCase();

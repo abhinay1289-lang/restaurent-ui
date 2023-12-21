@@ -32,21 +32,18 @@ const Products = () => {
   const [startersCount, setStartersCount] = useState(0);
   const [curriesCount, setCurriesCount] = useState(0);
   const [friedriceCount, setFriedriceCount] = useState(0);
-  const [riceCount, setRiceCount] = useState(0);
   const [rotisCount, setRotisCount] = useState(0);
   const [drinksCount, setDrinksCount] = useState(0);
   const [listOfBiryaniItems, setListOfBiryaniItems] = useState([] as any[]);
   const [listOfStartersItems, setListOfStartersItems] = useState([] as any[]);
   const [listOfCurriesItems, setListOfCurriesItems] = useState([] as any[]);
   const [listOfFriedItems, setListOfFriedItems] = useState([] as any[]);
-  const [listOfRiceItems, setListOfRiceItems] = useState([] as any[]);
   const [listOfRotisItems, setListOfRotisItems] = useState([] as any[]);
   const [listOfDrinksItems, setListOfDrinksItems] = useState([] as any[]);
   const [listOfBiryaniCount, setListOfBiryaniCount] = useState([] as any[]);
   const [listOfStartersCount, setListOfStartersCount] = useState([] as any[]);
   const [listOfFriedCount, setListOfFriedCount] = useState([] as any[]);
   const [listOfCurriesCount, setListOfCurriesCount] = useState([] as any[]);
-  const [listOfRiceCount, setListOfRiceCount] = useState([] as any[]);
   const [listOfRotisCount, setListOfRotisCount] = useState([] as any[]);
   const [listOfDrinksCount, setListOfDrinksCount] = useState([] as any[]);
   let totalCount =
@@ -54,7 +51,6 @@ const Products = () => {
     briyaniCount +
     curriesCount +
     friedriceCount +
-    riceCount +
     rotisCount +
     drinksCount;
 
@@ -63,7 +59,6 @@ const Products = () => {
     ...listOfCurriesItems,
     ...listOfStartersItems,
     ...listOfFriedItems,
-    ...listOfRiceItems,
     ...listOfRotisItems,
     ...listOfDrinksItems,
   ];
@@ -72,7 +67,6 @@ const Products = () => {
     ...listOfCurriesCount,
     ...listOfStartersCount,
     ...listOfFriedCount,
-    ...listOfRiceCount,
     ...listOfRotisCount,
     ...listOfDrinksCount,
   ];
