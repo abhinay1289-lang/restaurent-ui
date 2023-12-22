@@ -4,13 +4,13 @@ const UserProfile = () => {
   const user = JSON.parse(localStorage.getItem("userObject") || "{}");
   return (
     <div className="userprofile">
-      <span>{JSON.stringify(user)}</span>
       <div className="container">
         <div className="shape">
           <div className="image"></div>
         </div>
-        <h3>
-          <span>{user.firstName}</span> <span>{user.lastName}</span>
+        <h3 style={{ color: "red" }}>
+          <span>{user.firstName.toLocaleUpperCase()}</span>{" "}
+          <span>{user.lastName.toLocaleUpperCase()}</span>
         </h3>
         <h3 className="title">
           {user.roles.map((role: any) => role.name.toLocaleUpperCase())}
