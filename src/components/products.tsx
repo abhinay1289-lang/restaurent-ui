@@ -82,9 +82,6 @@ const Products = () => {
   return (
     <div>
       <div className="menu">
-        {/* <video autoPlay loop muted id="background-video" width="100%">
-          <source src={require("../assets/")} type="video/mp4" />
-        </video> */}
         <Paper
           sx={{
             padding: "10px",
