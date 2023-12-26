@@ -18,7 +18,7 @@ const UserProfile = () => {
         <p>Email Id : {user.emailId}</p>
         <p>Web Designer, UI designer, photographer, web developer, etc</p>
         <div className="icons">
-          <i className="fa fa-facebook" aria-hidden="true"></i>
+          <i className="fa fa-facebook " aria-hidden="true"></i>
           <i className="fa fa-instagram" aria-hidden="true"></i>
           <i className="fa fa-pinterest-p" aria-hidden="true"></i>
           <i className="fa fa-twitter" aria-hidden="true"></i>
