@@ -96,9 +96,20 @@ const Pricing = () => {
             </Table>
           </TableContainer>
         </div>
-        <div>
-          <h3 style={{ textAlign: "center" }}>STARTERS</h3>
-          <TableContainer component={Paper}>
+        <div style={{ marginTop: "10px" }}>
+          {/* <h3 style={{ textAlign: "center" }}>STARTERS</h3> */}
+          <img
+            src={require("../pricing/starters-1.avif")}
+            alt="Peopletech-Group"
+            height={150}
+            width={240}
+            style={{
+              marginLeft: "20px",
+              objectFit: "cover",
+              borderRadius: "20px",
+            }}
+          />
+          <TableContainer>
             <Table aria-label="simple table" sx={{ width: "90%" }}>
               <TableHead>
                 <TableRow>
@@ -115,9 +126,20 @@ const Pricing = () => {
             </Table>
           </TableContainer>
         </div>
-        <div>
-          <h3 style={{ textAlign: "center" }}>RICE</h3>
-          <TableContainer component={Paper}>
+        <div style={{ marginTop: "10px" }}>
+          {/* <h3 style={{ textAlign: "center" }}>RICE</h3> */}
+          <img
+            src={require("../pricing/rice.avif")}
+            alt="Peopletech-Group"
+            height={150}
+            width={240}
+            style={{
+              marginLeft: "20px",
+              objectFit: "cover",
+              borderRadius: "20px",
+            }}
+          />
+          <TableContainer>
             <Table aria-label="simple table" sx={{ width: "90%" }}>
               <TableHead>
                 <TableRow>
@@ -134,9 +156,20 @@ const Pricing = () => {
             </Table>
           </TableContainer>
         </div>
-        <div>
-          <h3 style={{ textAlign: "center" }}>ROTIS</h3>
-          <TableContainer component={Paper}>
+        <div style={{ marginTop: "10px" }}>
+          {/* <h3 style={{ textAlign: "center" }}>ROTIS</h3> */}
+          <img
+            src={require("../pricing/rotis.avif")}
+            alt="Peopletech-Group"
+            height={150}
+            width={240}
+            style={{
+              marginLeft: "20px",
+              objectFit: "cover",
+              borderRadius: "20px",
+            }}
+          />
+          <TableContainer>
             <Table aria-label="simple table" sx={{ width: "90%" }}>
               <TableHead>
                 <TableRow>
@@ -153,9 +186,20 @@ const Pricing = () => {
             </Table>
           </TableContainer>
         </div>
-        <div>
-          <h3 style={{ textAlign: "center" }}>DRINKS</h3>
-          <TableContainer component={Paper}>
+        <div style={{ marginTop: "10px", marginRight: "20px" }}>
+          {/* <h3 style={{ textAlign: "center" }}>DRINKS</h3> */}
+          <img
+            src={require("../pricing/drinks.avif")}
+            alt="Peopletech-Group"
+            height={150}
+            width={240}
+            style={{
+              marginLeft: "20px",
+              objectFit: "cover",
+              borderRadius: "20px",
+            }}
+          />
+          <TableContainer>
             <Table aria-label="simple table" sx={{ width: "90%" }}>
               <TableHead>
                 <TableRow>
