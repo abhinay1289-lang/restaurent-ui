@@ -41,8 +41,14 @@ body {
   background-repeat: no-repeat;
   height: 100%;
   margin: 0px;
+  /* width: 100%; */
   justify-content: space-evenly;
 }
+
+/* .pricing .pricing-cell{
+  font-Family: 'Basis_Grotesque_Pro_Bold';
+  font-Weight: 700;
+} */
 
 ::selection{
 	color: #fff;

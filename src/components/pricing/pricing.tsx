@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import globalObject from "../../common/global-variables";
 import {
+  Box,
   Paper,
   Table,
   TableCell,
@@ -8,7 +9,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import "./pricing.css";
+import "../user-settings/userprofile.css";
 
 const Pricing = () => {
   const biryani: any[] = globalObject.lookupvalues["biryani"];
@@ -27,41 +28,69 @@ const Pricing = () => {
 
   return (
     <>
-      <div style={{ width: "100%", display: "flex" }} className="pricing">
-        <div>
-          <h3 style={{ textAlign: "center", color: "" }}>BIRYANI</h3>
-          <TableContainer component={Paper}>
-            <Table aria-label="simple table" sx={{ width: "90%" }}>
-              <TableHead>
-                <TableRow>
-                  <TableCell>NAME</TableCell>
-                  <TableCell className="price">PRICE</TableCell>
-                </TableRow>
-              </TableHead>
+      <div
+        style={{
+          width: "100vw",
+          height: "90vh",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+        className="pricing"
+      >
+        <div style={{ marginTop: "10px" }}>
+          {/* <h3
+            style={{
+              textAlign: "center",
+              color: "",
+            }}
+          >
+            BIRYANI
+          </h3> */}
+          <div>
+            <img
+              src={require("../pricing/Biryani.avif")}
+              alt="Peopletech-Group"
+              height={150}
+              width={240}
+              style={{
+                marginLeft: "20px",
+                objectFit: "cover",
+                borderRadius: "20px",
+              }}
+            />
+          </div>
+          <TableContainer sx={{ marginLeft: "28px" }}>
+            <Table
+              aria-label="simple table"
+              sx={{ width: "100%", maxWidth: "550px" }}
+            >
               {biryani.map((item) => (
                 <TableRow>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell className="price">{item.price}</TableCell>
+                  <TableCell className="pricing-cell">{item.name}</TableCell>
+                  <TableCell className="pricing-cell">{item.price}</TableCell>
                 </TableRow>
               ))}
             </Table>
           </TableContainer>
         </div>
-        <div>
-          <h3 style={{ textAlign: "center" }}>CURRIES</h3>
-          {/* <span>{JSON.stringify(curries)}</span> */}
-          <TableContainer component={Paper}>
+        <div style={{ marginTop: "10px" }}>
+          <img
+            src={require("../pricing/curry.avif")}
+            alt="Peopletech-Group"
+            height={150}
+            width={240}
+            style={{
+              marginLeft: "20px",
+              objectFit: "cover",
+              borderRadius: "20px",
+            }}
+          />
+          <TableContainer>
             <Table aria-label="simple table" sx={{ width: "90%" }}>
-              <TableHead>
-                <TableRow>
-                  <TableCell>NAME</TableCell>
-                  <TableCell className="price">PRICE</TableCell>
-                </TableRow>
-              </TableHead>
               {curries.map((item) => (
                 <TableRow>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell className="price">{item.price}</TableCell>
+                  <TableCell className="pricing-cell">{item.name}</TableCell>
+                  <TableCell className="pricing-cell">{item.price}</TableCell>
                 </TableRow>
               ))}
             </Table>
@@ -79,8 +108,8 @@ const Pricing = () => {
               </TableHead>
               {starters.map((item) => (
                 <TableRow>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell className="price">{item.price}</TableCell>
+                  <TableCell className="pricing-cell">{item.name}</TableCell>
+                  <TableCell className="pricing-cell">{item.price}</TableCell>
                 </TableRow>
               ))}
             </Table>
@@ -98,8 +127,8 @@ const Pricing = () => {
               </TableHead>
               {rice.map((item) => (
                 <TableRow>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell className="price">{item.price}</TableCell>
+                  <TableCell className="pricing-cell">{item.name}</TableCell>
+                  <TableCell className="pricing-cell">{item.price}</TableCell>
                 </TableRow>
               ))}
             </Table>
@@ -117,8 +146,8 @@ const Pricing = () => {
               </TableHead>
               {rotis.map((item) => (
                 <TableRow>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell className="price">{item.price}</TableCell>
+                  <TableCell className="pricing-cell">{item.name}</TableCell>
+                  <TableCell className="pricing-cell">{item.price}</TableCell>
                 </TableRow>
               ))}
             </Table>
@@ -136,8 +165,8 @@ const Pricing = () => {
               </TableHead>
               {drinks.map((item) => (
                 <TableRow>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell className="price">{item.price}</TableCell>
+                  <TableCell className="pricing-cell">{item.name}</TableCell>
+                  <TableCell className="pricing-cell">{item.price}</TableCell>
                 </TableRow>
               ))}
             </Table>
